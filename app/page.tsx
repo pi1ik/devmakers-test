@@ -1,6 +1,9 @@
+"use client";
+
 import dynamic from "next/dynamic";
 import { Hero } from "@/src/components/Hero";
 import { Stats } from "@/src/components/Stats";
+import { useRouter } from "next/navigation";
 
 // Lazy load components below the fold for better performance
 const Services = dynamic(() => import("@/src/components/Services").then(mod => ({ default: mod.Services })), {
@@ -26,6 +29,13 @@ const CTASection = dynamic(() => import("@/src/components/CTASection").then(mod 
 });
 
 export default function Home() {
+  const router = useRouter();
+
+  const handleProjectClick = (projectId: string) => {
+    // projectId format: "landings-0", "chatbots-0", etc.
+    const [category, id] = projectId.split('-');
+    router.push(`/portfolio/${category}/${id}`);
+  };
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
       {/* Ambient background gradient system */}
@@ -75,7 +85,7 @@ export default function Home() {
       <AIConsultantPreview />
 
       {/* Work Preview */}
-      <Work />
+      <Work onProjectClick={handleProjectClick} />
 
       {/* Testimonials */}
       <Testimonials />

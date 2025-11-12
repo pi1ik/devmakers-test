@@ -107,9 +107,8 @@ export function AIConsultantPreview({ onNavigate }: AIConsultantPreviewProps) {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.4, delay: 0.6 + index * 0.1 }}
-                        whileHover={{ x: 4, scale: 1.01 }}
+                        whileHover={{ x: 4, scale: 1.01, transition: { duration: 0.15 } }}
                         whileTap={{ scale: 0.99 }}
-                        transition={{ duration: 0.15 }}
                         className="flex items-center gap-3 w-full px-6 py-4 rounded-xl border border-border bg-secondary/30 text-muted-foreground hover:border-accent/50 hover:text-foreground hover:bg-secondary/50 transition-all duration-150 group cursor-pointer"
                       >
                         <MessageCircle className="w-5 h-5 text-accent flex-shrink-0" />

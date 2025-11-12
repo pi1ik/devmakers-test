@@ -192,7 +192,7 @@ export function Navigation() {
                           {section.items.map((item) => (
                             <li key={item.key}>
                               <Link
-                                href={`/portfolio?category=${item.key}`}
+                                href={`/portfolio/${item.key}`}
                                 onClick={handleItemClick}
                                 className="text-muted-foreground hover:text-accent transition-colors duration-300 text-left w-full block"
                               >
@@ -365,7 +365,7 @@ export function Navigation() {
                             {section.items.map((item) => (
                               <Link
                                 key={item.key}
-                                href={`/portfolio?category=${item.key}`}
+                                href={`/portfolio/${item.key}`}
                                 onClick={handleItemClick}
                                 className="block w-full text-left py-2 px-6 text-muted-foreground hover:text-accent transition-colors"
                               >
