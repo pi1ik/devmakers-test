@@ -8,63 +8,64 @@
 }
 
 /* Dark Theme (Default) */
-:root, .dark {
-  --background: #0A0A0A;
-  --foreground: #FFFFFF;
-  --card: #0A0A0A;
-  --card-foreground: #FFFFFF;
+:root,
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ffffff;
+  --card: #0a0a0a;
+  --card-foreground: #ffffff;
   --popover: #111111;
-  --popover-foreground: #FFFFFF;
-  --primary: #FFFFFF;
-  --primary-foreground: #0A0A0A;
-  --secondary: #1A1A1A;
-  --secondary-foreground: #FFFFFF;
-  --muted: #1A1A1A;
-  --muted-foreground: #A1A1A1;
-  --accent: #6366F1;
-  --accent-foreground: #FFFFFF;
+  --popover-foreground: #ffffff;
+  --primary: #ffffff;
+  --primary-foreground: #0a0a0a;
+  --secondary: #1a1a1a;
+  --secondary-foreground: #ffffff;
+  --muted: #1a1a1a;
+  --muted-foreground: #a1a1a1;
+  --accent: #6366f1;
+  --accent-foreground: #ffffff;
   --destructive: #d4183d;
   --destructive-foreground: #ffffff;
   --border: rgba(255, 255, 255, 0.1);
   --input: transparent;
-  --input-background: #1A1A1A;
-  --switch-background: #2A2A2A;
+  --input-background: #1a1a1a;
+  --switch-background: #2a2a2a;
   --ring: rgba(99, 102, 241, 0.5);
-  --chart-1: #6366F1;
-  --chart-2: #00C2FF;
-  --chart-3: #A78BFA;
-  --chart-4: #34D399;
-  --chart-5: #F59E0B;
+  --chart-1: #6366f1;
+  --chart-2: #00c2ff;
+  --chart-3: #a78bfa;
+  --chart-4: #34d399;
+  --chart-5: #f59e0b;
 }
 
 /* Light Theme */
 .light {
-  --background: #FFFFFF;
-  --foreground: #0A0A0A;
-  --card: #FFFFFF;
-  --card-foreground: #0A0A0A;
-  --popover: #FFFFFF;
-  --popover-foreground: #0A0A0A;
-  --primary: #0A0A0A;
-  --primary-foreground: #FFFFFF;
-  --secondary: #F5F5F5;
-  --secondary-foreground: #0A0A0A;
-  --muted: #F5F5F5;
+  --background: #ffffff;
+  --foreground: #0a0a0a;
+  --card: #ffffff;
+  --card-foreground: #0a0a0a;
+  --popover: #ffffff;
+  --popover-foreground: #0a0a0a;
+  --primary: #0a0a0a;
+  --primary-foreground: #ffffff;
+  --secondary: #f5f5f5;
+  --secondary-foreground: #0a0a0a;
+  --muted: #f5f5f5;
   --muted-foreground: #737373;
-  --accent: #6366F1;
-  --accent-foreground: #FFFFFF;
+  --accent: #6366f1;
+  --accent-foreground: #ffffff;
   --destructive: #d4183d;
   --destructive-foreground: #ffffff;
   --border: rgba(0, 0, 0, 0.1);
   --input: transparent;
-  --input-background: #F5F5F5;
-  --switch-background: #E5E5E5;
+  --input-background: #f5f5f5;
+  --switch-background: #e5e5e5;
   --ring: rgba(99, 102, 241, 0.5);
-  --chart-1: #6366F1;
-  --chart-2: #00C2FF;
-  --chart-3: #A78BFA;
-  --chart-4: #34D399;
-  --chart-5: #F59E0B;
+  --chart-1: #6366f1;
+  --chart-2: #00c2ff;
+  --chart-3: #a78bfa;
+  --chart-4: #34d399;
+  --chart-5: #f59e0b;
 }
 
 @theme inline {
@@ -171,7 +172,8 @@ html {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', 'Satoshi', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", "Satoshi",
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -198,7 +200,7 @@ body {
   .xs\:inline {
     display: inline;
   }
-  
+
   .xs\:hidden {
     display: none;
   }
@@ -221,12 +223,18 @@ body {
 
 .animate-shimmer {
   animation: shimmer 8s infinite;
-  background: linear-gradient(to right, transparent 0%, rgba(255,255,255,0.1) 50%, transparent 100%);
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 100%
+  );
   background-size: 1000px 100%;
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0px);
   }
   50% {
@@ -240,7 +248,7 @@ body {
 
 /* Gradient text utilities */
 .gradient-text {
-  background: linear-gradient(to right, var(--accent), #A78BFA);
+  background: linear-gradient(to right, var(--accent), #a78bfa);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -255,7 +263,8 @@ body {
 
 /* Smooth background transitions */
 @keyframes pulse-slow {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.3;
     transform: scale(1);
   }
@@ -270,7 +279,8 @@ body {
 }
 
 @keyframes gradient-shift {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.5;
   }
   50% {

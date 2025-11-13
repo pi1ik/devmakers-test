@@ -1,7 +1,14 @@
 "use client";
 
 import { motion } from "motion/react";
-import { ArrowLeft, Calendar, Users, Target, CheckCircle, ExternalLink } from "lucide-react";
+import {
+  ArrowLeft,
+  Calendar,
+  Users,
+  Target,
+  CheckCircle,
+  ExternalLink,
+} from "lucide-react";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { useEffect } from "react";
 import { trackProjectView, trackOutboundLink } from "../../utils/analytics";
@@ -32,8 +39,11 @@ type ProjectDetailPageProps = {
   onNavigate?: (page: string) => void;
 };
 
-export function ProjectDetailPage({ project, onBack, onNavigate }: ProjectDetailPageProps) {
-
+export function ProjectDetailPage({
+  project,
+  onBack,
+  onNavigate,
+}: ProjectDetailPageProps) {
   // Track project view
   useEffect(() => {
     trackProjectView(project.id, project.title, project.category);
@@ -73,11 +83,21 @@ export function ProjectDetailPage({ project, onBack, onNavigate }: ProjectDetail
             ))}
           </div>
 
-          <h1 style={{ fontSize: '3.5rem', lineHeight: '1.1', letterSpacing: '-0.02em' }} className="text-foreground mb-6">
+          <h1
+            style={{
+              fontSize: "3.5rem",
+              lineHeight: "1.1",
+              letterSpacing: "-0.02em",
+            }}
+            className="text-foreground mb-6"
+          >
             {project.title}
           </h1>
-          
-          <p className="text-muted-foreground max-w-3xl" style={{ fontSize: '1.25rem' }}>
+
+          <p
+            className="text-muted-foreground max-w-3xl"
+            style={{ fontSize: "1.25rem" }}
+          >
             {project.description}
           </p>
         </motion.div>
@@ -87,12 +107,12 @@ export function ProjectDetailPage({ project, onBack, onNavigate }: ProjectDetail
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="mb-16 rounded-2xl overflow-hidden border border-border"
+          className="image-wrapper-details"
         >
           <ImageWithFallback
             src={project.image}
             alt={project.title}
-            className="w-full h-[500px] object-cover"
+            className="image-details"
           />
         </motion.div>
 
@@ -116,7 +136,9 @@ export function ProjectDetailPage({ project, onBack, onNavigate }: ProjectDetail
                 </div>
                 <div>
                   <h3 className="text-foreground mb-1">Посмотреть сайт</h3>
-                  <p className="text-muted-foreground">Перейти к работающему проекту</p>
+                  <p className="text-muted-foreground">
+                    Перейти к работающему проекту
+                  </p>
                 </div>
               </div>
               <ExternalLink className="w-5 h-5 text-accent group-hover:translate-x-1 transition-transform" />
@@ -130,7 +152,10 @@ export function ProjectDetailPage({ project, onBack, onNavigate }: ProjectDetail
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: project.websiteUrl ? 0.4 : 0.3 }}
+              transition={{
+                duration: 0.5,
+                delay: project.websiteUrl ? 0.4 : 0.3,
+              }}
               className="p-6 rounded-2xl border border-border bg-background/50 backdrop-blur-sm"
             >
               <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-4">
@@ -145,7 +170,10 @@ export function ProjectDetailPage({ project, onBack, onNavigate }: ProjectDetail
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: project.websiteUrl ? 0.5 : 0.4 }}
+              transition={{
+                duration: 0.5,
+                delay: project.websiteUrl ? 0.5 : 0.4,
+              }}
               className="p-6 rounded-2xl border border-border bg-background/50 backdrop-blur-sm"
             >
               <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-4">
@@ -160,7 +188,10 @@ export function ProjectDetailPage({ project, onBack, onNavigate }: ProjectDetail
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: project.websiteUrl ? 0.6 : 0.5 }}
+              transition={{
+                duration: 0.5,
+                delay: project.websiteUrl ? 0.6 : 0.5,
+              }}
               className="p-6 rounded-2xl border border-border bg-background/50 backdrop-blur-sm"
             >
               <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-4">
@@ -180,10 +211,20 @@ export function ProjectDetailPage({ project, onBack, onNavigate }: ProjectDetail
             transition={{ duration: 0.6, delay: 0.6 }}
             className="mb-16"
           >
-            <h2 style={{ fontSize: '2rem', lineHeight: '1.2', letterSpacing: '-0.02em' }} className="text-foreground mb-6">
+            <h2
+              style={{
+                fontSize: "2rem",
+                lineHeight: "1.2",
+                letterSpacing: "-0.02em",
+              }}
+              className="text-foreground mb-6"
+            >
               О проекте
             </h2>
-            <p className="text-muted-foreground leading-relaxed" style={{ fontSize: '1.125rem' }}>
+            <p
+              className="text-muted-foreground leading-relaxed"
+              style={{ fontSize: "1.125rem" }}
+            >
               {project.fullDescription}
             </p>
           </motion.div>
@@ -198,7 +239,12 @@ export function ProjectDetailPage({ project, onBack, onNavigate }: ProjectDetail
               transition={{ duration: 0.6, delay: 0.7 }}
               className="p-8 rounded-2xl border border-border bg-secondary/30 backdrop-blur-sm"
             >
-              <h3 style={{ fontSize: '1.5rem' }} className="text-foreground mb-4">Задача</h3>
+              <h3
+                style={{ fontSize: "1.5rem" }}
+                className="text-foreground mb-4"
+              >
+                Задача
+              </h3>
               <p className="text-muted-foreground leading-relaxed">
                 {project.challenge}
               </p>
@@ -212,7 +258,12 @@ export function ProjectDetailPage({ project, onBack, onNavigate }: ProjectDetail
               transition={{ duration: 0.6, delay: 0.8 }}
               className="p-8 rounded-2xl border border-border bg-secondary/30 backdrop-blur-sm"
             >
-              <h3 style={{ fontSize: '1.5rem' }} className="text-foreground mb-4">Решение</h3>
+              <h3
+                style={{ fontSize: "1.5rem" }}
+                className="text-foreground mb-4"
+              >
+                Решение
+              </h3>
               <p className="text-muted-foreground leading-relaxed">
                 {project.solution}
               </p>
@@ -228,7 +279,14 @@ export function ProjectDetailPage({ project, onBack, onNavigate }: ProjectDetail
             transition={{ duration: 0.6, delay: 0.9 }}
             className="mb-16"
           >
-            <h2 style={{ fontSize: '2rem', lineHeight: '1.2', letterSpacing: '-0.02em' }} className="text-foreground mb-8">
+            <h2
+              style={{
+                fontSize: "2rem",
+                lineHeight: "1.2",
+                letterSpacing: "-0.02em",
+              }}
+              className="text-foreground mb-8"
+            >
               Ключевые функции
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -256,7 +314,14 @@ export function ProjectDetailPage({ project, onBack, onNavigate }: ProjectDetail
             transition={{ duration: 0.6, delay: 1.1 }}
             className="mb-16"
           >
-            <h2 style={{ fontSize: '2rem', lineHeight: '1.2', letterSpacing: '-0.02em' }} className="text-foreground mb-8">
+            <h2
+              style={{
+                fontSize: "2rem",
+                lineHeight: "1.2",
+                letterSpacing: "-0.02em",
+              }}
+              className="text-foreground mb-8"
+            >
               Технологии
             </h2>
             <div className="flex flex-wrap gap-3">
@@ -280,16 +345,23 @@ export function ProjectDetailPage({ project, onBack, onNavigate }: ProjectDetail
             transition={{ duration: 0.6, delay: 1.2 }}
             className="mb-20"
           >
-            <h2 style={{ fontSize: '2rem', lineHeight: '1.2', letterSpacing: '-0.02em' }} className="text-foreground mb-8">
+            <h2
+              style={{
+                fontSize: "2rem",
+                lineHeight: "1.2",
+                letterSpacing: "-0.02em",
+              }}
+              className="text-foreground mb-8"
+            >
               Достижения
             </h2>
             <div className="relative overflow-hidden">
               {/* Left fade gradient */}
               <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
-              
+
               {/* Right fade gradient */}
               <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
-              
+
               <div className="flex gap-6 animate-marquee">
                 {/* First set */}
                 {project.outcomes.map((outcome, index) => (
@@ -297,7 +369,12 @@ export function ProjectDetailPage({ project, onBack, onNavigate }: ProjectDetail
                     key={`first-${index}`}
                     className="flex-shrink-0 p-6 rounded-2xl border border-accent/20 bg-accent/5 backdrop-blur-sm flex items-center justify-center min-h-[120px] min-w-[320px]"
                   >
-                    <p className="text-foreground text-center" style={{ fontSize: '1.125rem' }}>{outcome}</p>
+                    <p
+                      className="text-foreground text-center"
+                      style={{ fontSize: "1.125rem" }}
+                    >
+                      {outcome}
+                    </p>
                   </div>
                 ))}
                 {/* Duplicate set for seamless loop */}
@@ -306,7 +383,12 @@ export function ProjectDetailPage({ project, onBack, onNavigate }: ProjectDetail
                     key={`second-${index}`}
                     className="flex-shrink-0 p-6 rounded-2xl border border-accent/20 bg-accent/5 backdrop-blur-sm flex items-center justify-center min-h-[120px] min-w-[320px]"
                   >
-                    <p className="text-foreground text-center" style={{ fontSize: '1.125rem' }}>{outcome}</p>
+                    <p
+                      className="text-foreground text-center"
+                      style={{ fontSize: "1.125rem" }}
+                    >
+                      {outcome}
+                    </p>
                   </div>
                 ))}
                 {/* Third set for extra smoothness */}
@@ -315,7 +397,12 @@ export function ProjectDetailPage({ project, onBack, onNavigate }: ProjectDetail
                     key={`third-${index}`}
                     className="flex-shrink-0 p-6 rounded-2xl border border-accent/20 bg-accent/5 backdrop-blur-sm flex items-center justify-center min-h-[120px] min-w-[320px]"
                   >
-                    <p className="text-foreground text-center" style={{ fontSize: '1.125rem' }}>{outcome}</p>
+                    <p
+                      className="text-foreground text-center"
+                      style={{ fontSize: "1.125rem" }}
+                    >
+                      {outcome}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -330,11 +417,12 @@ export function ProjectDetailPage({ project, onBack, onNavigate }: ProjectDetail
           transition={{ duration: 0.6, delay: 1.4 }}
           className="mb-20 p-8 rounded-2xl border border-border bg-secondary/30 backdrop-blur-sm text-center"
         >
-          <h3 style={{ fontSize: '1.75rem' }} className="text-foreground mb-4">
+          <h3 style={{ fontSize: "1.75rem" }} className="text-foreground mb-4">
             Хотите похожий проект?
           </h3>
           <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-            Расскажите нам о вашей задаче, и мы создадим решение, которое превзойдет ожидания
+            Расскажите нам о вашей задаче, и мы создадим решение, которое
+            превзойдет ожидания
           </p>
           <motion.button
             onClick={() => onNavigate?.("ai-consultant")}
