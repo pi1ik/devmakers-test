@@ -1,7 +1,16 @@
 "use client";
 
 import { motion } from "motion/react";
-import { Globe, Palette, Bot, Workflow, Send, Mail, Sparkles, ArrowRight } from "lucide-react";
+import {
+  Globe,
+  Palette,
+  Bot,
+  Workflow,
+  Send,
+  Mail,
+  Sparkles,
+  ArrowRight,
+} from "lucide-react";
 import { ImageWithFallback } from "../figma/ImageWithFallback";
 import { CTASection } from "../CTASection";
 import { SEO, generateBreadcrumbSchema } from "../SEO";
@@ -17,9 +26,11 @@ const categories = [
   {
     icon: Globe,
     title: "Веб разработка",
-    description: "Сайты любой сложности: от лендингов до сложных веб-приложений",
+    description:
+      "Сайты любой сложности: от лендингов до сложных веб-приложений",
     projects: 48,
-    image: "https://images.unsplash.com/photo-1759668358660-0d06064f0f84?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBsYXB0b3AlMjB3b3Jrc3BhY2V8ZW58MXx8fHwxNzYyMTAyMTE0fDA&ixlib=rb-4.1.0&q=80&w=1080",
+    image:
+      "https://images.unsplash.com/photo-1759668358660-0d06064f0f84?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBsYXB0b3AlMjB3b3Jrc3BhY2V8ZW58MXx8fHwxNzYyMTAyMTE0fDA&ixlib=rb-4.1.0&q=80&w=1080",
     subcategories: [
       { label: "Лендинги", key: "landings", count: 12 },
       { label: "Корпоративные сайты", key: "corporate", count: 15 },
@@ -30,9 +41,11 @@ const categories = [
   {
     icon: Palette,
     title: "Дизайн",
-    description: "От логотипов до полных дизайн-систем и UI/UX для сложных продуктов",
+    description:
+      "От логотипов до полных дизайн-систем и UI/UX для сложных продуктов",
     projects: 62,
-    image: "https://images.unsplash.com/photo-1510832758362-af875829efcf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcmVhdGl2ZSUyMGRlc2lnbiUyMHdvcmtzcGFjZXxlbnwxfHx8fDE3NjIwOTIyMDR8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    image:
+      "https://images.unsplash.com/photo-1510832758362-af875829efcf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjcmVhdGl2ZSUyMGRlc2lnbiUyMHdvcmtzcGFjZXxlbnwxfHx8fDE3NjIwOTIyMDR8MA&ixlib=rb-4.1.0&q=80&w=1080",
     subcategories: [
       { label: "UI/UX дизайн", key: "uiux", count: 20 },
       { label: "Логотипы", key: "logos", count: 18 },
@@ -45,7 +58,8 @@ const categories = [
     title: "AI-агенты",
     description: "Умные помощники для автоматизации коммуникации и поддержки",
     projects: 42,
-    image: "https://images.unsplash.com/photo-1601132359864-c974e79890ac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhaSUyMHJvYm90JTIwdGVjaG5vbG9neXxlbnwxfHx8fDE3NjIxNzE5Mzl8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    image:
+      "https://images.unsplash.com/photo-1601132359864-c974e79890ac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxhaSUyMHJvYm90JTIwdGVjaG5vbG9neXxlbnwxfHx8fDE3NjIxNzE5Mzl8MA&ixlib=rb-4.1.0&q=80&w=1080",
     subcategories: [
       { label: "Чат-боты", key: "chatbots", count: 15 },
       { label: "Telegram боты", key: "telegrambots", count: 8 },
@@ -58,7 +72,8 @@ const categories = [
     title: "Автоматизация",
     description: "Оптимизация бизнес-процессов и интеграция систем",
     projects: 41,
-    image: "https://images.unsplash.com/photo-1628017974725-18928e8e8211?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0ZWNoJTIwc3RhcnR1cCUyMG9mZmljZXxlbnwxfHx8fDE3NjIxMTM1ODd8MA&ixlib=rb-4.1.0&q=80&w=1080",
+    image:
+      "https://images.unsplash.com/photo-1628017974725-18928e8e8211?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0ZWNoJTIwc3RhcnR1cCUyMG9mZmljZXxlbnwxfHx8fDE3NjIxMTM1ODd8MA&ixlib=rb-4.1.0&q=80&w=1080",
     subcategories: [
       { label: "CRM системы", key: "crm", count: 12 },
       { label: "Email-маркетинг", key: "emailmarketing", count: 10 },
@@ -75,10 +90,13 @@ const stats = [
   { value: "8", label: "Лет на рынке" },
 ];
 
-export function PortfolioPage({ onCategoryClick, onNavigate }: PortfolioCategoryProps) {
+export function PortfolioPage({
+  onCategoryClick,
+  onNavigate,
+}: PortfolioCategoryProps) {
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: "Главная", url: "https://studio.ai/" },
-    { name: "Портфолио", url: "https://studio.ai/portfolio" }
+    { name: "Портфолио", url: "https://studio.ai/portfolio" },
   ]);
 
   return (
@@ -109,11 +127,10 @@ export function PortfolioPage({ onCategoryClick, onNavigate }: PortfolioCategory
               <span className="text-accent">Портфолио студии</span>
             </motion.div>
 
-            <PageHeading variants={fadeInUp}>
-              Наши работы
-            </PageHeading>
+            <PageHeading variants={fadeInUp}>Наши работы</PageHeading>
             <PageDescription variants={fadeInUp}>
-              Более 120 успешных проектов в разработке, дизайне, AI и автоматизации.
+              Более 120 успешных проектов в разработке, дизайне, AI и
+              автоматизации.
               <br />
               От стартапов до крупных корпораций.
             </PageDescription>
@@ -135,7 +152,11 @@ export function PortfolioPage({ onCategoryClick, onNavigate }: PortfolioCategory
                 className="text-center p-6 rounded-2xl border border-border bg-background/50 backdrop-blur-sm"
               >
                 <div
-                  style={{ fontSize: "2.5rem", lineHeight: "1.2", letterSpacing: "-0.02em" }}
+                  style={{
+                    fontSize: "2.5rem",
+                    lineHeight: "1.2",
+                    letterSpacing: "-0.02em",
+                  }}
                   className="text-accent mb-2"
                 >
                   {stat.value}
@@ -165,7 +186,7 @@ export function PortfolioPage({ onCategoryClick, onNavigate }: PortfolioCategory
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
-                    
+
                     {/* Icon Badge */}
                     <div className="absolute top-6 left-6 w-12 h-12 rounded-xl bg-accent/20 backdrop-blur-sm border border-accent/30 flex items-center justify-center">
                       <Icon className="w-6 h-6 text-accent" />
@@ -173,16 +194,23 @@ export function PortfolioPage({ onCategoryClick, onNavigate }: PortfolioCategory
 
                     {/* Projects Count */}
                     <div className="absolute top-6 right-6 px-3 py-1 rounded-full bg-background/80 backdrop-blur-sm border border-border">
-                      <span className="text-foreground">{category.projects} проектов</span>
+                      <span className="text-foreground">
+                        {category.projects} проектов
+                      </span>
                     </div>
                   </div>
 
                   {/* Category Content */}
                   <div className="p-8">
-                    <h3 style={{ fontSize: "1.75rem" }} className="text-foreground mb-3">
+                    <h3
+                      style={{ fontSize: "1.75rem" }}
+                      className="text-foreground mb-3"
+                    >
                       {category.title}
                     </h3>
-                    <p className="text-muted-foreground mb-6">{category.description}</p>
+                    <p className="text-muted-foreground mb-6">
+                      {category.description}
+                    </p>
 
                     {/* Subcategories */}
                     <div className="space-y-2 mb-6">
@@ -196,7 +224,9 @@ export function PortfolioPage({ onCategoryClick, onNavigate }: PortfolioCategory
                             {sub.label}
                           </span>
                           <div className="flex items-center gap-2">
-                            <span className="text-muted-foreground">{sub.count}</span>
+                            <span className="text-muted-foreground">
+                              {sub.count}
+                            </span>
                             <ArrowRight className="w-4 h-4 text-muted-foreground group-hover/item:text-accent group-hover/item:translate-x-1 transition-all" />
                           </div>
                         </button>
