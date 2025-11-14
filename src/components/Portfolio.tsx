@@ -5,6 +5,9 @@ import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { ProjectCard } from "./ProjectCard";
+import { getAnimationConfig } from "../utils/performance";
+import { PageDescription, PageHeading } from "./ui/Typography";
+import { fadeInUp } from "../utils/motionConfig";
 
 export type Project = {
   title: string;
@@ -1071,6 +1074,7 @@ export function Portfolio({
   const [loadedImages, setLoadedImages] = useState<{ [key: string]: boolean }>(
     {}
   );
+  const animConfig = useMemo(() => getAnimationConfig(), []);
 
   useEffect(() => {
     console.log(data);
@@ -1086,8 +1090,6 @@ export function Portfolio({
   const handleLoadMore = () => {
     setVisibleCount((prev) => prev + 4);
   };
-
-  //Определение сенсорное ли устройство (далее будем отключать ховер эффекты для сенсорных)
 
   const isTouchDevice = useMemo(() => {
     if (typeof window === "undefined") return false;
@@ -1110,34 +1112,37 @@ export function Portfolio({
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{
-            type: "spring",
-            duration: 0.6,
-            ease: [0.25, 0.1, 0.25, 1.0],
+            duration: animConfig.duration,
           }}
-          className="mb-16 transition-all"
+          className="mb-16"
         >
           <button
             onClick={onBack}
-            className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-all duration-300 mb-8 group"
+            className="flex items-center gap-2 text-muted-foreground hover:text-foreground mb-8 group"
           >
             <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
             Вернуться назад
           </button>
 
-          <h1
-            style={{
-              fontSize: "3.5rem",
-              lineHeight: "1.2",
-              letterSpacing: "-0.02em",
-            }}
-            className="text-foreground mb-4 transition-all"
+          <PageHeading
+            variants={fadeInUp}
+            // style={{
+            //   fontSize: "3.5rem",
+            //   lineHeight: "1.2",
+            //   letterSpacing: "-0.02em",
+            // }}
+            className="text-foreground text-center mb-4"
           >
             {data.title}
-          </h1>
-          <p className="text-muted-foreground max-w-2xl transition-all">
+          </PageHeading>
+          <PageDescription
+            variants={fadeInUp}
+            className="text-center text-muted-foreground max-w-2xl"
+          >
             Реализованные проекты в категории «{data.title}»
-          </p>
+          </PageDescription>
         </motion.div>
 
         {/* Projects Grid */}
@@ -1150,7 +1155,7 @@ export function Portfolio({
                 key={project.title}
                 project={project}
                 index={index}
-                isLoaded={isLoaded}
+                // isLoaded={isLoaded}
                 isTouchDevice={isTouchDevice}
                 onClick={() => onProjectClick(category, index)}
                 onImageLoad={() => handleImageLoad(project.title)}

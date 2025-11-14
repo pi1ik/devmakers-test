@@ -19,7 +19,6 @@ interface HomePageProps {
 }
 
 export function HomePage({ onNavigate, onProjectClick }: HomePageProps) {
-
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
@@ -36,86 +35,86 @@ export function HomePage({ onNavigate, onProjectClick }: HomePageProps) {
         canonical={`${SITE_ORIGIN}/`}
         structuredData={organizationSchema}
       />
-      
+
       {/* Ambient background gradient system */}
       <div className="fixed inset-0 -z-10 pointer-events-none">
         {/* Base gradient - full page smooth transition */}
         <div className="absolute inset-0 bg-gradient-to-b from-accent/5 via-transparent to-accent/5" />
-        
+
         {/* Top accent bloom */}
-        <motion.div 
+        <motion.div
           className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[600px] bg-accent/8 rounded-full blur-[150px]"
-          animate={{ 
+          animate={{
             opacity: [0.8, 1, 0.8],
-            scale: [1, 1.1, 1]
+            scale: [1, 1.1, 1],
           }}
-          transition={{ 
-            duration: 10, 
+          transition={{
+            duration: 10,
             repeat: Infinity,
-            ease: "easeInOut"
+            ease: "easeInOut",
           }}
         />
-        
+
         {/* Left side gradient flow */}
-        <motion.div 
+        <motion.div
           className="absolute top-1/4 -left-1/4 w-[800px] h-[800px] bg-purple-500/6 rounded-full blur-[120px]"
-          animate={{ 
+          animate={{
             opacity: [0.6, 0.8, 0.6],
-            y: [-20, 20, -20]
+            y: [-20, 20, -20],
           }}
-          transition={{ 
-            duration: 12, 
+          transition={{
+            duration: 12,
             repeat: Infinity,
             ease: "easeInOut",
-            delay: 1
+            delay: 1,
           }}
         />
-        
+
         {/* Right side gradient flow */}
-        <motion.div 
+        <motion.div
           className="absolute top-1/2 -right-1/4 w-[900px] h-[900px] bg-accent/6 rounded-full blur-[140px]"
-          animate={{ 
+          animate={{
             opacity: [0.7, 0.9, 0.7],
-            y: [20, -20, 20]
+            y: [20, -20, 20],
           }}
-          transition={{ 
-            duration: 14, 
+          transition={{
+            duration: 14,
             repeat: Infinity,
             ease: "easeInOut",
-            delay: 2
+            delay: 2,
           }}
         />
-        
+
         {/* Bottom accent bloom */}
-        <motion.div 
+        <motion.div
           className="absolute bottom-0 left-1/3 w-[1000px] h-[500px] bg-purple-500/7 rounded-full blur-[130px]"
-          animate={{ 
+          animate={{
             opacity: [0.8, 1, 0.8],
-            scale: [1, 1.05, 1]
+            scale: [1, 1.05, 1],
           }}
-          transition={{ 
-            duration: 11, 
+          transition={{
+            duration: 11,
             repeat: Infinity,
             ease: "easeInOut",
-            delay: 3
+            delay: 3,
           }}
         />
-        
+
         {/* Smooth vignette overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent via-50% to-background/40" />
-        
+
         {/* Radial fade from edges */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,background_100%)] opacity-60" />
       </div>
 
       <Hero />
-      
+
       {/* Stats Section */}
       <Stats />
 
       {/* Clients/Partners */}
       <Clients />
-      
+
       {/* Services Preview */}
       <Services onNavigate={onNavigate} />
 

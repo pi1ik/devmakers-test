@@ -1,7 +1,8 @@
-import { memo } from "react";
+import { memo, useMemo } from "react";
 import { motion } from "framer-motion";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 import { ArrowUpRight } from "lucide-react";
+import { getAnimationConfig } from "../utils/performance";
 
 export interface ProjectData {
   title: string;
@@ -14,7 +15,7 @@ export interface ProjectData {
 interface ProjectCardProps {
   project: ProjectData;
   index: number;
-  isLoaded: boolean;
+  // isLoaded: boolean;
   isTouchDevice: boolean;
   onClick: () => void;
   onImageLoad: () => void;
@@ -22,36 +23,36 @@ interface ProjectCardProps {
 
 export const ProjectCard = memo(function ProjectCard({
   project,
+  // isLoaded,
   index,
-  isLoaded,
   isTouchDevice,
   onClick,
   onImageLoad,
 }: ProjectCardProps) {
+  const animConfig = useMemo(() => getAnimationConfig(), []);
   return (
     <motion.div
       key={project.title}
-      layout
-      initial={{ opacity: 0, y: 20 }}
-      animate={isLoaded ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }}
-      transition={{
-        duration: isLoaded ? 0.6 : 0.3,
-        ease: [0.25, 0.1, 0.25, 1.0],
-      }}
-      whileHover={!isTouchDevice ? { y: -8 } : undefined}
+      initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: animConfig.duration, delay: index * 0.1 }}
+      viewport={{ once: true }}
+      whileHover={animConfig.shouldAnimate ? { y: -8 } : {}}
       onClick={onClick}
-      className="group rounded-2xl border border-border bg-background/50 backdrop-blur-sm hover:border-accent/50 transition-all overflow-hidden cursor-pointer"
+      className="group rounded-2xl border border-border bg-background/50 backdrop-blur-sm hover:border-accent/50 overflow-hidden cursor-pointer"
+      // style={{ willChange: animConfig.shouldAnimate ? "transform" : "auto" }}
     >
       {/* Image */}
       <div className="relative h-64 w-full overflow-hidden bg-secondary/20 flex justify-center items-center transition-all">
         <div className="image-wrapper-portfolio transition-all">
           <ImageWithFallback
+            loading="eager"
             src={project.image}
             alt={project.title}
             onLoad={onImageLoad}
-            className={`mt-5 w-full h-full object-cover object-top group-hover:scale-105 transition-transform transition-all duration-300 ${
-              isLoaded ? "opacity-100" : "opacity-0"
-            }`}
+            className={`mt-5 w-full h-full object-cover object-top group-hover:scale-105 transition-transform transition-all duration-300 
+              
+            `}
           />
         </div>
 

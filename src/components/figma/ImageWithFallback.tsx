@@ -15,7 +15,7 @@ export function ImageWithFallback(
     setDidError(true);
   };
 
-  const { src, alt, style, className, onLoad, ...rest } = props;
+  const { src, alt, style, className, onLoad, loading, ...rest } = props;
   return didError ? (
     <div
       className={`inline-block bg-gray-100 text-center align-middle ${
@@ -39,7 +39,8 @@ export function ImageWithFallback(
       className={className}
       style={style}
       onError={handleError}
-      onLoadingComplete={() => {
+      loading={loading}
+      onLoad={() => {
         if (onLoad) onLoad();
       }}
       fill={true}

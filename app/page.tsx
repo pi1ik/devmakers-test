@@ -6,34 +6,73 @@ import { Stats } from "@/src/components/Stats";
 import { useRouter } from "next/navigation";
 
 // Lazy load components below the fold for better performance
-const Services = dynamic(() => import("@/src/components/Services").then(mod => ({ default: mod.Services })), {
-  loading: () => <div className="min-h-[400px]" />,
-});
-const Work = dynamic(() => import("@/src/components/Work").then(mod => ({ default: mod.Work })), {
-  loading: () => <div className="min-h-[400px]" />,
-});
-const Clients = dynamic(() => import("@/src/components/Clients").then(mod => ({ default: mod.Clients })), {
-  loading: () => <div className="min-h-[300px]" />,
-});
-const Process = dynamic(() => import("@/src/components/Process").then(mod => ({ default: mod.Process })), {
-  loading: () => <div className="min-h-[600px]" />,
-});
-const Testimonials = dynamic(() => import("@/src/components/Testimonials").then(mod => ({ default: mod.Testimonials })), {
-  loading: () => <div className="min-h-[400px]" />,
-});
-const AIConsultantPreview = dynamic(() => import("@/src/components/AIConsultantPreview").then(mod => ({ default: mod.AIConsultantPreview })), {
-  loading: () => <div className="min-h-[500px]" />,
-});
-const CTASection = dynamic(() => import("@/src/components/CTASection").then(mod => ({ default: mod.CTASection })), {
-  loading: () => <div className="min-h-[300px]" />,
-});
+const Services = dynamic(
+  () =>
+    import("@/src/components/Services").then((mod) => ({
+      default: mod.Services,
+    })),
+  {
+    loading: () => <div className="min-h-[400px]" />,
+  }
+);
+const Work = dynamic(
+  () => import("@/src/components/Work").then((mod) => ({ default: mod.Work })),
+  {
+    loading: () => <div className="min-h-[400px]" />,
+  }
+);
+const Clients = dynamic(
+  () =>
+    import("@/src/components/Clients").then((mod) => ({
+      default: mod.Clients,
+    })),
+  {
+    loading: () => <div className="min-h-[300px]" />,
+  }
+);
+const Process = dynamic(
+  () =>
+    import("@/src/components/Process").then((mod) => ({
+      default: mod.Process,
+    })),
+  {
+    loading: () => <div className="min-h-[600px]" />,
+  }
+);
+const Testimonials = dynamic(
+  () =>
+    import("@/src/components/Testimonials").then((mod) => ({
+      default: mod.Testimonials,
+    })),
+  {
+    loading: () => <div className="min-h-[400px]" />,
+  }
+);
+const AIConsultantPreview = dynamic(
+  () =>
+    import("@/src/components/AIConsultantPreview").then((mod) => ({
+      default: mod.AIConsultantPreview,
+    })),
+  {
+    loading: () => <div className="min-h-[500px]" />,
+  }
+);
+const CTASection = dynamic(
+  () =>
+    import("@/src/components/CTASection").then((mod) => ({
+      default: mod.CTASection,
+    })),
+  {
+    loading: () => <div className="min-h-[300px]" />,
+  }
+);
 
 export default function Home() {
   const router = useRouter();
 
   const handleProjectClick = (projectId: string) => {
     // projectId format: "landings-0", "chatbots-0", etc.
-    const [category, id] = projectId.split('-');
+    const [category, id] = projectId.split("-");
     router.push(`/portfolio/${category}/${id}`);
   };
   return (
@@ -44,24 +83,16 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-accent/5 via-transparent to-accent/5" />
 
         {/* Top accent bloom */}
-        <div
-          className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[600px] bg-accent/8 rounded-full blur-[150px]"
-        />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[600px] bg-accent/8 rounded-full blur-[150px]" />
 
         {/* Left side gradient flow */}
-        <div
-          className="absolute top-1/4 -left-1/4 w-[800px] h-[800px] bg-purple-500/6 rounded-full blur-[120px]"
-        />
+        <div className="absolute top-1/4 -left-1/4 w-[800px] h-[800px] bg-purple-500/6 rounded-full blur-[120px]" />
 
         {/* Right side gradient flow */}
-        <div
-          className="absolute top-1/2 -right-1/4 w-[900px] h-[900px] bg-accent/6 rounded-full blur-[140px]"
-        />
+        <div className="absolute top-1/2 -right-1/4 w-[900px] h-[900px] bg-accent/6 rounded-full blur-[140px]" />
 
         {/* Bottom accent bloom */}
-        <div
-          className="absolute bottom-0 left-1/3 w-[1000px] h-[500px] bg-purple-500/7 rounded-full blur-[130px]"
-        />
+        <div className="absolute bottom-0 left-1/3 w-[1000px] h-[500px] bg-purple-500/7 rounded-full blur-[130px]" />
 
         {/* Smooth vignette overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent via-50% to-background/40" />
