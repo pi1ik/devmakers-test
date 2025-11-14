@@ -1,4 +1,4 @@
-import { FAQPage } from "@/src/components/pages/FAQPage";
+import { FAQPage } from "@/src/entities/faq/FAQPage";
 
 export default function FAQ() {
   return <FAQPage />;

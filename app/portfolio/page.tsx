@@ -1,6 +1,6 @@
 "use client";
 
-import { PortfolioPage } from "@/src/components/pages/PortfolioPage";
+import { PortfolioPage } from "@/src/app-pages/PortfolioPage";
 import { useRouter } from "next/navigation";
 
 export default function Portfolio() {

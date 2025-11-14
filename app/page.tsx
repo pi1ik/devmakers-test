@@ -1,65 +1,65 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { Hero } from "@/src/components/Hero";
-import { Stats } from "@/src/components/Stats";
+import { Hero } from "@/src/widgets/Hero";
+import { Stats } from "@/src/widgets/Stats";
 import { useRouter } from "next/navigation";
 
 // Lazy load components below the fold for better performance
 const Services = dynamic(
   () =>
-    import("@/src/components/Services").then((mod) => ({
-      default: mod.Services,
-    })),
+    import("@/src/widgets/Services").then((mod) => ({ default: mod.Services })),
   {
     loading: () => <div className="min-h-[400px]" />,
   }
 );
+
 const Work = dynamic(
-  () => import("@/src/components/Work").then((mod) => ({ default: mod.Work })),
+  () => import("@/src/widgets/Work").then((mod) => ({ default: mod.Work })),
   {
     loading: () => <div className="min-h-[400px]" />,
   }
 );
+
 const Clients = dynamic(
   () =>
-    import("@/src/components/Clients").then((mod) => ({
-      default: mod.Clients,
-    })),
+    import("@/src/widgets/Clients").then((mod) => ({ default: mod.Clients })),
   {
     loading: () => <div className="min-h-[300px]" />,
   }
 );
+
 const Process = dynamic(
   () =>
-    import("@/src/components/Process").then((mod) => ({
-      default: mod.Process,
-    })),
+    import("@/src/widgets/Process").then((mod) => ({ default: mod.Process })),
   {
     loading: () => <div className="min-h-[600px]" />,
   }
 );
+
 const Testimonials = dynamic(
   () =>
-    import("@/src/components/Testimonials").then((mod) => ({
+    import("@/src/widgets/Testimonials").then((mod) => ({
       default: mod.Testimonials,
     })),
   {
     loading: () => <div className="min-h-[400px]" />,
   }
 );
+
 const AIConsultantPreview = dynamic(
   () =>
-    import("@/src/components/AIConsultantPreview").then((mod) => ({
+    import("@/src/features/ai-consultant/AIConsultantPreview").then((mod) => ({
       default: mod.AIConsultantPreview,
     })),
   {
     loading: () => <div className="min-h-[500px]" />,
   }
 );
+
 const CTASection = dynamic(
   () =>
-    import("@/src/components/CTASection").then((mod) => ({
+    import("@/src/widgets/CTASection").then((mod) => ({
       default: mod.CTASection,
     })),
   {
