@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "motion/react";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useLayoutEffect } from "react";
 import { ChevronDown, Send, Mail, Menu, X, Sun, Moon } from "lucide-react";
 import { useTheme } from "../theme/ThemeProvider";
 import { throttle, getAnimationConfig } from "@/src/shared/utils/performance";
@@ -56,7 +56,13 @@ export function Navigation() {
   const [showPortfolio, setShowPortfolio] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobilePortfolioOpen, setMobilePortfolioOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
   const animConfig = useMemo(() => getAnimationConfig(), []);
+
+  useLayoutEffect(() => {
+    Promise.resolve().then(() => setMounted(true));
+  }, []);
 
   useEffect(() => {
     // Throttle scroll handler for better performance
@@ -97,7 +103,7 @@ export function Navigation() {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-colors ${
         scrolled
           ? "bg-background/80 backdrop-blur-xl border-b border-border"
           : "bg-transparent"
@@ -249,11 +255,12 @@ export function Navigation() {
               className="p-2 rounded-full border border-border bg-background/50 backdrop-blur-sm text-foreground hover:border-accent/50 transition-all duration-300"
               aria-label="Toggle theme"
             >
-              {theme === "dark" ? (
-                <Sun className="w-5 h-5" />
-              ) : (
-                <Moon className="w-5 h-5" />
-              )}
+              {mounted &&
+                (theme === "dark" ? (
+                  <Sun className="w-5 h-5" />
+                ) : (
+                  <Moon className="w-5 h-5" />
+                ))}
             </motion.button>
 
             <motion.a
@@ -424,11 +431,12 @@ export function Navigation() {
                   <span className="text-sm">
                     {theme === "dark" ? "Темная" : "Светлая"}
                   </span>
-                  {theme === "dark" ? (
-                    <Sun className="w-5 h-5" />
-                  ) : (
-                    <Moon className="w-5 h-5" />
-                  )}
+                  {mounted &&
+                    (theme === "dark" ? (
+                      <Sun className="w-5 h-5" />
+                    ) : (
+                      <Moon className="w-5 h-5" />
+                    ))}
                 </div>
               </button>
 
