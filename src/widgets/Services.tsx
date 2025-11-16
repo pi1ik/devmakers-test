@@ -11,6 +11,8 @@ import {
 } from "lucide-react";
 import { useState, useMemo } from "react";
 import { getAnimationConfig } from "../shared/utils/performance";
+import { SectionDescription, SectionHeading } from "../shared/ui";
+import { fadeInUp } from "../shared/utils/motionConfig";
 
 const services = [
   {
@@ -184,7 +186,7 @@ function ServiceCard({
           {/* Icon container with simplified animations */}
           <div className="mb-6 relative">
             <div
-              className={`relative w-16 h-16 rounded-2xl bg-gradient-to-br ${service.gradient} flex items-center justify-center backdrop-blur-sm border border-white/10 group-hover:border-white/20 transition-all duration-300`}
+              className={`relative w-16 h-16 rounded-2xl bg-gradient-to-br ${service.gradient} flex items-center justify-center backdrop-blur-sm border border-white/10 group-hover:border-white/20 transition-colors duration-300`}
             >
               {/* Icon */}
               <service.icon
@@ -219,7 +221,7 @@ function ServiceCard({
 
         {/* Corner accent */}
         <div
-          className={`absolute top-4 right-4 w-2 h-2 bg-accent rounded-full transition-all duration-300 ${
+          className={`absolute top-4 right-4 w-2 h-2 bg-accent rounded-full transition-transform duration-300 ${
             isHovered ? "scale-100" : "scale-0"
           }`}
         />
@@ -299,20 +301,11 @@ export function Services({ onNavigate }: ServicesProps) {
             <span className="text-sm text-accent">Наши услуги</span>
           </motion.div>
 
-          <h2
-            style={{
-              fontSize: "3rem",
-              lineHeight: "1.2",
-              letterSpacing: "-0.02em",
-            }}
-            className="text-foreground mb-4"
-          >
-            Что мы делаем
-          </h2>
+          <SectionHeading>Что мы делаем</SectionHeading>
 
-          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+          <SectionDescription className="mb-4">
             Комплексные digital-решения для вашего бизнеса
-          </p>
+          </SectionDescription>
         </motion.div>
 
         {/* Services grid */}

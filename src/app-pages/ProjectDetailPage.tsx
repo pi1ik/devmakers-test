@@ -10,8 +10,15 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { ImageWithFallback } from "../shared/ui/imageWithFallback";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { trackProjectView } from "../shared/utils/analytics";
+import {
+  PageDescription,
+  PageHeading,
+  SectionDescription,
+  SectionHeading,
+} from "../shared/ui";
+import { getAnimationConfig } from "../shared/utils/performance";
 
 export type ProjectDetail = {
   id: string;
@@ -44,6 +51,7 @@ export function ProjectDetailPage({
   onBack,
   onNavigate,
 }: ProjectDetailPageProps) {
+  const animConfig = useMemo(() => getAnimationConfig(), []);
   // Track project view
   useEffect(() => {
     trackProjectView(project.id, project.title, project.category);
@@ -58,7 +66,7 @@ export function ProjectDetailPage({
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.4 }}
-          whileHover={{ x: -4 }}
+          whileHover={animConfig.shouldAnimate ? { x: -4 } : {}}
           className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-8 group"
         >
           <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
@@ -69,7 +77,10 @@ export function ProjectDetailPage({
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          transition={{
+            duration: animConfig.duration,
+          }}
           className="mb-12"
         >
           <div className="flex flex-wrap gap-2 mb-6">
@@ -83,23 +94,11 @@ export function ProjectDetailPage({
             ))}
           </div>
 
-          <h1
-            style={{
-              fontSize: "3.5rem",
-              lineHeight: "1.1",
-              letterSpacing: "-0.02em",
-            }}
-            className="text-foreground mb-6"
-          >
-            {project.title}
-          </h1>
+          <PageHeading className="mb-6">{project.title}</PageHeading>
 
-          <p
-            className="text-muted-foreground max-w-3xl"
-            style={{ fontSize: "1.25rem" }}
-          >
+          <PageDescription className="max-w-3xl">
             {project.description}
-          </p>
+          </PageDescription>
         </motion.div>
 
         {/* Project Image */}
@@ -125,7 +124,7 @@ export function ProjectDetailPage({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            whileHover={{ scale: 1.02 }}
+            whileHover={animConfig.shouldAnimate ? { scale: 1.02 } : {}}
             whileTap={{ scale: 0.98 }}
             className="block mb-6 p-6 rounded-2xl border border-accent/30 bg-accent/5 backdrop-blur-sm hover:border-accent/50 transition-all duration-300 group"
           >
@@ -211,22 +210,13 @@ export function ProjectDetailPage({
             transition={{ duration: 0.6, delay: 0.6 }}
             className="mb-16"
           >
-            <h2
-              style={{
-                fontSize: "2rem",
-                lineHeight: "1.2",
-                letterSpacing: "-0.02em",
-              }}
-              className="text-foreground mb-6"
-            >
-              О проекте
-            </h2>
-            <p
-              className="text-muted-foreground leading-relaxed"
+            <SectionHeading>О проекте</SectionHeading>
+            <SectionDescription
+              className="leading-relaxed"
               style={{ fontSize: "1.125rem" }}
             >
               {project.fullDescription}
-            </p>
+            </SectionDescription>
           </motion.div>
         )}
 
@@ -279,16 +269,7 @@ export function ProjectDetailPage({
             transition={{ duration: 0.6, delay: 0.9 }}
             className="mb-16"
           >
-            <h2
-              style={{
-                fontSize: "2rem",
-                lineHeight: "1.2",
-                letterSpacing: "-0.02em",
-              }}
-              className="text-foreground mb-8"
-            >
-              Ключевые функции
-            </h2>
+            <SectionHeading>Ключевые функции</SectionHeading>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {project.features.map((feature, index) => (
                 <motion.div
@@ -314,16 +295,7 @@ export function ProjectDetailPage({
             transition={{ duration: 0.6, delay: 1.1 }}
             className="mb-16"
           >
-            <h2
-              style={{
-                fontSize: "2rem",
-                lineHeight: "1.2",
-                letterSpacing: "-0.02em",
-              }}
-              className="text-foreground mb-8"
-            >
-              Технологии
-            </h2>
+            <SectionHeading>Технологии</SectionHeading>
             <div className="flex flex-wrap gap-3">
               {project.technologies.map((tech) => (
                 <span
@@ -345,16 +317,7 @@ export function ProjectDetailPage({
             transition={{ duration: 0.6, delay: 1.2 }}
             className="mb-20"
           >
-            <h2
-              style={{
-                fontSize: "2rem",
-                lineHeight: "1.2",
-                letterSpacing: "-0.02em",
-              }}
-              className="text-foreground mb-8"
-            >
-              Достижения
-            </h2>
+            <SectionHeading>Достижения</SectionHeading>
             <div className="relative overflow-hidden">
               {/* Left fade gradient */}
               <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none" />
@@ -426,7 +389,7 @@ export function ProjectDetailPage({
           </p>
           <motion.button
             onClick={() => onNavigate?.("ai-consultant")}
-            whileHover={{ scale: 1.02 }}
+            whileHover={animConfig.shouldAnimate ? { scale: 1.02 } : {}}
             whileTap={{ scale: 0.98 }}
             className="inline-block px-8 py-3 bg-accent text-accent-foreground rounded-xl transition-all duration-300 hover:shadow-[0_0_30px_rgba(99,102,241,0.4)]"
           >

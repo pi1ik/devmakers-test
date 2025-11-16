@@ -14,8 +14,16 @@ import {
   Users,
 } from "lucide-react";
 import { ImageWithFallback } from "@/src/shared/ui/imageWithFallback";
-import { PageHeading, PageDescription } from "@/src/shared/ui/Typography";
+import {
+  MotionPageHeading,
+  MotionPageDescription,
+  MotionSectionHeading,
+  SectionHeading,
+  SectionDescription,
+} from "@/src/shared/ui/Typography";
 import { fadeInUp } from "../shared/utils/motionConfig";
+import { useMemo } from "react";
+import { getAnimationConfig } from "../shared/utils/performance";
 
 const benefits = [
   {
@@ -113,6 +121,7 @@ interface ServicesPageProps {
 }
 
 export function ServicesPage({ onNavigate }: ServicesPageProps) {
+  const animConfig = useMemo(() => getAnimationConfig(), []);
   return (
     <div className="min-h-screen bg-background pt-24">
       <SEO
@@ -125,22 +134,22 @@ export function ServicesPage({ onNavigate }: ServicesPageProps) {
       {/* Hero */}
       <div className="max-w-7xl mx-auto px-6 lg:px-8 pb-12">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: animConfig.duration }}
           className="text-center mb-12"
         >
-          <PageHeading variants={fadeInUp}>Наши услуги</PageHeading>
-          <PageDescription variants={fadeInUp}>
+          <MotionPageHeading variants={fadeInUp}>Наши услуги</MotionPageHeading>
+          <MotionPageDescription variants={fadeInUp}>
             Комплексные решения для вашего бизнеса: от идеи до готового продукта
-          </PageDescription>
+          </MotionPageDescription>
         </motion.div>
 
         {/* Benefits Grid */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: animConfig.duration, delay: 0.2 }}
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20"
         >
           {benefits.map((benefit, index) => {
@@ -148,10 +157,15 @@ export function ServicesPage({ onNavigate }: ServicesPageProps) {
             return (
               <motion.div
                 key={benefit.title}
-                initial={{ opacity: 0, y: 20 }}
+                initial={
+                  animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false
+                }
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-                className="p-6 rounded-2xl border border-border bg-background/50 backdrop-blur-sm hover:border-accent/50 transition-all duration-300"
+                transition={{
+                  duration: animConfig.duration,
+                  delay: 0.3 + index * 0.1,
+                }}
+                className="p-6 rounded-2xl border border-border bg-background/50 backdrop-blur-sm hover:border-accent/50 md:transition-[border] nd:duration-300 cursor-pointer"
               >
                 <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center mb-4">
                   <Icon className="w-6 h-6 text-accent" />
@@ -169,20 +183,15 @@ export function ServicesPage({ onNavigate }: ServicesPageProps) {
 
       {/* Detailed Services */}
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
+        <MotionSectionHeading
+          initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          style={{
-            fontSize: "3rem",
-            lineHeight: "1.2",
-            letterSpacing: "-0.02em",
-          }}
-          className="text-foreground mb-16 text-center"
+          className="mb-16 text-center"
         >
           Что входит в услуги
-        </motion.h2>
+        </MotionSectionHeading>
 
         <div className="space-y-12">
           {serviceDetails.map((service, index) => {
@@ -258,20 +267,11 @@ export function ServicesPage({ onNavigate }: ServicesPageProps) {
             transition={{ duration: 0.6 }}
             className="text-center mb-12"
           >
-            <h2
-              style={{
-                fontSize: "3rem",
-                lineHeight: "1.2",
-                letterSpacing: "-0.02em",
-              }}
-              className="text-foreground mb-4"
-            >
-              Технологии
-            </h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+            <SectionHeading>Технологии</SectionHeading>
+            <SectionDescription>
               Используем проверенный стек технологий для создания надежных
               решений
-            </p>
+            </SectionDescription>
           </motion.div>
 
           {/* Infinite Marquee */}

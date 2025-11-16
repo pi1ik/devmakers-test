@@ -12,7 +12,10 @@ import {
 } from "lucide-react";
 import { CTASection, SEO, generateBreadcrumbSchema } from "@/src/widgets";
 import { useState } from "react";
-import { PageHeading, PageDescription } from "@/src/shared/ui/Typography";
+import {
+  MotionPageHeading,
+  MotionPageDescription,
+} from "@/src/shared/ui/Typography";
 import { fadeInUp } from "../shared/utils/motionConfig";
 import { ContactModal } from "../features/contact/ContactModal";
 
@@ -270,12 +273,14 @@ export function PricingPage({ onNavigate }: PricingPageProps) {
               <span className="text-accent">Прозрачные цены</span>
             </motion.div>
 
-            <PageHeading variants={fadeInUp}>Стоимость проектов</PageHeading>
-            <PageDescription variants={fadeInUp}>
+            <MotionPageHeading variants={fadeInUp}>
+              Стоимость проектов
+            </MotionPageHeading>
+            <MotionPageDescription variants={fadeInUp}>
               Фиксированные цены без скрытых платежей.
               <br />
               Оплата по этапам с гарантией результата.
-            </PageDescription>
+            </MotionPageDescription>
           </motion.div>
 
           {/* Category Filter */}

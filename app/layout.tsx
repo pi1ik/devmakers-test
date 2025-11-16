@@ -6,6 +6,7 @@ import { Footer } from "@/src/widgets/Footer";
 import { FloatingChatButton } from "@/src/features/navigation/FloatingChatButton";
 import { ThemeProvider } from "@/src/features/theme/ThemeProvider";
 import { QueryProvider } from "@/src/processes/QueryProvider";
+import { ThemeScript } from "@/src/features/theme/ThemeScript";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,7 +37,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru">
+    <html lang="ru" suppressHydrationWarning>
+      <head>
+        <ThemeScript />
+        <link rel="preload" href="/logo-new.svg" as="image" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

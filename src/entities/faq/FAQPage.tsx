@@ -4,7 +4,7 @@ import { motion } from "motion/react";
 import { CheckCircle, HelpCircle } from "lucide-react";
 import { SEO, generateFAQSchema } from "@/src/widgets";
 import { STUDIO_NAME, SITE_ORIGIN } from "@/src/shared/utils/constants";
-import { PageHeading, PageDescription } from "@/src/shared/ui";
+import { MotionPageHeading, MotionPageDescription } from "@/src/shared/ui";
 import { fadeInUp } from "@/src/shared/utils/motionConfig";
 import { useState } from "react";
 import { ContactModal } from "@/src/features/contact/ContactModal";
@@ -80,10 +80,12 @@ export function FAQPage({ onNavigate }: FAQPageProps) {
           <div className="w-20 h-20 rounded-2xl bg-accent/10 flex items-center justify-center mx-auto mb-8">
             <HelpCircle className="w-10 h-10 text-accent" />
           </div>
-          <PageHeading variants={fadeInUp}>Частые вопросы</PageHeading>
-          <PageDescription variants={fadeInUp}>
+          <MotionPageHeading variants={fadeInUp}>
+            Частые вопросы
+          </MotionPageHeading>
+          <MotionPageDescription variants={fadeInUp}>
             Ответы на самые популярные вопросы о работе с нами
-          </PageDescription>
+          </MotionPageDescription>
         </motion.div>
 
         {/* FAQ List */}

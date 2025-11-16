@@ -113,108 +113,116 @@ export function Testimonials({ onContactClick }: TestimonialsProps) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: animConfig.duration }}
-            className="flex gap-6 animate-marquee"
+            className="flex animate-marquee"
           >
             {/* First set */}
-            {testimonials.map((testimonial, index) => (
-              <div
-                key={`first-${index}`}
-                className="flex-shrink-0 w-[380px] group"
-              >
-                <div className="relative h-full p-6 sm:p-8 rounded-2xl bg-secondary/30 border border-border backdrop-blur-sm hover:bg-secondary/50 hover:border-accent/50 transition-all duration-300">
-                  {/* Quote icon */}
-                  <Quote className="w-10 h-10 text-accent/20 mb-4" />
+            <div className="flex gap-6 pl-3 pr-3 animate-marquee1">
+              {testimonials.map((testimonial, index) => (
+                <div
+                  key={`first-${index}`}
+                  className="flex-shrink-0 w-[380px] group"
+                >
+                  <div className="relative h-full p-6 sm:p-8 rounded-2xl bg-secondary/30 border border-border backdrop-blur-sm hover:bg-secondary/50 hover:border-accent/50 transition-colors duration-300">
+                    {/* Quote icon */}
+                    <Quote className="w-10 h-10 text-accent/20 mb-4" />
 
-                  {/* Rating */}
-                  <div className="flex gap-1 mb-4">
-                    {Array.from({ length: testimonial.rating }).map((_, i) => (
-                      <Star
-                        key={i}
-                        className="w-4 h-4 fill-accent text-accent"
-                      />
-                    ))}
-                  </div>
+                    {/* Rating */}
+                    <div className="flex gap-1 mb-4">
+                      {Array.from({ length: testimonial.rating }).map(
+                        (_, i) => (
+                          <Star
+                            key={i}
+                            className="w-4 h-4 fill-accent text-accent"
+                          />
+                        )
+                      )}
+                    </div>
 
-                  {/* Content */}
-                  <p className="text-sm sm:text-base text-muted-foreground mb-6 leading-relaxed">
-                    "{testimonial.content}"
-                  </p>
+                    {/* Content */}
+                    <p className="text-sm sm:text-base text-muted-foreground mb-6 leading-relaxed">
+                      "{testimonial.content}"
+                    </p>
 
-                  {/* Author */}
-                  <div className="flex items-center gap-3 mt-auto">
-                    <Avatar className="w-12 h-12 border-2 border-accent/20">
-                      <AvatarFallback className="bg-accent/10 text-accent">
-                        {testimonial.name
-                          .split(" ")
-                          .map((n) => n[0])
-                          .join("")}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <div className="text-sm text-foreground">
-                        {testimonial.name}
-                      </div>
-                      <div className="text-xs text-muted-foreground">
-                        {testimonial.role} • {testimonial.company}
+                    {/* Author */}
+                    <div className="flex items-center gap-3 mt-auto">
+                      <Avatar className="w-12 h-12 border-2 border-accent/20">
+                        <AvatarFallback className="bg-accent/10 text-accent">
+                          {testimonial.name
+                            .split(" ")
+                            .map((n) => n[0])
+                            .join("")}
+                        </AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <div className="text-sm text-foreground">
+                          {testimonial.name}
+                        </div>
+                        <div className="text-xs text-muted-foreground">
+                          {testimonial.role} • {testimonial.company}
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  {/* Hover glow */}
-                  <div className="absolute inset-0 rounded-2xl bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 blur-xl" />
+                    {/* Hover glow */}
+                    <div className="absolute inset-0 rounded-2xl bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 blur-xl" />
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
             {/* Second set for seamless loop */}
-            {testimonials.map((testimonial, index) => (
-              <div
-                key={`second-${index}`}
-                className="flex-shrink-0 w-[380px] group"
-              >
-                <div className="relative h-full p-6 sm:p-8 rounded-2xl bg-secondary/30 border border-border backdrop-blur-sm hover:bg-secondary/50 hover:border-accent/50 transition-all duration-300">
-                  {/* Quote icon */}
-                  <Quote className="w-10 h-10 text-accent/20 mb-4" />
+            <div className="flex gap-6 pl-3 pr-3 animate-marquee2">
+              {testimonials.map((testimonial, index) => (
+                <div
+                  key={`second-${index}`}
+                  className="flex-shrink-0 w-[380px] group"
+                >
+                  <div className="relative h-full p-6 sm:p-8 rounded-2xl bg-secondary/30 border border-border backdrop-blur-sm hover:bg-secondary/50 hover:border-accent/50 transition-colors duration-300">
+                    {/* Quote icon */}
+                    <Quote className="w-10 h-10 text-accent/20 mb-4" />
 
-                  {/* Rating */}
-                  <div className="flex gap-1 mb-4">
-                    {Array.from({ length: testimonial.rating }).map((_, i) => (
-                      <Star
-                        key={i}
-                        className="w-4 h-4 fill-accent text-accent"
-                      />
-                    ))}
-                  </div>
+                    {/* Rating */}
+                    <div className="flex gap-1 mb-4">
+                      {Array.from({ length: testimonial.rating }).map(
+                        (_, i) => (
+                          <Star
+                            key={i}
+                            className="w-4 h-4 fill-accent text-accent"
+                          />
+                        )
+                      )}
+                    </div>
 
-                  {/* Content */}
-                  <p className="text-sm sm:text-base text-muted-foreground mb-6 leading-relaxed">
-                    "{testimonial.content}"
-                  </p>
+                    {/* Content */}
+                    <p className="text-sm sm:text-base text-muted-foreground mb-6 leading-relaxed">
+                      "{testimonial.content}"
+                    </p>
 
-                  {/* Author */}
-                  <div className="flex items-center gap-3 mt-auto">
-                    <Avatar className="w-12 h-12 border-2 border-accent/20">
-                      <AvatarFallback className="bg-accent/10 text-accent">
-                        {testimonial.name
-                          .split(" ")
-                          .map((n) => n[0])
-                          .join("")}
-                      </AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <div className="text-sm text-foreground">
-                        {testimonial.name}
-                      </div>
-                      <div className="text-xs text-muted-foreground">
-                        {testimonial.role} • {testimonial.company}
+                    {/* Author */}
+                    <div className="flex items-center gap-3 mt-auto">
+                      <Avatar className="w-12 h-12 border-2 border-accent/20">
+                        <AvatarFallback className="bg-accent/10 text-accent">
+                          {testimonial.name
+                            .split(" ")
+                            .map((n) => n[0])
+                            .join("")}
+                        </AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <div className="text-sm text-foreground">
+                          {testimonial.name}
+                        </div>
+                        <div className="text-xs text-muted-foreground">
+                          {testimonial.role} • {testimonial.company}
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  {/* Hover glow */}
-                  <div className="absolute inset-0 rounded-2xl bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 blur-xl" />
+                    {/* Hover glow */}
+                    <div className="absolute inset-0 rounded-2xl bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10 blur-xl" />
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </motion.div>
         </div>
 
@@ -231,9 +239,9 @@ export function Testimonials({ onContactClick }: TestimonialsProps) {
           </p>
           <motion.button
             onClick={onContactClick}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent text-accent-foreground hover:bg-accent/90 transition-colors"
+            whileHover={{ scale: 1.05, transition: { duration: 0.15 } }}
+            whileTap={{ scale: 0.95, transition: { duration: 0.15 } }}
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-accent text-accent-foreground hover:bg-accent/90 transition-colors cursor-pointer"
           >
             Начать проект
           </motion.button>

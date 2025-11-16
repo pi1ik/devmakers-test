@@ -3876,21 +3876,37 @@ body {
     sans-serif;
 }
 
-@keyframes marquee {
+@keyframes marquee1 {
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes marquee2 {
   0% {
     transform: translateX(0);
   }
 
   100% {
-    transform: translateX(-50%);
+    transform: translateX(-200%);
   }
 }
 
-.animate-marquee {
-  animation: 30s linear infinite marquee;
+.animate-marquee1 {
+  animation: 120s linear infinite marquee1;
+  animation-delay: -120s;
+}
+.animate-marquee2 {
+  animation: 120s linear infinite marquee2;
+  animation-delay: -60s;
 }
 
-.animate-marquee:hover {
+.animate-marquee:hover .animate-marquee1,
+.animate-marquee:hover .animate-marquee2 {
   animation-play-state: paused;
 }
 

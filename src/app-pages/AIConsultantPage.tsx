@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "motion/react";
 import { Bot, Send, Sparkles, Lock } from "lucide-react";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import { SEO } from "@/src/widgets";
 import {
   STUDIO_NAME,
@@ -14,6 +14,14 @@ import { trackAIConsultant } from "@/src/shared/utils/analytics";
 import { ChatMessage } from "@/src/features/ai-consultant/ChatMessage";
 import { useMutation } from "@tanstack/react-query";
 import { axiosInstance } from "@/src/shared/utils/axiosInstance";
+import { fadeInUp } from "../shared/utils/motionConfig";
+import { getAnimationConfig } from "../shared/utils/performance";
+import {
+  MotionPageDescription,
+  MotionPageHeading,
+  PageDescription,
+  PageHeading,
+} from "../shared/ui";
 
 type Message = {
   id: string | number;
@@ -121,6 +129,7 @@ export function AIConsultantPage() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const animConfig = useMemo(() => getAnimationConfig(), []);
 
   // Check if user has already unlocked the chat
   useEffect(() => {
@@ -252,28 +261,24 @@ export function AIConsultantPage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          transition={{
+            duration: animConfig.duration,
+          }}
           className="text-center mb-8 sm:mb-12"
         >
           <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-accent/10 mb-4 sm:mb-6">
             <Bot className="w-6 h-6 sm:w-8 sm:h-8 text-accent" />
           </div>
-          <h1
-            style={{
-              fontSize: "clamp(2rem, 8vw, 4rem)",
-              lineHeight: "1.1",
-              letterSpacing: "-0.02em",
-            }}
-            className="text-foreground mb-3 sm:mb-4"
-          >
+          <MotionPageHeading className="mb-3 sm:mb-4">
             AI-консультант
-          </h1>
-          <p
+          </MotionPageHeading>
+          <MotionPageDescription
             className="text-muted-foreground max-w-2xl mx-auto px-4"
             style={{ fontSize: "clamp(1rem, 3vw, 1.25rem)" }}
           >
             Получите мгновенные ответы на ваши вопросы о наших услугах
-          </p>
+          </MotionPageDescription>
         </motion.div>
 
         {/* Quick Questions */}
@@ -298,7 +303,7 @@ export function AIConsultantPage() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.3, delay: 0.3 + index * 0.05 }}
-                whileHover={{ scale: 1.02 }}
+                whileHover={animConfig.shouldAnimate ? { scale: 1.02 } : {}}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => handleQuickQuestion(question)}
                 className="px-4 py-3 sm:px-5 sm:py-3 rounded-xl border border-border bg-secondary/30 text-muted-foreground hover:border-accent/50 hover:text-foreground transition-all duration-300 text-sm touch-manipulation active:bg-accent/10"
@@ -399,7 +404,7 @@ export function AIConsultantPage() {
                 />
                 <motion.button
                   type="submit"
-                  whileHover={{ scale: 1.02 }}
+                  whileHover={animConfig.shouldAnimate ? { scale: 1.02 } : {}}
                   whileTap={{ scale: 0.98 }}
                   disabled={!inputValue.trim()}
                   className="px-4 sm:px-6 py-2.5 sm:py-3 bg-accent text-accent-foreground rounded-xl transition-all duration-300 hover:shadow-[0_0_30px_rgba(99,102,241,0.4)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1.5 sm:gap-2 shrink-0"
@@ -495,7 +500,9 @@ export function AIConsultantPage() {
 
                       <motion.button
                         type="submit"
-                        whileHover={{ scale: 1.02 }}
+                        whileHover={
+                          animConfig.shouldAnimate ? { scale: 1.02 } : {}
+                        }
                         whileTap={{ scale: 0.98 }}
                         className="w-full px-4 sm:px-6 py-2.5 sm:py-3 bg-accent text-accent-foreground rounded-xl transition-all duration-300 hover:shadow-[0_0_30px_rgba(99,102,241,0.4)] flex items-center justify-center gap-2"
                       >

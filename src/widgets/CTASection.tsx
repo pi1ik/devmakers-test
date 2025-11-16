@@ -5,49 +5,16 @@ import { Sparkles, ArrowRight, MessageSquare } from "lucide-react";
 import { TELEGRAM_URL } from "@/src/shared/utils/constants";
 import styled from "@emotion/styled";
 import { mediaQueries } from "@/src/shared/utils/breakpoints";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { ContactModal } from "@/src/features/contact/ContactModal";
+import { SectionDescription, SectionHeading } from "../shared/ui";
+import { getAnimationConfig } from "../shared/utils/performance";
 
 interface CTASectionProps {
   onNavigate?: (page: string) => void;
 }
 
 // Styled Components for CTA Section
-const CTAHeading = styled.h2`
-  color: var(--foreground);
-  margin-bottom: 1.5rem;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-
-  /* Mobile: 2rem (32px) */
-  font-size: 2rem;
-
-  /* Tablet: 2.5rem (40px) */
-  ${mediaQueries.tablet} {
-    font-size: 2.5rem;
-  }
-
-  /* Desktop: 3rem (48px) */
-  ${mediaQueries.desktop} {
-    font-size: 3rem;
-  }
-`;
-
-const CTADescription = styled.p`
-  color: var(--muted-foreground);
-  max-width: 42rem;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 3rem;
-
-  /* Mobile: 1rem (16px) */
-  font-size: 1rem;
-
-  /* Tablet: 1.125rem (18px) */
-  ${mediaQueries.tablet} {
-    font-size: 1.125rem;
-  }
-`;
 
 const CTAButtonContainer = styled.div`
   display: flex;
@@ -56,10 +23,8 @@ const CTAButtonContainer = styled.div`
   gap: 1rem;
   margin-bottom: 3rem;
 
-  /* Mobile: column layout */
   flex-direction: column;
 
-  /* Tablet and up: row layout */
   ${mediaQueries.tablet} {
     flex-direction: row;
   }
@@ -74,13 +39,11 @@ const TrustBadges = styled(motion.div)`
   font-size: 0.875rem;
   color: var(--muted-foreground);
 
-  /* Mobile: smaller gap and font */
   ${mediaQueries.mobile} {
     gap: 1rem;
     font-size: 0.75rem;
   }
 
-  /* Tablet: normal size */
   ${mediaQueries.tablet} {
     gap: 2rem;
     font-size: 0.875rem;
@@ -92,7 +55,6 @@ const Badge = styled.div`
   align-items: center;
   gap: 0.5rem;
 
-  /* Mobile: smaller text and wrapping */
   font-size: 0.875rem;
 
   ${mediaQueries.tablet} {
@@ -102,6 +64,7 @@ const Badge = styled.div`
 
 export function CTASection({ onNavigate }: CTASectionProps) {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const animConfig = useMemo(() => getAnimationConfig(), []);
 
   return (
     <>
@@ -109,10 +72,14 @@ export function CTASection({ onNavigate }: CTASectionProps) {
         {/* Background effects */}
         <div className="absolute inset-0 bg-gradient-to-b from-accent/5 via-transparent to-accent/5" />
         <motion.div
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
+          animate={
+            animConfig.shouldAnimate
+              ? {
+                  scale: [1, 1.2, 1],
+                  opacity: [0.3, 0.5, 0.3],
+                }
+              : false
+          }
           transition={{
             duration: 8,
             repeat: Infinity,
@@ -121,10 +88,14 @@ export function CTASection({ onNavigate }: CTASectionProps) {
           className="absolute top-0 left-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl"
         />
         <motion.div
-          animate={{
-            scale: [1.2, 1, 1.2],
-            opacity: [0.2, 0.4, 0.2],
-          }}
+          animate={
+            animConfig.shouldAnimate
+              ? {
+                  scale: [1.2, 1, 1.2],
+                  opacity: [0.2, 0.4, 0.2],
+                }
+              : false
+          }
           transition={{
             duration: 10,
             repeat: Infinity,
@@ -135,10 +106,10 @@ export function CTASection({ onNavigate }: CTASectionProps) {
 
         <div className="relative max-w-5xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: animConfig.duration }}
             className="text-center"
           >
             {/* Icon */}
@@ -153,13 +124,13 @@ export function CTASection({ onNavigate }: CTASectionProps) {
             </motion.div>
 
             {/* Heading */}
-            <CTAHeading>Готовы начать проект?</CTAHeading>
+            <SectionHeading>Готовы начать проект?</SectionHeading>
 
             {/* Description */}
-            <CTADescription>
+            <SectionDescription>
               Давайте обсудим вашу идею и создадим что-то невероятное вместе.
               Первая консультация — бесплатно.
-            </CTADescription>
+            </SectionDescription>
 
             {/* CTA Buttons */}
             <CTAButtonContainer>
@@ -168,7 +139,7 @@ export function CTASection({ onNavigate }: CTASectionProps) {
                 onClick={() => setIsContactModalOpen(true)}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="group relative px-8 py-4 rounded-xl bg-accent text-accent-foreground transition-all duration-300 flex items-center gap-2 overflow-hidden hover:shadow-[0_0_30px_rgba(99,102,241,0.5)]"
+                className="group relative px-8 py-4 rounded-xl bg-accent text-accent-foreground transition-shadow duration-300 flex items-center gap-2 overflow-hidden hover:shadow-[0_0_30px_rgba(99,102,241,0.5)] cursor-pointer"
               >
                 <ArrowRight className="w-5 h-5 relative z-10" />
                 <span className="relative z-10">Оставить заявку</span>
@@ -193,9 +164,9 @@ export function CTASection({ onNavigate }: CTASectionProps) {
                 href={TELEGRAM_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 rounded-xl border border-border bg-background/50 backdrop-blur-sm text-foreground hover:border-accent/50 transition-all flex items-center gap-2"
+                whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+                whileTap={{ scale: 0.95, transition: { duration: 0.15 } }}
+                className="px-8 py-4 rounded-xl border border-border bg-background/50 backdrop-blur-sm text-foreground hover:border-accent/50 transition-colors flex items-center gap-2"
               >
                 <MessageSquare className="w-5 h-5" />
                 Написать в Telegram

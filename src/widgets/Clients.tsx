@@ -46,43 +46,43 @@ export function Clients() {
 
         {/* Marquee animation */}
         <div className="relative">
-          <div className="flex overflow-hidden">
-            <motion.div
-              className="flex gap-12 sm:gap-16 whitespace-nowrap"
-              animate={{
-                x: [0, -1920],
-              }}
-              transition={{
-                x: {
-                  duration: 30,
-                  repeat: Infinity,
-                  ease: "linear",
-                },
+          <div className="flex overflow-hidden animate-marquee">
+            {/* First set */}
+            <div
+              className="flex gap-12 sm:gap-16 whitespace-nowrap animate-marquee1 pl-6 pr-6 sm:pl-8 sm:pr-8"
+              style={{
+                willChange: "transform",
               }}
             >
-              {/* First set */}
               {clients.map((client, index) => (
                 <div
                   key={`first-${index}`}
-                  className="flex items-center justify-center px-6 py-4 rounded-xl bg-secondary/30 border border-border backdrop-blur-sm hover:bg-secondary/50 hover:border-accent/30 transition-all duration-300 min-w-[200px]"
+                  className="flex items-center justify-center px-6 py-4 rounded-xl bg-secondary/30 border border-border backdrop-blur-sm hover:bg-secondary/50 hover:border-accent/30 transition-colors duration-300 min-w-[200px] cursor-default shrink-0"
                 >
                   <span className="text-base sm:text-lg text-muted-foreground hover:text-foreground transition-colors">
                     {client}
                   </span>
                 </div>
               ))}
-              {/* Duplicate set for seamless loop */}
+            </div>
+            {/* Duplicate set for seamless loop */}
+            <div
+              className="flex gap-12 sm:gap-16 whitespace-nowrap animate-marquee2 pl-6 pr-6 sm:pl-8 sm:pr-8"
+              style={{
+                willChange: "transform",
+              }}
+            >
               {clients.map((client, index) => (
                 <div
                   key={`second-${index}`}
-                  className="flex items-center justify-center px-6 py-4 rounded-xl bg-secondary/30 border border-border backdrop-blur-sm hover:bg-secondary/50 hover:border-accent/30 transition-all duration-300 min-w-[200px]"
+                  className="flex items-center justify-center px-6 py-4 rounded-xl bg-secondary/30 border border-border backdrop-blur-sm hover:bg-secondary/50 hover:border-accent/30 transition-colors duration-300 min-w-[200px] cursor-default"
                 >
                   <span className="text-base sm:text-lg text-muted-foreground hover:text-foreground transition-colors">
                     {client}
                   </span>
                 </div>
               ))}
-            </motion.div>
+            </div>
           </div>
 
           {/* Fade edges */}
@@ -95,7 +95,7 @@ export function Clients() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
+          transition={{ duration: animConfig.duration, delay: 0.3 }}
           className="grid grid-cols-3 gap-8 mt-16 max-w-3xl mx-auto"
         >
           <div className="text-center">

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import Team from "@/app/team/page";
+import { Team } from "@/src/entities/team/Team";
 import {
   Award,
   BookOpen,
@@ -25,6 +25,9 @@ import {
   TELEGRAM_URL,
   CONTACT_EMAIL,
 } from "@/src/shared/utils/constants";
+import { useMemo } from "react";
+import { getAnimationConfig } from "../shared/utils/performance";
+import { PageDescription, PageHeading } from "../shared/ui";
 
 const culture = [
   {
@@ -110,6 +113,7 @@ const teamPhotos = [
 ];
 
 export function TeamPage() {
+  const animConfig = useMemo(() => getAnimationConfig(), []);
   return (
     <div className="min-h-screen bg-background pt-24">
       <SEO
@@ -123,25 +127,16 @@ export function TeamPage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          transition={{
+            duration: animConfig.duration,
+          }}
           className="text-center mb-16"
         >
-          <h1
-            style={{
-              fontSize: "4rem",
-              lineHeight: "1.1",
-              letterSpacing: "-0.02em",
-            }}
-            className="text-foreground mb-6"
-          >
-            Наша команда
-          </h1>
-          <p
-            className="text-muted-foreground max-w-3xl mx-auto"
-            style={{ fontSize: "1.25rem" }}
-          >
+          <PageHeading className="mb-6">Наша команда</PageHeading>
+          <PageDescription>
             Опытные специалисты мирового уровня в разработке, дизайне и AI
-          </p>
+          </PageDescription>
         </motion.div>
 
         {/* Team Photos Grid */}
@@ -237,7 +232,7 @@ export function TeamPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                whileHover={{ y: -4 }}
+                whileHover={animConfig.shouldAnimate ? { y: -4 } : {}}
                 className="p-8 rounded-2xl border border-border bg-background/50 backdrop-blur-sm hover:border-accent/50 transition-all duration-300"
               >
                 <div className="w-14 h-14 rounded-xl bg-accent/10 flex items-center justify-center mb-4">
@@ -344,7 +339,7 @@ export function TeamPage() {
               href={TELEGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.03 }}
+              whileHover={animConfig.shouldAnimate ? { scale: 1.03 } : {}}
               whileTap={{ scale: 0.98 }}
               className="px-8 py-4 bg-accent text-accent-foreground rounded-full transition-all duration-300 hover:shadow-[0_0_30px_rgba(99,102,241,0.4)] flex items-center gap-2"
             >
@@ -354,7 +349,7 @@ export function TeamPage() {
 
             <motion.a
               href={`mailto:${CONTACT_EMAIL}`}
-              whileHover={{ scale: 1.03 }}
+              whileHover={animConfig.shouldAnimate ? { scale: 1.03 } : {}}
               whileTap={{ scale: 0.98 }}
               className="px-8 py-4 border border-border bg-background/50 backdrop-blur-sm text-foreground rounded-full transition-all duration-300 hover:border-accent/50 flex items-center gap-2"
             >

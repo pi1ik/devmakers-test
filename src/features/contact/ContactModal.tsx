@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "motion/react";
 import { Send, Mail, CheckCircle2 } from "lucide-react";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { TELEGRAM_URL, CONTACT_EMAIL } from "@/src/shared/utils/constants";
 import {
   Dialog,
@@ -11,6 +11,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/src/shared/ui";
+import { getAnimationConfig } from "@/src/shared/utils/performance";
 
 interface ContactModalProps {
   open: boolean;
@@ -33,6 +34,7 @@ export function ContactModal({
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const animConfig = useMemo(() => getAnimationConfig(), []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -206,10 +208,14 @@ export function ContactModal({
 
                   <motion.button
                     type="submit"
-                    whileHover={{ scale: isSubmitting ? 1 : 1.02 }}
+                    whileHover={
+                      animConfig.shouldAnimate
+                        ? { scale: isSubmitting ? 1 : 1.02 }
+                        : {}
+                    }
                     whileTap={{ scale: isSubmitting ? 1 : 0.98 }}
                     disabled={isSubmitting}
-                    className="w-full px-6 py-3 bg-accent text-accent-foreground rounded-xl transition-all duration-300 hover:shadow-[0_0_30px_rgba(99,102,241,0.4)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    className="w-full px-6 py-3 bg-accent text-accent-foreground rounded-xl transition-shadow duration-300 hover:shadow-[0_0_30px_rgba(99,102,241,0.4)] cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                   >
                     {isSubmitting ? (
                       <>
@@ -246,9 +252,9 @@ export function ContactModal({
               href={TELEGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.02 }}
+              whileHover={animConfig.shouldAnimate ? { scale: 1.02 } : {}}
               whileTap={{ scale: 0.98 }}
-              className="group p-5 border border-border bg-secondary/30 rounded-xl hover:border-accent/50 transition-all duration-300 flex items-center gap-4"
+              className="group p-5 border border-border bg-secondary/30 rounded-xl hover:border-accent/50 transition-colors duration-300 flex items-center gap-4"
             >
               <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center group-hover:bg-accent/20 transition-colors">
                 <Send className="w-6 h-6 text-accent" />
@@ -263,9 +269,9 @@ export function ContactModal({
 
             <motion.a
               href={`mailto:${CONTACT_EMAIL}`}
-              whileHover={{ scale: 1.02 }}
+              whileHover={animConfig.shouldAnimate ? { scale: 1.02 } : {}}
               whileTap={{ scale: 0.98 }}
-              className="group p-5 border border-border bg-secondary/30 rounded-xl hover:border-accent/50 transition-all duration-300 flex items-center gap-4"
+              className="group p-5 border border-border bg-secondary/30 rounded-xl hover:border-accent/50 transition-colors duration-300 flex items-center gap-4"
             >
               <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center group-hover:bg-accent/20 transition-colors">
                 <Mail className="w-6 h-6 text-accent" />

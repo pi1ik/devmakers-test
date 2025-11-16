@@ -10,6 +10,9 @@ import {
   LineChart,
   CheckCircle2,
 } from "lucide-react";
+import { useMemo } from "react";
+import { getAnimationConfig } from "../shared/utils/performance";
+import { SectionDescription, SectionHeading } from "../shared/ui";
 
 const processSteps = [
   {
@@ -87,6 +90,7 @@ const processSteps = [
 ];
 
 export function Process() {
+  const animConfig = useMemo(() => getAnimationConfig(), []);
   return (
     <section
       id="process"
@@ -100,26 +104,17 @@ export function Process() {
 
       <div className="max-w-4xl mx-auto">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: animConfig.duration }}
           className="text-center mb-16"
         >
-          <h2
-            style={{
-              fontSize: "3rem",
-              lineHeight: "1.2",
-              letterSpacing: "-0.02em",
-            }}
-            className="text-foreground mb-4"
-          >
-            Процесс работы
-          </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <SectionHeading className="mb-4">Процесс работы</SectionHeading>
+          <SectionDescription>
             От первого звонка до запуска продукта — прозрачный и предсказуемый
             процесс
-          </p>
+          </SectionDescription>
         </motion.div>
 
         <div className="relative">
@@ -137,12 +132,19 @@ export function Process() {
                     {isEven ? (
                       <>
                         <motion.div
-                          initial={{ opacity: 0, x: -50 }}
+                          initial={
+                            animConfig.shouldAnimate
+                              ? { opacity: 0, x: -50 }
+                              : false
+                          }
                           whileInView={{ opacity: 1, x: 0 }}
                           viewport={{ once: true }}
-                          transition={{ duration: 0.6, delay: 0.2 }}
-                          whileHover={{ y: -8 }}
-                          className="relative p-8 rounded-2xl border border-border bg-background/50 backdrop-blur-sm hover:border-accent/50 transition-all duration-300"
+                          transition={{
+                            duration: animConfig.duration,
+                            delay: 0.2,
+                          }}
+                          whileHover={{ y: -8, transition: { duration: 0.15 } }}
+                          className="relative p-8 rounded-2xl border border-border bg-background/50 backdrop-blur-sm hover:border-accent/50 transition-colors duration-300"
                         >
                           {/* Number Badge */}
                           <div className="absolute -top-4 -right-4 w-12 h-12 rounded-xl bg-accent text-accent-foreground flex items-center justify-center shadow-lg">
@@ -184,12 +186,19 @@ export function Process() {
                       <>
                         <div />
                         <motion.div
-                          initial={{ opacity: 0, x: 50 }}
+                          initial={
+                            animConfig.shouldAnimate
+                              ? { opacity: 0, x: 50 }
+                              : false
+                          }
                           whileInView={{ opacity: 1, x: 0 }}
                           viewport={{ once: true }}
-                          transition={{ duration: 0.6, delay: 0.2 }}
-                          whileHover={{ y: -8 }}
-                          className="relative p-8 rounded-2xl border border-border bg-background/50 backdrop-blur-sm hover:border-accent/50 transition-all duration-300"
+                          transition={{
+                            duration: animConfig.duration,
+                            delay: 0.2,
+                          }}
+                          whileHover={{ y: -8, transition: { duration: 0.15 } }}
+                          className="relative p-8 rounded-2xl border border-border bg-background/50 backdrop-blur-sm hover:border-accent/50 transition-colors duration-300"
                         >
                           {/* Number Badge */}
                           <div className="absolute -top-4 -left-4 w-12 h-12 rounded-xl bg-accent text-accent-foreground flex items-center justify-center shadow-lg">
@@ -231,12 +240,14 @@ export function Process() {
 
                   {/* Mobile Layout */}
                   <motion.div
-                    initial={{ opacity: 0, y: 30 }}
+                    initial={
+                      animConfig.shouldAnimate ? { opacity: 0, y: 30 } : false
+                    }
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
-                    whileHover={{ y: -8 }}
-                    className="md:hidden relative p-8 rounded-2xl border border-border bg-background/50 backdrop-blur-sm hover:border-accent/50 transition-all duration-300"
+                    whileTap={{ y: -8, transition: { duration: 0.15 } }}
+                    className="md:hidden relative p-8 rounded-2xl border border-border bg-background/50 backdrop-blur-sm hover:border-accent/50 transition-colors duration-300"
                   >
                     {/* Number Badge */}
                     <div className="absolute -top-4 -left-4 w-12 h-12 rounded-xl bg-accent text-accent-foreground flex items-center justify-center shadow-lg">
@@ -351,7 +362,11 @@ export function Process() {
                           strokeWidth="2"
                           fill="none"
                           strokeDasharray="4 4"
-                          initial={{ pathLength: 0, opacity: 0 }}
+                          initial={
+                            animConfig.shouldAnimate
+                              ? { pathLength: 0, opacity: 0 }
+                              : false
+                          }
                           whileInView={{ pathLength: 1, opacity: 1 }}
                           viewport={{ once: true }}
                           transition={{

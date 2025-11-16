@@ -3,6 +3,10 @@
 import { motion } from "motion/react";
 import { Bot, ArrowRight, Sparkles, MessageCircle } from "lucide-react";
 import Link from "next/link";
+import { SectionDescription, SectionHeading } from "@/src/shared/ui";
+import { useMemo } from "react";
+import { getAnimationConfig } from "@/src/shared/utils/performance";
+import { fadeInLeft } from "@/src/shared/utils/motionConfig";
 
 interface AIConsultantPreviewProps {
   onNavigate?: () => void;
@@ -16,55 +20,46 @@ const sampleQuestions = [
 ];
 
 export function AIConsultantPreview({ onNavigate }: AIConsultantPreviewProps) {
+  const animConfig = useMemo(() => getAnimationConfig(), []);
   return (
     <div className="py-16 sm:py-24 lg:py-32">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: animConfig.duration }}
           className="text-center mb-16"
         >
           <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-accent/10 mb-6">
             <Bot className="w-7 h-7 text-accent" />
           </div>
-          <h2
-            style={{
-              fontSize: "3.15rem",
-              lineHeight: "1.1",
-              letterSpacing: "-0.02em",
-            }}
-            className="text-foreground mb-6"
-          >
-            AI-консультант
-          </h2>
-          <p
-            className="text-muted-foreground max-w-2xl mx-auto mb-8"
-            style={{ fontSize: "1.125rem" }}
-          >
-            Получите мгновенные ответы на вопросы о наших услугах, ценах и сроках. 
-            Наш AI-помощник работает 24/7 и знает всё о студии.
-          </p>
+          <SectionHeading>AI-консультант</SectionHeading>
+          <SectionDescription>
+            Получите мгновенные ответы на вопросы о наших услугах, ценах и
+            сроках. Наш AI-помощник работает 24/7 и знает всё о студии.
+          </SectionDescription>
         </motion.div>
 
         {/* Interactive Preview Card */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={animConfig.shouldAnimate ? { opacity: 0, y: 30 } : false}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: animConfig.duration, delay: 0.2 }}
           className="max-w-4xl mx-auto"
         >
           <div className="relative rounded-2xl border border-border bg-secondary/20 backdrop-blur-sm overflow-hidden min-h-[650px]">
             {/* Gradient Overlay */}
             <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-transparent pointer-events-none" />
-            
+
             <div className="relative p-8 lg:p-12 flex flex-col justify-between min-h-[650px]">
               {/* AI Welcome Message */}
               <motion.div
-                initial={{ opacity: 0, x: -20 }}
+                initial={
+                  animConfig.shouldAnimate ? { opacity: 0, x: -20 } : false
+                }
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.4 }}
@@ -76,7 +71,9 @@ export function AIConsultantPreview({ onNavigate }: AIConsultantPreviewProps) {
                 <div className="flex-1">
                   <div className="px-6 py-5 rounded-xl bg-background/50 border border-border">
                     <p className="text-foreground text-lg leading-relaxed">
-                      Привет! 👋 Я AI-консультант студии. Задайте мне любой вопрос о наших услугах, ценах, сроках или выберите популярный вопрос ниже.
+                      Привет! 👋 Я AI-консультант студии. Задайте мне любой
+                      вопрос о наших услугах, ценах, сроках или выберите
+                      популярный вопрос ниже.
                     </p>
                   </div>
                 </div>
@@ -84,7 +81,9 @@ export function AIConsultantPreview({ onNavigate }: AIConsultantPreviewProps) {
 
               {/* Quick Questions */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={
+                  animConfig.shouldAnimate ? { opacity: 0, x: -20 } : false
+                }
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.5 }}
@@ -92,7 +91,9 @@ export function AIConsultantPreview({ onNavigate }: AIConsultantPreviewProps) {
               >
                 <div className="flex items-center gap-2 mb-5">
                   <Sparkles className="w-5 h-5 text-accent" />
-                  <h3 className="text-foreground text-lg">Популярные вопросы</h3>
+                  <h3 className="text-foreground text-lg">
+                    Популярные вопросы
+                  </h3>
                 </div>
                 <div className="space-y-5">
                   {sampleQuestions.map((question, index) => (
@@ -107,12 +108,18 @@ export function AIConsultantPreview({ onNavigate }: AIConsultantPreviewProps) {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.4, delay: 0.6 + index * 0.1 }}
-                        whileHover={{ x: 4, scale: 1.01, transition: { duration: 0.15 } }}
+                        whileHover={{
+                          x: 4,
+                          scale: 1.01,
+                          transition: { duration: 0.15 },
+                        }}
                         whileTap={{ scale: 0.99 }}
-                        className="flex items-center gap-3 w-full px-6 py-4 rounded-xl border border-border bg-secondary/30 text-muted-foreground hover:border-accent/50 hover:text-foreground hover:bg-secondary/50 transition-all duration-150 group cursor-pointer"
+                        className="flex items-center gap-3 w-full px-6 py-4 rounded-xl border border-border bg-secondary/30 text-muted-foreground hover:border-accent/50 hover:text-foreground hover:bg-secondary/50 transition-colors duration-150 group cursor-pointer"
                       >
                         <MessageCircle className="w-5 h-5 text-accent flex-shrink-0" />
-                        <span className="flex-1 text-left text-base">{question}</span>
+                        <span className="flex-1 text-left text-base">
+                          {question}
+                        </span>
                         <ArrowRight className="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity" />
                       </motion.div>
                     </Link>
@@ -122,7 +129,9 @@ export function AIConsultantPreview({ onNavigate }: AIConsultantPreviewProps) {
 
               {/* CTA Button */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={
+                  animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false
+                }
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.9 }}
@@ -130,9 +139,13 @@ export function AIConsultantPreview({ onNavigate }: AIConsultantPreviewProps) {
               >
                 <Link href="/ai-consultant" onClick={onNavigate}>
                   <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    className="group inline-flex items-center gap-3 px-8 py-4 bg-accent text-accent-foreground rounded-xl transition-all duration-300 hover:shadow-[0_0_40px_rgba(99,102,241,0.4)] cursor-pointer"
+                    whileHover={
+                      animConfig.shouldAnimate
+                        ? { scale: 1.02, transition: { duration: 0.15 } }
+                        : {}
+                    }
+                    whileTap={{ scale: 0.98, transition: { duration: 0.15 } }}
+                    className="group inline-flex items-center gap-3 px-8 py-4 bg-accent text-accent-foreground rounded-xl transition-colors transition-shadow duration-300 hover:shadow-[0_0_40px_rgba(99,102,241,0.4)] cursor-pointer"
                   >
                     <Bot className="w-5 h-5" />
                     <span>Начать диалог с AI-консультантом</span>
@@ -145,10 +158,10 @@ export function AIConsultantPreview({ onNavigate }: AIConsultantPreviewProps) {
 
           {/* Features Grid */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 1 }}
+            transition={{ duration: animConfig.duration, delay: 1 }}
             className="grid md:grid-cols-3 gap-4 mt-6"
           >
             {[
@@ -170,11 +183,13 @@ export function AIConsultantPreview({ onNavigate }: AIConsultantPreviewProps) {
             ].map((feature, index) => (
               <motion.div
                 key={feature.title}
-                initial={{ opacity: 0, y: 20 }}
+                initial={
+                  animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false
+                }
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: 1.1 + index * 0.1 }}
-                className="p-5 rounded-xl border border-border bg-secondary/10 backdrop-blur-sm text-center"
+                className="p-5 rounded-xl border border-border bg-secondary/10 backdrop-blur-sm text-center cursor-default"
               >
                 <div className="text-2xl mb-2">{feature.icon}</div>
                 <h4 className="text-foreground mb-1">{feature.title}</h4>

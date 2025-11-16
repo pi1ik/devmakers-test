@@ -4,6 +4,7 @@ import { motion, useInView } from "motion/react";
 import { useRef, useEffect, useState, useMemo } from "react";
 import { TrendingUp, Users, Award, Zap } from "lucide-react";
 import { getAnimationConfig } from "../shared/utils/performance";
+import { SectionDescription, SectionHeading } from "../shared/ui";
 
 interface Stat {
   icon: React.ElementType;
@@ -49,7 +50,7 @@ function AnimatedNumber({
 }) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const isInView = useInView(ref, { once: true, margin: "0px" });
   const animConfig = useMemo(() => getAnimationConfig(), []);
 
   useEffect(() => {
@@ -82,7 +83,12 @@ function AnimatedNumber({
     };
   }, [isInView, value, duration, animConfig.reducedMotion]);
 
-  return <span ref={ref}>{count}</span>;
+  return (
+    <span ref={ref}>
+      {count}
+      {animConfig.reducedMotion}
+    </span>
+  );
 }
 
 export function Stats() {
@@ -105,12 +111,10 @@ export function Stats() {
             <TrendingUp className="w-4 h-4 text-accent" />
             <span className="text-sm text-accent">Статистика</span>
           </div>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl mb-6">
-            Цифры говорят сами
-          </h2>
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-2xl mx-auto">
+          <SectionHeading className="mb-6">Цифры говорят сами</SectionHeading>
+          <SectionDescription>
             Результаты нашей работы в цифрах — реальные показатели эффективности
-          </p>
+          </SectionDescription>
         </motion.div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
@@ -119,12 +123,15 @@ export function Stats() {
               key={index}
               initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: animConfig.duration, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: animConfig.duration,
+                delay: index * 0.15,
+              }}
               whileHover={animConfig.shouldAnimate ? { scale: 1.05 } : {}}
               className="relative group h-full"
             >
-              <div className="relative h-full p-6 sm:p-8 rounded-2xl bg-secondary/30 border border-border backdrop-blur-sm hover:bg-secondary/50 hover:border-accent/50 transition-all duration-300">
+              <div className="relative h-full p-6 sm:p-8 rounded-2xl bg-secondary/30 border border-border backdrop-blur-sm hover:bg-secondary/50 hover:border-accent/50 transition-colors duration-300 cursor-default">
                 {/* Icon */}
                 <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-accent/10 flex items-center justify-center mb-4 group-hover:bg-accent/20 transition-colors">
                   <stat.icon className="w-6 h-6 sm:w-7 sm:h-7 text-accent" />

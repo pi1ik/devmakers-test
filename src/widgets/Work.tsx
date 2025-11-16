@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import { ArrowUpRight } from "lucide-react";
 import { useMemo } from "react";
 import { getAnimationConfig } from "../shared/utils/performance";
+import { SectionDescription, SectionHeading } from "../shared/ui";
 
 // Map projects from projectDetailsMap to display on home page
 const projects = [
@@ -77,19 +78,12 @@ export function Work({ onProjectClick }: WorkProps) {
           transition={{ duration: animConfig.duration }}
           className="mb-20"
         >
-          <h2
-            style={{
-              fontSize: "3rem",
-              lineHeight: "1.2",
-              letterSpacing: "-0.02em",
-            }}
-            className="text-foreground mb-4"
-          >
+          <SectionHeading className="text-center mb-4">
             Портфолио
-          </h2>
-          <p className="text-muted-foreground max-w-2xl">
+          </SectionHeading>
+          <SectionDescription className="text-center">
             Реализованные решения для бизнеса
-          </p>
+          </SectionDescription>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -100,9 +94,13 @@ export function Work({ onProjectClick }: WorkProps) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: animConfig.duration, delay: index * 0.1 }}
-              whileHover={animConfig.shouldAnimate ? { y: -4 } : {}}
+              whileHover={
+                animConfig.shouldAnimate
+                  ? { y: -4, transition: { duration: 0.15 } }
+                  : {}
+              }
               onClick={() => onProjectClick?.(project.id)}
-              className="group p-8 rounded-2xl border border-border bg-background/50 backdrop-blur-sm hover:border-accent/50 transition-all duration-300 cursor-pointer"
+              className="group p-8 rounded-2xl border border-border bg-background/50 backdrop-blur-sm hover:border-accent/50 transition-colors duration-300 cursor-pointer"
               style={{
                 willChange: animConfig.shouldAnimate ? "transform" : "auto",
               }}
@@ -116,7 +114,7 @@ export function Work({ onProjectClick }: WorkProps) {
                     >
                       {project.title}
                     </h3>
-                    <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300" />
+                    <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform duration-300" />
                   </div>
                   <p className="text-indigo-600 dark:text-accent font-medium mb-3">
                     {project.category}

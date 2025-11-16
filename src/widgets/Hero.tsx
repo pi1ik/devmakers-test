@@ -9,7 +9,11 @@ import { useMemo, useState } from "react";
 import styled from "@emotion/styled";
 import { mediaQueries } from "@/src/shared/utils/breakpoints";
 import { fadeInUp, fadeIn } from "@/src/shared/utils/motionConfig";
-import { PageHeading, PageDescription, GradientText } from "@/src/shared/ui";
+import {
+  MotionPageHeading,
+  MotionPageDescription,
+  GradientText,
+} from "@/src/shared/ui";
 import { ContactModal } from "@/src/features/contact/ContactModal";
 
 // Styled Components for Hero
@@ -19,10 +23,8 @@ const ButtonContainer = styled(motion.div)`
   justify-content: center;
   gap: 1rem;
 
-  /* Mobile: column layout */
   flex-direction: column;
 
-  /* Tablet and up: row layout */
   ${mediaQueries.tablet} {
     flex-direction: row;
   }
@@ -66,9 +68,16 @@ export function Hero() {
       </div>
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-16 sm:py-24 lg:py-32 text-center">
-        <motion.div variants={fadeInUp} initial="hidden" animate="visible">
+        <motion.div
+          layout
+          variants={fadeInUp}
+          initial="hidden"
+          animate="visible"
+          viewport={{ once: true }}
+        >
           <motion.div
             variants={fadeIn}
+            viewport={{ once: true }}
             className="inline-block mb-6 px-4 py-2 rounded-full border border-border bg-secondary/50 backdrop-blur-sm"
           >
             <span className="text-muted-foreground">
@@ -76,26 +85,26 @@ export function Hero() {
             </span>
           </motion.div>
 
-          <PageHeading variants={fadeInUp}>
+          <MotionPageHeading variants={fadeInUp} viewport={{ once: true }}>
             Сайты, дизайн и
             <br />
             <GradientText>AI для вашего бизнеса</GradientText>
-          </PageHeading>
+          </MotionPageHeading>
 
-          <PageDescription variants={fadeInUp}>
+          <MotionPageDescription variants={fadeInUp} viewport={{ once: true }}>
             Разрабатываем сайты, создаем дизайн, внедряем AI-агентов и
             автоматизируем бизнес-процессы. От идеи до полной реализации.
-          </PageDescription>
+          </MotionPageDescription>
 
-          <ButtonContainer variants={fadeInUp}>
+          <ButtonContainer layout variants={fadeInUp} viewport={{ once: true }}>
             <motion.button
               onClick={() => {
                 trackButtonClick("Оставить заявку", "hero");
                 setIsContactModalOpen(true);
               }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="group relative px-10 py-4 bg-accent text-accent-foreground rounded-full transition-all duration-300 hover:shadow-[0_0_40px_rgba(99,102,241,0.6)] flex items-center gap-3 overflow-hidden text-lg font-semibold"
+              whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+              whileTap={{ scale: 0.95, transition: { duration: 0.15 } }}
+              className="group relative px-10 py-4 bg-accent text-accent-foreground rounded-full transition-shadow duration-300 hover:shadow-[0_0_40px_rgba(99,102,241,0.6)] flex items-center gap-3 overflow-hidden text-lg font-semibold cursor-pointer"
             >
               <ArrowRight className="w-5 h-5 relative z-10" />
               <span className="relative z-10">Оставить заявку</span>

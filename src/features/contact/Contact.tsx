@@ -5,8 +5,9 @@ import { Mail, MessageCircle, Send } from "lucide-react";
 import { TELEGRAM_URL, CONTACT_EMAIL } from "@/src/shared/utils/constants";
 import styled from "@emotion/styled";
 import { mediaQueries } from "@/src/shared/utils/breakpoints";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { ContactModal } from "./ContactModal";
+import { getAnimationConfig } from "@/src/shared/utils/performance";
 
 interface ContactProps {
   onNavigate?: (page: string) => void;
@@ -19,15 +20,12 @@ const ContactHeading = styled(motion.h2)`
   line-height: 1.1;
   letter-spacing: -0.02em;
 
-  /* Mobile: 2rem (32px) */
   font-size: 2rem;
 
-  /* Tablet: 2.5rem (40px) */
   ${mediaQueries.tablet} {
     font-size: 2.5rem;
   }
 
-  /* Desktop: 3.5rem (56px) */
   ${mediaQueries.desktop} {
     font-size: 3.5rem;
   }
@@ -48,10 +46,8 @@ const ContactDescription = styled.p`
   margin-left: auto;
   margin-right: auto;
 
-  /* Mobile: 1rem (16px) */
   font-size: 1rem;
 
-  /* Tablet: 1.125rem (18px) */
   ${mediaQueries.tablet} {
     font-size: 1.125rem;
   }
@@ -70,10 +66,8 @@ const FeatureTitle = styled.h3`
   color: var(--foreground);
   margin-bottom: 0.5rem;
 
-  /* Mobile: 1rem (16px) */
   font-size: 1rem;
 
-  /* Tablet: 1.125rem (18px) */
   ${mediaQueries.tablet} {
     font-size: 1.125rem;
   }
@@ -82,10 +76,8 @@ const FeatureTitle = styled.h3`
 const FeatureDescription = styled.p`
   color: var(--muted-foreground);
 
-  /* Mobile: 0.875rem (14px) */
   font-size: 0.875rem;
 
-  /* Tablet: 1rem (16px) */
   ${mediaQueries.tablet} {
     font-size: 1rem;
   }
@@ -93,6 +85,7 @@ const FeatureDescription = styled.p`
 
 export function Contact({ onNavigate }: ContactProps) {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const animConfig = useMemo(() => getAnimationConfig(), []);
 
   return (
     <section id="contact" className="px-6 lg:px-8 pt-0 pb-20">
@@ -143,7 +136,7 @@ export function Contact({ onNavigate }: ContactProps) {
             </p>
             <motion.button
               onClick={() => setIsContactModalOpen(true)}
-              whileHover={{ scale: 1.02 }}
+              whileHover={animConfig.shouldAnimate ? { scale: 1.02 } : {}}
               whileTap={{ scale: 0.98 }}
               className="w-full px-8 py-3 bg-accent text-accent-foreground rounded-xl transition-all duration-300 hover:shadow-[0_0_30px_rgba(99,102,241,0.4)]"
             >
@@ -170,7 +163,7 @@ export function Contact({ onNavigate }: ContactProps) {
               href={TELEGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.02 }}
+              whileHover={animConfig.shouldAnimate ? { scale: 1.02 } : {}}
               whileTap={{ scale: 0.98 }}
               className="group p-6 border border-border bg-secondary/30 rounded-xl hover:border-accent/50 transition-all duration-300 flex items-center gap-4"
             >
@@ -187,7 +180,7 @@ export function Contact({ onNavigate }: ContactProps) {
 
             <motion.a
               href={`mailto:${CONTACT_EMAIL}`}
-              whileHover={{ scale: 1.02 }}
+              whileHover={animConfig.shouldAnimate ? { scale: 1.02 } : {}}
               whileTap={{ scale: 0.98 }}
               className="group p-6 border border-border bg-secondary/30 rounded-xl hover:border-accent/50 transition-all duration-300 flex items-center gap-4"
             >

@@ -11,7 +11,10 @@ import {
 } from "lucide-react";
 import { ImageWithFallback } from "@/src/shared/ui/imageWithFallback";
 import { CTASection, SEO, generateBreadcrumbSchema } from "@/src/widgets";
-import { PageHeading, PageDescription } from "@/src/shared/ui/Typography";
+import {
+  MotionPageHeading,
+  MotionPageDescription,
+} from "@/src/shared/ui/Typography";
 import { fadeInUp } from "../shared/utils/motionConfig";
 
 type PortfolioCategoryProps = {
@@ -124,13 +127,15 @@ export function PortfolioPage({
               <span className="text-accent">Портфолио студии</span>
             </motion.div>
 
-            <PageHeading variants={fadeInUp}>Наши работы</PageHeading>
-            <PageDescription variants={fadeInUp}>
+            <MotionPageHeading variants={fadeInUp}>
+              Наши работы
+            </MotionPageHeading>
+            <MotionPageDescription variants={fadeInUp}>
               Более 120 успешных проектов в разработке, дизайне, AI и
               автоматизации.
               <br />
               От стартапов до крупных корпораций.
-            </PageDescription>
+            </MotionPageDescription>
           </motion.div>
 
           {/* Stats */}

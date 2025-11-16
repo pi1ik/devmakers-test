@@ -7,6 +7,8 @@ import {
   getDomainFromUrl,
   TextPart,
 } from "@/src/shared/utils/linkParser";
+import { useMemo } from "react";
+import { getAnimationConfig } from "@/src/shared/utils/performance";
 
 interface ChatMessageProps {
   message: {
@@ -18,6 +20,7 @@ interface ChatMessageProps {
 
 export function ChatMessage({ message }: ChatMessageProps) {
   const parts = parseTextWithLinks(message.text);
+  const animConfig = useMemo(() => getAnimationConfig(), []);
 
   return (
     <motion.div
@@ -97,7 +100,9 @@ export function ChatMessage({ message }: ChatMessageProps) {
                         initial={{ opacity: 0, scale: 0.95 }}
                         animate={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.2, delay: 0.1 }}
-                        whileHover={{ scale: 1.02 }}
+                        whileHover={
+                          animConfig.shouldAnimate ? { scale: 1.02 } : {}
+                        }
                         whileTap={{ scale: 0.98 }}
                         className="flex items-center gap-3 px-3 py-2 rounded-lg border border-border bg-secondary/30 hover:bg-secondary/50 hover:border-accent/50 transition-all duration-300 group"
                         onClick={(e) => e.stopPropagation()}
