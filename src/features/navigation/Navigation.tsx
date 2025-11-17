@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "motion/react";
-import { useState, useEffect, useMemo, useLayoutEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { ChevronDown, Send, Mail, Menu, X, Sun, Moon } from "lucide-react";
 import { useTheme } from "../theme/ThemeProvider";
 import { throttle, getAnimationConfig } from "@/src/shared/utils/performance";
@@ -60,7 +60,7 @@ export function Navigation() {
 
   const animConfig = useMemo(() => getAnimationConfig(), []);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     Promise.resolve().then(() => setMounted(true));
   }, []);
 
@@ -80,7 +80,7 @@ export function Navigation() {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "unset";
-      setMobilePortfolioOpen(false); // Close portfolio submenu when mobile menu closes
+      Promise.resolve().then(() => setMobilePortfolioOpen(false)); // Close portfolio submenu when mobile menu closes
     }
     return () => {
       document.body.style.overflow = "unset";

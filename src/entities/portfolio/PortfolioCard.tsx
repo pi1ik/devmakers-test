@@ -1,24 +1,19 @@
-import { memo, useMemo } from "react";
+"use client";
+
+import { useMemo } from "react";
 import { motion } from "framer-motion";
 import { ImageWithFallback } from "@/src/shared/ui";
 import { ArrowUpRight } from "lucide-react";
 import { getAnimationConfig } from "@/src/shared/utils/performance";
-
-export interface ProjectData {
-  title: string;
-  image: string;
-  description: string;
-  results?: string;
-  tags: string[];
-}
+import { PortfolioProject } from "./portfolioData";
 
 interface ProjectCardProps {
-  project: ProjectData;
+  project: PortfolioProject;
   index: number;
   onClick: () => void;
 }
 
-export const ProjectCard = memo(function ProjectCard({
+export function PortfolioCard ({
   project,
   index,
   onClick,
@@ -81,4 +76,4 @@ export const ProjectCard = memo(function ProjectCard({
       </div>
     </motion.div>
   );
-});
+};

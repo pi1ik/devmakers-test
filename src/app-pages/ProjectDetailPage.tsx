@@ -66,6 +66,26 @@ export const ProjectDetailPageDescription = styled.p`
   }
 `;
 
+export const ProjectDetailSectionDescription = styled.p`
+  color: var(--muted-foreground);
+  margin-bottom: 2rem;
+  line-height: 1.6;
+  max-width: 28rem;
+  text-wrap: balance;
+
+  font-size: 1rem;
+
+  ${mediaQueries.tablet} {
+    font-size: 1.125rem;
+    max-width: 36rem;
+  }
+
+  ${mediaQueries.desktop} {
+    font-size: 1.125rem;
+    max-width: 40rem;
+  }
+`;
+
 export function ProjectDetailPage({
   project,
   onBack,
@@ -236,12 +256,11 @@ export function ProjectDetailPage({
             className="mb-16"
           >
             <SectionHeading>О проекте</SectionHeading>
-            <SectionDescription
+            <ProjectDetailSectionDescription
               className="leading-relaxed"
-              style={{ fontSize: "1.125rem" }}
             >
               {project.fullDescription}
-            </SectionDescription>
+            </ProjectDetailSectionDescription>
           </motion.div>
         )}
 

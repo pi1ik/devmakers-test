@@ -8,7 +8,6 @@ export * from "./Logo";
 export * from "./PageIndicator";
 export * from "./PageLoader";
 export * from "./PerformanceIndicator";
-export * from "./Portfolio";
 export * from "./Pricing";
 export * from "./Process";
 export * from "./SEO";

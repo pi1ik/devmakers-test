@@ -56,7 +56,7 @@ const faq = [
   },
 ];
 
-export function FAQPage({ onNavigate }: FAQPageProps) {
+export function FAQPage({ }: FAQPageProps) {
   const faqSchema = generateFAQSchema(faq);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
 

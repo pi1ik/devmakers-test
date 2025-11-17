@@ -4,9 +4,9 @@ import {
   ProjectDetailPage,
   ProjectDetail,
 } from "@/src/app-pages/ProjectDetailPage";
-import { projectDetailsMap } from "@/src/entities/project/projectData";
+import { projectDetailsMap } from "@/src/entities/portfolio/projectData";
 import { useRouter, useParams } from "next/navigation";
-import { portfolioData } from "@/src/widgets/Portfolio";
+import { portfolioData } from "@/src/entities/portfolio/portfolioData";
 
 export default function ProjectPage() {
   const router = useRouter();
@@ -80,7 +80,7 @@ export default function ProjectPage() {
               Проект не найден
             </h1>
             <p className="text-muted-foreground">
-              Проект с ID "{id}" не существует.
+              {`Проект с ID "${id}" не существует.`}
             </p>
           </div>
         </div>
