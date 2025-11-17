@@ -256,16 +256,16 @@ export function AIConsultantPage() {
         keywords="AI консультант, чат-бот, онлайн консультация, вопросы о разработке, стоимость сайта, сроки проекта, технологии разработки"
         canonical={`${SITE_ORIGIN}/ai-consultant`}
       />
-      <div className="max-w-5xl mx-auto px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
           animate={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{
             duration: animConfig.duration,
           }}
-          className="text-center mb-8 sm:mb-12"
+          className="text-center mb-8 sm:mb-12 px-6 lg:px-8"
         >
           <div className="inline-flex items-center justify-center w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-accent/10 mb-4 sm:mb-6">
             <Bot className="w-6 h-6 sm:w-8 sm:h-8 text-accent" />
@@ -273,20 +273,18 @@ export function AIConsultantPage() {
           <MotionPageHeading className="mb-3 sm:mb-4">
             AI-консультант
           </MotionPageHeading>
-          <MotionPageDescription
-            className="text-muted-foreground max-w-2xl mx-auto px-4"
-            style={{ fontSize: "clamp(1rem, 3vw, 1.25rem)" }}
-          >
+          <MotionPageDescription className="text-muted-foreground max-w-2xl mx-auto px-4">
             Получите мгновенные ответы на ваши вопросы о наших услугах
           </MotionPageDescription>
         </motion.div>
 
         {/* Quick Questions */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className={`mb-8 transition-all duration-500 ${
+          className={`mb-8 pt-6 px-6 lg:px-8 ${
             !isUnlocked ? "blur-sm pointer-events-none" : ""
           }`}
         >
@@ -300,13 +298,20 @@ export function AIConsultantPage() {
             {quickQuestions.map((question, index) => (
               <motion.button
                 key={question}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
+                initial={
+                  animConfig.shouldAnimate ? { opacity: 0, scale: 0.9 } : false
+                }
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
                 transition={{ duration: 0.3, delay: 0.3 + index * 0.05 }}
-                whileHover={animConfig.shouldAnimate ? { scale: 1.02 } : {}}
-                whileTap={{ scale: 0.98 }}
+                whileHover={
+                  animConfig.shouldAnimate
+                    ? { scale: 1.02, transition: { duration: 0.3 } }
+                    : {}
+                }
+                whileTap={{ scale: 0.98, transition: { duration: 0.15 } }}
                 onClick={() => handleQuickQuestion(question)}
-                className="px-4 py-3 sm:px-5 sm:py-3 rounded-xl border border-border bg-secondary/30 text-muted-foreground hover:border-accent/50 hover:text-foreground transition-all duration-300 text-sm touch-manipulation active:bg-accent/10"
+                className="px-4 py-3 sm:px-5 sm:py-3 rounded-xl border border-border bg-secondary/30 text-muted-foreground hover:border-accent/50 hover:text-foreground transition-colors duration-300 text-sm touch-manipulation active:bg-accent/10"
               >
                 {question}
               </motion.button>
@@ -316,10 +321,11 @@ export function AIConsultantPage() {
 
         {/* Chat Container */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="rounded-2xl border border-border bg-secondary/20 backdrop-blur-sm overflow-hidden relative"
+          className="mx-6 lg:mx-8 rounded-2xl border border-border bg-secondary/20 backdrop-blur-sm overflow-hidden relative"
         >
           {/* Messages */}
           <div
@@ -405,9 +411,9 @@ export function AIConsultantPage() {
                 <motion.button
                   type="submit"
                   whileHover={animConfig.shouldAnimate ? { scale: 1.02 } : {}}
-                  whileTap={{ scale: 0.98 }}
+                  whileTap={{ scale: 0.98, transition: { duration: 0.15 } }}
                   disabled={!inputValue.trim()}
-                  className="px-4 sm:px-6 py-2.5 sm:py-3 bg-accent text-accent-foreground rounded-xl transition-all duration-300 hover:shadow-[0_0_30px_rgba(99,102,241,0.4)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1.5 sm:gap-2 shrink-0"
+                  className="px-4 sm:px-6 py-2.5 sm:py-3 bg-accent text-accent-foreground rounded-xl transition-shadow duration-300 hover:shadow-[0_0_30px_rgba(99,102,241,0.4)] disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-1.5 sm:gap-2 shrink-0"
                 >
                   <Send className="w-4 h-4 sm:w-5 sm:h-5" />
                   <span className="hidden xs:inline sm:inline">Отправить</span>
@@ -501,10 +507,15 @@ export function AIConsultantPage() {
                       <motion.button
                         type="submit"
                         whileHover={
-                          animConfig.shouldAnimate ? { scale: 1.02 } : {}
+                          animConfig.shouldAnimate
+                            ? { scale: 1.02, transition: { duration: 0.15 } }
+                            : {}
                         }
-                        whileTap={{ scale: 0.98 }}
-                        className="w-full px-4 sm:px-6 py-2.5 sm:py-3 bg-accent text-accent-foreground rounded-xl transition-all duration-300 hover:shadow-[0_0_30px_rgba(99,102,241,0.4)] flex items-center justify-center gap-2"
+                        whileTap={{
+                          scale: 0.98,
+                          transition: { duration: 0.15 },
+                        }}
+                        className="w-full px-4 sm:px-6 py-2.5 sm:py-3 bg-accent text-accent-foreground rounded-xl transition-shadow duration-300 hover:shadow-[0_0_30px_rgba(99,102,241,0.4)] flex items-center justify-center gap-2"
                       >
                         <Send className="w-4 h-4 sm:w-5 sm:h-5" />
                         <span className="text-sm sm:text-base">
@@ -529,7 +540,7 @@ export function AIConsultantPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-6 sm:mt-8 p-4 sm:p-6 rounded-2xl border border-border bg-accent/5 backdrop-blur-sm"
+          className="mx-6 lg:mx-8 mt-6 sm:mt-8 p-4 sm:p-6 rounded-2xl border border-border bg-accent/5 backdrop-blur-sm"
         >
           <p className="text-muted-foreground text-center text-sm sm:text-base">
             Не нашли ответ на свой вопрос? Свяжитесь с нами напрямую через{" "}

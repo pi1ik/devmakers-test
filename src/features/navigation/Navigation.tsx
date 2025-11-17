@@ -252,7 +252,7 @@ export function Navigation() {
               onClick={toggleTheme}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="p-2 rounded-full border border-border bg-background/50 backdrop-blur-sm text-foreground hover:border-accent/50 transition-all duration-300"
+              className="p-2 rounded-full border border-border bg-background/50 backdrop-blur-sm text-foreground hover:border-accent/50 transition-colors duration-300 cursor-pointer"
               aria-label="Toggle theme"
             >
               {mounted &&
@@ -267,9 +267,9 @@ export function Navigation() {
               href={TELEGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.03 }}
+              whileHover={{ scale: 1.03, transition: { duration: 0.15 } }}
               whileTap={{ scale: 0.98 }}
-              className="hidden sm:flex px-5 py-2 bg-accent text-accent-foreground rounded-full transition-all duration-300 hover:shadow-[0_0_20px_rgba(99,102,241,0.3)] items-center gap-2"
+              className="hidden sm:flex px-5 py-2 bg-accent text-accent-foreground rounded-full transition-shadow duration-300 hover:shadow-[0_0_20px_rgba(99,102,241,0.3)] items-center gap-2 cursor-pointer"
             >
               <Send className="w-4 h-4" />
               Telegram
@@ -279,7 +279,7 @@ export function Navigation() {
               href={`mailto:${CONTACT_EMAIL}`}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
-              className="hidden sm:flex px-5 py-2 border border-border bg-background/50 backdrop-blur-sm text-foreground rounded-full transition-all duration-300 hover:border-accent/50 items-center gap-2"
+              className="hidden sm:flex px-5 py-2 border border-border bg-background/50 backdrop-blur-sm text-foreground rounded-full transition-colors duration-300 hover:border-accent/50 items-center gap-2"
             >
               <Mail className="w-4 h-4" />
               Email

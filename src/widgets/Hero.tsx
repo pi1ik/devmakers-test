@@ -8,7 +8,6 @@ import { getAnimationConfig } from "@/src/shared/utils/performance";
 import { useMemo, useState } from "react";
 import styled from "@emotion/styled";
 import { mediaQueries } from "@/src/shared/utils/breakpoints";
-import { fadeInUp, fadeIn } from "@/src/shared/utils/motionConfig";
 import {
   MotionPageHeading,
   MotionPageDescription,
@@ -69,14 +68,15 @@ export function Hero() {
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-16 sm:py-24 lg:py-32 text-center">
         <motion.div
-          layout
-          variants={fadeInUp}
-          initial="hidden"
-          animate="visible"
+          initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: animConfig.duration }}
           viewport={{ once: true }}
         >
           <motion.div
-            variants={fadeIn}
+            initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: animConfig.duration }}
             viewport={{ once: true }}
             className="inline-block mb-6 px-4 py-2 rounded-full border border-border bg-secondary/50 backdrop-blur-sm"
           >
@@ -85,18 +85,33 @@ export function Hero() {
             </span>
           </motion.div>
 
-          <MotionPageHeading variants={fadeInUp} viewport={{ once: true }}>
+          <MotionPageHeading
+            initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: animConfig.duration }}
+            viewport={{ once: true }}
+          >
             Сайты, дизайн и
             <br />
             <GradientText>AI для вашего бизнеса</GradientText>
           </MotionPageHeading>
 
-          <MotionPageDescription variants={fadeInUp} viewport={{ once: true }}>
+          <MotionPageDescription
+            initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: animConfig.duration }}
+            viewport={{ once: true }}
+          >
             Разрабатываем сайты, создаем дизайн, внедряем AI-агентов и
             автоматизируем бизнес-процессы. От идеи до полной реализации.
           </MotionPageDescription>
 
-          <ButtonContainer layout variants={fadeInUp} viewport={{ once: true }}>
+          <ButtonContainer
+            initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: animConfig.duration }}
+            viewport={{ once: true }}
+          >
             <motion.button
               onClick={() => {
                 trackButtonClick("Оставить заявку", "hero");

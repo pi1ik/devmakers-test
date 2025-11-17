@@ -8,6 +8,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { ProjectCard } from "@/src/entities/project/ProjectCard";
 import { getAnimationConfig } from "@/src/shared/utils/performance";
 import { fadeInUp } from "@/src/shared/utils/motionConfig";
+import { notFound } from "next/navigation";
 
 export type Project = {
   title: string;
@@ -1111,35 +1112,20 @@ export function Portfolio({
 }: PortfolioProps) {
   const data = portfolioData[category];
   const [visibleCount, setVisibleCount] = useState(6);
-  const [loadedImages, setLoadedImages] = useState<{ [key: string]: boolean }>(
-    {}
-  );
+
   const animConfig = useMemo(() => getAnimationConfig(), []);
 
-  const visibleProjects = useMemo(
-    () => data.projects.slice(0, visibleCount),
-    [data.projects, visibleCount]
-  );
+  if (!data) {
+    notFound()
+  } ;
+
+  const visibleProjects = data.projects.slice(0, visibleCount);
 
   const hasMore = visibleCount < data.projects.length;
 
   const handleLoadMore = () => {
     setVisibleCount((prev) => prev + 4);
   };
-
-  const isTouchDevice = useMemo(() => {
-    if (typeof window === "undefined") return false;
-    return "ontouchstart" in window;
-  }, []);
-
-  const handleImageLoad = useCallback((title: string) => {
-    setLoadedImages((prev) => ({
-      ...prev,
-      [title]: true,
-    }));
-  }, []);
-
-  if (!data) return null;
 
   return (
     <div className="min-h-screen bg-background pt-24 px-6 lg:px-8 pb-20">
@@ -1176,16 +1162,13 @@ export function Portfolio({
         {/* Projects Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {visibleProjects.map((project, index) => {
-            const isLoaded = loadedImages[project.title] ?? false;
+            
             return (
               <ProjectCard
                 key={project.title}
                 project={project}
                 index={index}
-                // isLoaded={isLoaded}
-                isTouchDevice={isTouchDevice}
                 onClick={() => onProjectClick(category, index)}
-                onImageLoad={() => handleImageLoad(project.title)}
               />
             );
           })}

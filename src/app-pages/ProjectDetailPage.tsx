@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import styled from "@emotion/styled";
 import {
   ArrowLeft,
   Calendar,
@@ -19,6 +20,7 @@ import {
   SectionHeading,
 } from "../shared/ui";
 import { getAnimationConfig } from "../shared/utils/performance";
+import { mediaQueries } from "../shared/utils/breakpoints";
 
 export type ProjectDetail = {
   id: string;
@@ -45,6 +47,24 @@ type ProjectDetailPageProps = {
   onBack: () => void;
   onNavigate?: (page: string) => void;
 };
+
+export const ProjectDetailPageDescription = styled.p`
+  color: var(--muted-foreground);
+  margin-bottom: 3rem;
+  line-height: 1.6;
+  max-width: 30rem;
+
+  font-size: 1rem;
+
+  ${mediaQueries.tablet} {
+    font-size: 1.125rem;
+  }
+
+  ${mediaQueries.desktop} {
+    font-size: 1.25rem;
+    max-width: 42rem;
+  }
+`;
 
 export function ProjectDetailPage({
   project,
@@ -96,9 +116,9 @@ export function ProjectDetailPage({
 
           <PageHeading className="mb-6">{project.title}</PageHeading>
 
-          <PageDescription className="max-w-3xl">
+          <ProjectDetailPageDescription className="max-w-3xl ml-0 mr-0">
             {project.description}
-          </PageDescription>
+          </ProjectDetailPageDescription>
         </motion.div>
 
         {/* Project Image */}
@@ -106,12 +126,12 @@ export function ProjectDetailPage({
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="image-wrapper-details"
+          className="relative h-[330px] mb-16 rounded-2xl overflow-hidden border xs:h-[380px] sm:h-[420px] md:h-[500px]"
         >
           <ImageWithFallback
             src={project.image}
             alt={project.title}
-            className="image-details"
+            className="w-full pt-3 box-border object-top object-cover xs:pt-5 xs:px-5 sm:pt-5 sm:px-15 md:px-25 lg:px-55"
           />
         </motion.div>
 
@@ -122,11 +142,12 @@ export function ProjectDetailPage({
             target="_blank"
             rel="noopener noreferrer"
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
+            viewport={{ once: true }}
             whileHover={animConfig.shouldAnimate ? { scale: 1.02 } : {}}
             whileTap={{ scale: 0.98 }}
-            className="block mb-6 p-6 rounded-2xl border border-accent/30 bg-accent/5 backdrop-blur-sm hover:border-accent/50 transition-all duration-300 group"
+            className="block mb-6 p-6 rounded-2xl border border-accent/30 bg-accent/5 backdrop-blur-sm hover:border-accent/50 transition-colors duration-300 group"
           >
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4">
@@ -150,7 +171,8 @@ export function ProjectDetailPage({
           {project.client && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{
                 duration: 0.5,
                 delay: project.websiteUrl ? 0.4 : 0.3,
@@ -168,7 +190,8 @@ export function ProjectDetailPage({
           {project.timeline && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{
                 duration: 0.5,
                 delay: project.websiteUrl ? 0.5 : 0.4,
@@ -186,7 +209,8 @@ export function ProjectDetailPage({
           {project.results && (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
               transition={{
                 duration: 0.5,
                 delay: project.websiteUrl ? 0.6 : 0.5,
@@ -206,7 +230,8 @@ export function ProjectDetailPage({
         {project.fullDescription && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.6 }}
             className="mb-16"
           >
@@ -225,8 +250,9 @@ export function ProjectDetailPage({
           {project.challenge && (
             <motion.div
               initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.7 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.6 }}
               className="p-8 rounded-2xl border border-border bg-secondary/30 backdrop-blur-sm"
             >
               <h3
@@ -244,8 +270,9 @@ export function ProjectDetailPage({
           {project.solution && (
             <motion.div
               initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.8 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.7 }}
               className="p-8 rounded-2xl border border-border bg-secondary/30 backdrop-blur-sm"
             >
               <h3
@@ -265,7 +292,8 @@ export function ProjectDetailPage({
         {project.features && project.features.length > 0 && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.9 }}
             className="mb-16"
           >
@@ -275,7 +303,8 @@ export function ProjectDetailPage({
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: 1 + index * 0.1 }}
                   className="flex items-start gap-3 p-4 rounded-xl border border-border bg-background/50 backdrop-blur-sm"
                 >
@@ -291,7 +320,8 @@ export function ProjectDetailPage({
         {project.technologies && project.technologies.length > 0 && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 1.1 }}
             className="mb-16"
           >
@@ -313,7 +343,8 @@ export function ProjectDetailPage({
         {project.outcomes && project.outcomes.length > 0 && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 1.2 }}
             className="mb-20"
           >
@@ -325,49 +356,40 @@ export function ProjectDetailPage({
               {/* Right fade gradient */}
               <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
-              <div className="flex gap-6 animate-marquee">
+              <div className="flex animate-marquee">
                 {/* First set */}
-                {project.outcomes.map((outcome, index) => (
-                  <div
-                    key={`first-${index}`}
-                    className="flex-shrink-0 p-6 rounded-2xl border border-accent/20 bg-accent/5 backdrop-blur-sm flex items-center justify-center min-h-[120px] min-w-[320px]"
-                  >
-                    <p
-                      className="text-foreground text-center"
-                      style={{ fontSize: "1.125rem" }}
+                <div className="flex gap-6 pl-3 pr-3 animate-marquee1">
+                  {project.outcomes.map((outcome, index) => (
+                    <div
+                      key={`first-${index}`}
+                      className="flex-shrink-0 p-6 rounded-2xl border border-accent/20 bg-accent/5 backdrop-blur-sm flex items-center justify-center min-h-[120px] min-w-[320px] "
                     >
-                      {outcome}
-                    </p>
-                  </div>
-                ))}
+                      <p
+                        className="text-foreground text-center"
+                        style={{ fontSize: "1.125rem" }}
+                      >
+                        {outcome}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+
                 {/* Duplicate set for seamless loop */}
-                {project.outcomes.map((outcome, index) => (
-                  <div
-                    key={`second-${index}`}
-                    className="flex-shrink-0 p-6 rounded-2xl border border-accent/20 bg-accent/5 backdrop-blur-sm flex items-center justify-center min-h-[120px] min-w-[320px]"
-                  >
-                    <p
-                      className="text-foreground text-center"
-                      style={{ fontSize: "1.125rem" }}
+                <div className="flex gap-6 pl-3 pr-3 animate-marquee2">
+                  {project.outcomes.map((outcome, index) => (
+                    <div
+                      key={`second-${index}`}
+                      className="flex-shrink-0 p-6 rounded-2xl border border-accent/20 bg-accent/5 backdrop-blur-sm flex items-center justify-center min-h-[120px] min-w-[320px]"
                     >
-                      {outcome}
-                    </p>
-                  </div>
-                ))}
-                {/* Third set for extra smoothness */}
-                {project.outcomes.map((outcome, index) => (
-                  <div
-                    key={`third-${index}`}
-                    className="flex-shrink-0 p-6 rounded-2xl border border-accent/20 bg-accent/5 backdrop-blur-sm flex items-center justify-center min-h-[120px] min-w-[320px]"
-                  >
-                    <p
-                      className="text-foreground text-center"
-                      style={{ fontSize: "1.125rem" }}
-                    >
-                      {outcome}
-                    </p>
-                  </div>
-                ))}
+                      <p
+                        className="text-foreground text-center"
+                        style={{ fontSize: "1.125rem" }}
+                      >
+                        {outcome}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </motion.div>
@@ -376,7 +398,8 @@ export function ProjectDetailPage({
         {/* CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 1.4 }}
           className="mb-20 p-8 rounded-2xl border border-border bg-secondary/30 backdrop-blur-sm text-center"
         >
@@ -391,7 +414,7 @@ export function ProjectDetailPage({
             onClick={() => onNavigate?.("ai-consultant")}
             whileHover={animConfig.shouldAnimate ? { scale: 1.02 } : {}}
             whileTap={{ scale: 0.98 }}
-            className="inline-block px-8 py-3 bg-accent text-accent-foreground rounded-xl transition-all duration-300 hover:shadow-[0_0_30px_rgba(99,102,241,0.4)]"
+            className="inline-block px-8 py-3 bg-accent text-accent-foreground rounded-xl transition-shadow duration-300 hover:shadow-[0_0_30px_rgba(99,102,241,0.4)] cursor-pointer"
           >
             Задать вопрос AI
           </motion.button>

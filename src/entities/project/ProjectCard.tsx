@@ -15,19 +15,13 @@ export interface ProjectData {
 interface ProjectCardProps {
   project: ProjectData;
   index: number;
-  // isLoaded: boolean;
-  isTouchDevice: boolean;
   onClick: () => void;
-  onImageLoad: () => void;
 }
 
 export const ProjectCard = memo(function ProjectCard({
   project,
-  // isLoaded,
   index,
-  isTouchDevice,
   onClick,
-  onImageLoad,
 }: ProjectCardProps) {
   const animConfig = useMemo(() => getAnimationConfig(), []);
   return (
@@ -42,14 +36,13 @@ export const ProjectCard = memo(function ProjectCard({
       // style={{ willChange: animConfig.shouldAnimate ? "transform" : "auto" }}
     >
       {/* Image */}
-      <div className="relative h-64 w-full overflow-hidden bg-secondary/20 flex justify-center items-center transition-all">
-        <div className="image-wrapper-portfolio transition-all">
+      <div className="relative h-64 w-full overflow-hidden bg-secondary/20 flex justify-center items-center">
+        <div className="relative w-[85%] h-full xs:w-[65%] sm:w-[55%] md:w-[40%] lg:w-[60%] xl:w-[55%]">
           <ImageWithFallback
             loading="eager"
             src={project.image}
             alt={project.title}
-            onLoad={onImageLoad}
-            className={`mt-5 w-full h-full object-cover object-top group-hover:scale-105 transition-transform transition-all duration-300 
+            className={`mt-5 w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300 
               
             `}
           />
