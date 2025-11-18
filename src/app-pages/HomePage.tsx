@@ -13,15 +13,15 @@ import {
   SEO,
   organizationSchema,
 } from "@/src/widgets";
-import { AIConsultantPreview } from "@/src/features/ai-consultant/AIConsultantPreview";
+import { AIConsultantPreview } from "@/src/widgets/AIConsultantPreview";
 import { STUDIO_NAME, SITE_ORIGIN } from "@/src/shared/utils/constants";
 
-interface HomePageProps {
+interface IHomePageProps {
   onNavigate?: (page: string) => void;
   onProjectClick?: (projectId: string) => void;
 }
 
-export function HomePage({ onNavigate, onProjectClick }: HomePageProps) {
+export function HomePage({ onNavigate, onProjectClick }: IHomePageProps) {
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {

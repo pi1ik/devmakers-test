@@ -58,11 +58,11 @@ const projects = [
   },
 ];
 
-interface WorkProps {
+interface IWorkProps {
   onProjectClick?: (projectId: string) => void;
 }
 
-export function Work({ onProjectClick }: WorkProps) {
+export function Work({ onProjectClick }: IWorkProps) {
   const animConfig = useMemo(() => getAnimationConfig(), []);
   const [mounted, setMounted] = useState(false);
 
@@ -78,7 +78,7 @@ export function Work({ onProjectClick }: WorkProps) {
       >
         <div className="max-w-7xl mx-auto">
           <motion.div
-            initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
+            initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : {}}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: animConfig.duration }}
@@ -96,9 +96,7 @@ export function Work({ onProjectClick }: WorkProps) {
             {projects.map((project, index) => (
               <motion.div
                 key={project.id}
-                initial={
-                  animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false
-                }
+                initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : {}}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{

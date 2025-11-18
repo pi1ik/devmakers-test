@@ -6,7 +6,7 @@ import { TrendingUp, Users, Award, Zap } from "lucide-react";
 import { getAnimationConfig } from "../shared/utils/performance";
 import { SectionDescription, SectionHeading } from "../shared/ui";
 
-interface Stat {
+interface IStat {
   icon: React.ElementType;
   value: number;
   suffix: string;
@@ -14,7 +14,7 @@ interface Stat {
   prefix?: string;
 }
 
-const stats: Stat[] = [
+const stats: IStat[] = [
   {
     icon: Award,
     value: 150,
@@ -107,7 +107,7 @@ export function Stats() {
 
         <div className="container mx-auto px-4 sm:px-6 relative z-10">
           <motion.div
-            initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
+            initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : {}}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: animConfig.duration }}
@@ -128,9 +128,7 @@ export function Stats() {
             {stats.map((stat, index) => (
               <motion.div
                 key={index}
-                initial={
-                  animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false
-                }
+                initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : {}}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{

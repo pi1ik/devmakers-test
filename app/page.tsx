@@ -49,7 +49,7 @@ const Testimonials = dynamic(
 
 const AIConsultantPreview = dynamic(
   () =>
-    import("@/src/features/ai-consultant/AIConsultantPreview").then((mod) => ({
+    import("@/src/widgets/AIConsultantPreview").then((mod) => ({
       default: mod.AIConsultantPreview,
     })),
   {

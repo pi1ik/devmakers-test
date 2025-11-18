@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { STUDIO_NAME } from "@/src/shared/utils/constants";
 
-interface LogoProps {
+interface ILogoProps {
   width?: number;
   height?: number;
   showText?: boolean;
@@ -15,7 +15,7 @@ export function Logo({
   height = 40,
   showText = true,
   className = "",
-}: LogoProps) {
+}: ILogoProps) {
   return (
     <div className={`flex items-center gap-2 ${className}`}>
       <div className="transition-opacity duration-300">

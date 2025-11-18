@@ -4,11 +4,11 @@ import { motion } from "motion/react";
 import { Check, Sparkles, Zap, Crown } from "lucide-react";
 import { Button } from "@/src/shared/ui";
 
-interface PricingProps {
+interface IPricingProps {
   onContactClick?: () => void;
 }
 
-interface PricingPlan {
+interface IPricingPlan {
   name: string;
   icon: React.ElementType;
   price: string;
@@ -19,7 +19,7 @@ interface PricingPlan {
   cta: string;
 }
 
-const plans: PricingPlan[] = [
+const plans: IPricingPlan[] = [
   {
     name: "Старт",
     icon: Zap,
@@ -76,7 +76,7 @@ const plans: PricingPlan[] = [
   },
 ];
 
-export function Pricing({ onContactClick }: PricingProps) {
+export function Pricing({ onContactClick }: IPricingProps) {
   return (
     <section className="relative py-20 sm:py-32 overflow-hidden">
       {/* Background elements */}

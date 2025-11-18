@@ -36,7 +36,7 @@ export function Clients() {
 
         <div className="container mx-auto px-4 sm:px-6 relative z-10">
           <motion.div
-            initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
+            initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : {}}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: animConfig.duration }}

@@ -7,13 +7,9 @@ import { STUDIO_NAME, SITE_ORIGIN } from "@/src/shared/utils/constants";
 import { useRouter } from "next/navigation";
 import { useMemo } from "react";
 import { getAnimationConfig } from "../shared/utils/performance";
-import {
-  MotionPageDescription,
-  MotionSectionDescription,
-  MotionSectionHeading,
-} from "../shared/ui";
+import { MotionSectionDescription, MotionSectionHeading } from "../shared/ui";
 
-// interface NotFoundPageProps {
+// interface INotFoundPageProps {
 //   onNavigate?: (page: string) => void;
 // }
 
@@ -50,9 +46,7 @@ export function NotFoundPage() {
       <div className="max-w-4xl mx-auto px-6 lg:px-8">
         {/* 404 Animation */}
         <motion.div
-          initial={
-            animConfig.shouldAnimate ? { opacity: 0, scale: 0.9 } : false
-          }
+          initial={animConfig.shouldAnimate ? { opacity: 0, scale: 0.9 } : {}}
           animate={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: animConfig.duration, ease: "easeOut" }}
@@ -60,7 +54,7 @@ export function NotFoundPage() {
         >
           {/* Large 404 */}
           <motion.div
-            initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
+            initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : {}}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: animConfig.duration }}
@@ -82,14 +76,14 @@ export function NotFoundPage() {
           </motion.div>
 
           <motion.div
-            initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
+            initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : {}}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: animConfig.duration, delay: 0.15 }}
           >
             {/* Title */}
             <MotionSectionHeading
-              initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
+              initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : {}}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: animConfig.duration }}
@@ -100,7 +94,7 @@ export function NotFoundPage() {
           </motion.div>
           {/* Description */}
           <MotionSectionDescription
-            initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
+            initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : {}}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: animConfig.duration }}
@@ -112,7 +106,7 @@ export function NotFoundPage() {
 
           {/* CTA Button */}
           <motion.button
-            initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
+            initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : {}}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: animConfig.duration }}
@@ -128,7 +122,7 @@ export function NotFoundPage() {
 
         {/* Divider */}
         <motion.div
-          initial={animConfig.shouldAnimate ? { opacity: 0, scaleX: 0 } : false}
+          initial={animConfig.shouldAnimate ? { opacity: 0, scaleX: 0 } : {}}
           whileInView={{ opacity: 1, scaleX: 1 }}
           viewport={{ once: true }}
           transition={{ duration: animConfig.duration, delay: 0.5 }}
@@ -137,7 +131,7 @@ export function NotFoundPage() {
 
         {/* Popular Pages */}
         <motion.div
-          initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
+          initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : {}}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: animConfig.duration, delay: 0.6 }}
@@ -156,7 +150,7 @@ export function NotFoundPage() {
                 <motion.button
                   key={item.page}
                   initial={
-                    animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false
+                    animConfig.shouldAnimate ? { opacity: 0, y: 20 } : {}
                   }
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -186,7 +180,7 @@ export function NotFoundPage() {
 
         {/* Help Text */}
         <motion.div
-          initial={animConfig.shouldAnimate ? { opacity: 0 } : false}
+          initial={animConfig.shouldAnimate ? { opacity: 0 } : {}}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: animConfig.duration, delay: 1 }}
@@ -212,7 +206,7 @@ export function NotFoundPage() {
                     scale: [1, 1.2, 1],
                     opacity: [0.03, 0.05, 0.03],
                   }
-                : false
+                : {}
             }
             transition={{
               duration: 8,
@@ -228,7 +222,7 @@ export function NotFoundPage() {
                     scale: [1.2, 1, 1.2],
                     opacity: [0.03, 0.05, 0.03],
                   }
-                : false
+                : {}
             }
             transition={{
               duration: 10,

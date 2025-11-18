@@ -6,11 +6,11 @@ import { Avatar, AvatarFallback } from "@/src/shared/ui";
 import { useEffect, useMemo, useState } from "react";
 import { getAnimationConfig } from "../shared/utils/performance";
 
-interface TestimonialsProps {
+interface ITestimonialsProps {
   onContactClick?: () => void;
 }
 
-interface Testimonial {
+interface ITestimonial {
   name: string;
   role: string;
   company: string;
@@ -19,7 +19,7 @@ interface Testimonial {
   avatar?: string;
 }
 
-const testimonials: Testimonial[] = [
+const testimonials: ITestimonial[] = [
   {
     name: "Алексей Петров",
     role: "CEO",
@@ -70,7 +70,7 @@ const testimonials: Testimonial[] = [
   },
 ];
 
-export function Testimonials({ onContactClick }: TestimonialsProps) {
+export function Testimonials({ onContactClick }: ITestimonialsProps) {
   const animConfig = useMemo(() => getAnimationConfig(), []);
   const [mounted, setMounted] = useState(false);
 
@@ -88,7 +88,7 @@ export function Testimonials({ onContactClick }: TestimonialsProps) {
 
         <div className="container mx-auto px-4 sm:px-6 relative z-10">
           <motion.div
-            initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
+            initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : {}}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: animConfig.duration }}
@@ -115,7 +115,7 @@ export function Testimonials({ onContactClick }: TestimonialsProps) {
             <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
 
             <motion.div
-              initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
+              initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : {}}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: animConfig.duration }}
@@ -146,7 +146,7 @@ export function Testimonials({ onContactClick }: TestimonialsProps) {
 
                       {/* Content */}
                       <p className="text-sm sm:text-base text-muted-foreground mb-6 leading-relaxed">
-                        "{testimonial.content}"
+                        {`"${testimonial.content}"`}
                       </p>
 
                       {/* Author */}
@@ -200,7 +200,7 @@ export function Testimonials({ onContactClick }: TestimonialsProps) {
 
                       {/* Content */}
                       <p className="text-sm sm:text-base text-muted-foreground mb-6 leading-relaxed">
-                        "{testimonial.content}"
+                        {`"${testimonial.content}"`}
                       </p>
 
                       {/* Author */}

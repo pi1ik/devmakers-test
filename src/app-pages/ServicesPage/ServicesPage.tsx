@@ -9,16 +9,16 @@ import {
 import { fadeInUp } from "../../shared/utils/motionConfig";
 import { useMemo } from "react";
 import { getAnimationConfig } from "../../shared/utils/performance";
-import { benefits, technologies, serviceDetails } from "./servicesData";
-import { DetailedServices } from "./DetailedServices";
-import { Benefits } from "./Benefits";
-import { Technologies } from "./Technologies";
+import { benefits, technologies, serviceDetails } from "./model/servicesData";
+import { DetailedServices } from "./ui/DetailedServices";
+import { Benefits } from "./ui/Benefits";
+import { Technologies } from "./ui/Technologies";
 
-interface ServicesPageProps {
+interface IServicesPageProps {
   onNavigate?: (page: string) => void;
 }
 
-export function ServicesPage({ onNavigate }: ServicesPageProps) {
+export function ServicesPage({ onNavigate }: IServicesPageProps) {
   const animConfig = useMemo(() => getAnimationConfig(), []);
   return (
     <div className="min-h-screen bg-background pt-24">
@@ -32,7 +32,7 @@ export function ServicesPage({ onNavigate }: ServicesPageProps) {
       {/* Hero */}
       <div className="max-w-7xl mx-auto px-6 lg:px-8 pb-12">
         <motion.div
-          initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
+          initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : {}}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: animConfig.duration }}
           className="text-center mb-12"

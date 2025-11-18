@@ -4,11 +4,11 @@ import { motion, AnimatePresence } from "motion/react";
 import { useEffect, useState } from "react";
 import { getAnimationConfig } from "@/src/shared/utils/performance";
 
-interface PageLoaderProps {
+interface IPageLoaderProps {
   isLoading: boolean;
 }
 
-export function PageLoader({ isLoading }: PageLoaderProps) {
+export function PageLoader({ isLoading }: IPageLoaderProps) {
   const [progress, setProgress] = useState(0);
   const animConfig = getAnimationConfig();
 
@@ -77,7 +77,7 @@ export function PageLoader({ isLoading }: PageLoaderProps) {
             {/* Logo/Icon */}
             <motion.div
               initial={
-                animConfig.shouldAnimate ? { scale: 0, rotate: -180 } : false
+                animConfig.shouldAnimate ? { scale: 0, rotate: -180 } : {}
               }
               animate={{ scale: 1, rotate: 0 }}
               transition={{
@@ -158,7 +158,7 @@ export function PageLoader({ isLoading }: PageLoaderProps) {
 
             {/* Loading text */}
             <motion.div
-              initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
+              initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : {}}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-center mb-8"
@@ -176,7 +176,7 @@ export function PageLoader({ isLoading }: PageLoaderProps) {
 
             {/* Progress bar */}
             <motion.div
-              initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
+              initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : {}}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
               className="relative"
@@ -221,7 +221,7 @@ export function PageLoader({ isLoading }: PageLoaderProps) {
 
             {/* Dots animation */}
             <motion.div
-              initial={animConfig.shouldAnimate ? { opacity: 0 } : false}
+              initial={animConfig.shouldAnimate ? { opacity: 0 } : {}}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
               className="flex justify-center gap-2 mt-8"

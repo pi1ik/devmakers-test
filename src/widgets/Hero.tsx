@@ -74,13 +74,13 @@ export function Hero() {
 
         <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-16 sm:py-24 lg:py-32 text-center">
           <motion.div
-            initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
+            initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : {}}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: animConfig.duration }}
             viewport={{ once: true }}
           >
             <motion.div
-              initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
+              initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : {}}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: animConfig.duration }}
               viewport={{ once: true }}
@@ -92,7 +92,7 @@ export function Hero() {
             </motion.div>
 
             <MotionPageHeading
-              initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
+              initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : {}}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: animConfig.duration }}
               viewport={{ once: true }}
@@ -103,7 +103,7 @@ export function Hero() {
             </MotionPageHeading>
 
             <MotionPageDescription
-              initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
+              initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : {}}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: animConfig.duration }}
               viewport={{ once: true }}
@@ -113,7 +113,7 @@ export function Hero() {
             </MotionPageDescription>
 
             <ButtonContainer
-              initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
+              initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : {}}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: animConfig.duration }}
               viewport={{ once: true }}

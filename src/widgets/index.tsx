@@ -12,7 +12,7 @@ export * from "./Pricing";
 export * from "./Process";
 export * from "./SEO";
 export * from "./Services";
-export * from "./SitemapGenerator";
+export * from "../shared/config/SitemapGenerator";
 export * from "./Stats";
 export * from "./Testimonials";
 export * from "./Work";

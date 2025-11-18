@@ -1,6 +1,6 @@
 /**
  * Analytics Wrapper for Google Analytics 4 and Yandex.Metrika
- * 
+ *
  * Usage:
  * 1. Add GA4 script to index.html or App.tsx
  * 2. Add Yandex.Metrika script to index.html or App.tsx
@@ -63,7 +63,7 @@ export function initAnalytics(ga4Id?: string, ymId?: number): void {
   }
 
   isInitialized = true;
-  console.log('📊 Analytics initialized:', { ga4: !!GA4_ID, ym: !!YM_ID });
+  console.log("📊 Analytics initialized:", { ga4: !!GA4_ID, ym: !!YM_ID });
 }
 
 /**
@@ -71,13 +71,13 @@ export function initAnalytics(ga4Id?: string, ymId?: number): void {
  */
 function checkConsent(): void {
   // Check localStorage for consent
-  const consent = localStorage.getItem('analytics_consent');
-  consentGiven = consent === 'granted';
+  const consent = localStorage.getItem("analytics_consent");
+  consentGiven = consent === "granted";
 
   // If no consent stored, default to true (можно изменить на false для GDPR)
   if (!consent) {
     consentGiven = true;
-    localStorage.setItem('analytics_consent', 'granted');
+    localStorage.setItem("analytics_consent", "granted");
   }
 }
 
@@ -86,8 +86,8 @@ function checkConsent(): void {
  */
 export function grantConsent(): void {
   consentGiven = true;
-  localStorage.setItem('analytics_consent', 'granted');
-  
+  localStorage.setItem("analytics_consent", "granted");
+
   if (isInitialized) {
     loadScripts();
   }
@@ -98,7 +98,7 @@ export function grantConsent(): void {
  */
 export function revokeConsent(): void {
   consentGiven = false;
-  localStorage.setItem('analytics_consent', 'denied');
+  localStorage.setItem("analytics_consent", "denied");
 }
 
 /**
@@ -106,10 +106,10 @@ export function revokeConsent(): void {
  */
 function loadScripts(): void {
   // Google Analytics 4
-  if (GA4_ID && typeof window !== 'undefined') {
+  if (GA4_ID && typeof window !== "undefined") {
     if (!window.gtag) {
       // Load GA4 script
-      const script = document.createElement('script');
+      const script = document.createElement("script");
       script.async = true;
       script.src = `https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`;
       document.head.appendChild(script);
@@ -119,8 +119,8 @@ function loadScripts(): void {
       window.gtag = function gtag() {
         window.dataLayer!.push(arguments);
       };
-      window.gtag('js', new Date());
-      window.gtag('config', GA4_ID, {
+      window.gtag("js", new Date());
+      window.gtag("config", GA4_ID, {
         page_path: window.location.pathname,
         send_page_view: true,
       });
@@ -128,11 +128,33 @@ function loadScripts(): void {
   }
 
   // Yandex.Metrika
-  if (YM_ID && typeof window !== 'undefined') {
+  if (YM_ID && typeof window !== "undefined") {
     if (!window.ym) {
       // Load Yandex.Metrika script
       // @ts-ignore
-      (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};m[i].l=1*new Date();for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}k=e.createElement(t),a=e.getElementsByTagName(t)[0];k.async=1;k.src=r;a.parentNode.insertBefore(k,a);})(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+      (function (m, e, t, r, i, k, a) {
+        m[i] =
+          m[i] ||
+          function () {
+            (m[i].a = m[i].a || []).push(arguments);
+          };
+        m[i].l = 1 * new Date();
+        for (var j = 0; j < document.scripts.length; j++) {
+          if (document.scripts[j].src === r) {
+            return;
+          }
+        }
+        (k = e.createElement(t)), (a = e.getElementsByTagName(t)[0]);
+        k.async = 1;
+        k.src = r;
+        a.parentNode.insertBefore(k, a);
+      })(
+        window,
+        document,
+        "script",
+        "https://mc.yandex.ru/metrika/tag.js",
+        "ym"
+      );
 
       // @ts-ignore
       window.ym(YM_ID, "init", {
@@ -153,34 +175,37 @@ function loadScripts(): void {
  * Track custom event
  * @param eventName - Name of the event
  * @param eventParams - Additional parameters
- * 
+ *
  * @example
- * trackEvent('cta_click', { 
+ * trackEvent('cta_click', {
  *   button_name: 'Get Started',
  *   page: 'home'
  * })
  */
-export function trackEvent(eventName: string, eventParams?: Record<string, any>): void {
+export function trackEvent(
+  eventName: string,
+  eventParams?: Record<string, any>
+): void {
   if (!consentGiven) return;
 
   // Google Analytics 4
   if (GA4_ID && window.gtag) {
-    window.gtag('event', eventName, eventParams);
+    window.gtag("event", eventName, eventParams);
   }
 
   // Yandex.Metrika
   if (YM_ID && window.ym) {
-    window.ym(YM_ID, 'reachGoal', eventName, eventParams);
+    window.ym(YM_ID, "reachGoal", eventName, eventParams);
   }
 
-  console.log('📊 Event tracked:', eventName, eventParams);
+  console.log("📊 Event tracked:", eventName, eventParams);
 }
 
 /**
  * Track page view
  * @param pagePath - Path of the page
  * @param pageTitle - Title of the page
- * 
+ *
  * @example
  * trackPageView('/services', 'Услуги')
  */
@@ -195,17 +220,17 @@ export function trackPageView(pagePath: string, pageTitle?: string): void {
 
   // Google Analytics 4
   if (GA4_ID && window.gtag) {
-    window.gtag('config', GA4_ID, data);
+    window.gtag("config", GA4_ID, data);
   }
 
   // Yandex.Metrika
   if (YM_ID && window.ym) {
-    window.ym(YM_ID, 'hit', pagePath, {
+    window.ym(YM_ID, "hit", pagePath, {
       title: data.page_title,
     });
   }
 
-  console.log('📊 Page view tracked:', data);
+  console.log("📊 Page view tracked:", data);
 }
 
 /**
@@ -214,9 +239,9 @@ export function trackPageView(pagePath: string, pageTitle?: string): void {
  * @param location - Location of the button (e.g., 'header', 'hero')
  */
 export function trackButtonClick(buttonName: string, location?: string): void {
-  trackEvent('button_click', {
+  trackEvent("button_click", {
     button_name: buttonName,
-    location: location || 'unknown',
+    location: location || "unknown",
   });
 }
 
@@ -225,8 +250,11 @@ export function trackButtonClick(buttonName: string, location?: string): void {
  * @param formName - Name of the form
  * @param success - Whether submission was successful
  */
-export function trackFormSubmit(formName: string, success: boolean = true): void {
-  trackEvent('form_submit', {
+export function trackFormSubmit(
+  formName: string,
+  success: boolean = true
+): void {
+  trackEvent("form_submit", {
     form_name: formName,
     success: success,
   });
@@ -238,8 +266,12 @@ export function trackFormSubmit(formName: string, success: boolean = true): void
  * @param projectName - Name of the project
  * @param category - Category of the project
  */
-export function trackProjectView(projectId: string, projectName: string, category?: string): void {
-  trackEvent('project_view', {
+export function trackProjectView(
+  projectId: string,
+  projectName: string,
+  category?: string
+): void {
+  trackEvent("project_view", {
     project_id: projectId,
     project_name: projectName,
     category: category,
@@ -251,7 +283,7 @@ export function trackProjectView(projectId: string, projectName: string, categor
  * @param serviceName - Name of the service
  */
 export function trackServiceInterest(serviceName: string): void {
-  trackEvent('service_interest', {
+  trackEvent("service_interest", {
     service_name: serviceName,
   });
 }
@@ -262,9 +294,9 @@ export function trackServiceInterest(serviceName: string): void {
  * @param questionText - Text of the question (optional)
  */
 export function trackAIConsultant(action: string, questionText?: string): void {
-  trackEvent('ai_consultant_interaction', {
+  trackEvent("ai_consultant_interaction", {
     action: action,
-    question: questionText || '',
+    question: questionText || "",
   });
 }
 
@@ -274,9 +306,9 @@ export function trackAIConsultant(action: string, questionText?: string): void {
  * @param linkText - Text of the link
  */
 export function trackOutboundLink(url: string, linkText?: string): void {
-  trackEvent('outbound_click', {
+  trackEvent("outbound_click", {
     url: url,
-    link_text: linkText || '',
+    link_text: linkText || "",
   });
 }
 
@@ -285,7 +317,7 @@ export function trackOutboundLink(url: string, linkText?: string): void {
  * @param percentage - Scroll percentage (25, 50, 75, 100)
  */
 export function trackScrollDepth(percentage: number): void {
-  trackEvent('scroll_depth', {
+  trackEvent("scroll_depth", {
     percentage: percentage,
   });
 }
@@ -296,7 +328,7 @@ export function trackScrollDepth(percentage: number): void {
  * @param videoName - Name of the video
  */
 export function trackVideo(action: string, videoName: string): void {
-  trackEvent('video_interaction', {
+  trackEvent("video_interaction", {
     action: action,
     video_name: videoName,
   });
@@ -312,8 +344,12 @@ export function trackVideo(action: string, videoName: string): void {
  * @param value - Total value
  * @param currency - Currency (default: RUB)
  */
-export function trackPurchase(orderId: string, value: number, currency: string = 'RUB'): void {
-  trackEvent('purchase', {
+export function trackPurchase(
+  orderId: string,
+  value: number,
+  currency: string = "RUB"
+): void {
+  trackEvent("purchase", {
     transaction_id: orderId,
     value: value,
     currency: currency,
@@ -333,14 +369,14 @@ export function setUserId(userId: string): void {
 
   // Google Analytics 4
   if (GA4_ID && window.gtag) {
-    window.gtag('config', GA4_ID, {
+    window.gtag("config", GA4_ID, {
       user_id: userId,
     });
   }
 
   // Yandex.Metrika
   if (YM_ID && window.ym) {
-    window.ym(YM_ID, 'setUserID', userId);
+    window.ym(YM_ID, "setUserID", userId);
   }
 }
 
@@ -353,12 +389,12 @@ export function setUserProperties(properties: UserProperties): void {
 
   // Google Analytics 4
   if (GA4_ID && window.gtag) {
-    window.gtag('set', 'user_properties', properties);
+    window.gtag("set", "user_properties", properties);
   }
 
   // Yandex.Metrika
   if (YM_ID && window.ym) {
-    window.ym(YM_ID, 'userParams', properties);
+    window.ym(YM_ID, "userParams", properties);
   }
 }
 

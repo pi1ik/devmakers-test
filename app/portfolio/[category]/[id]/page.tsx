@@ -4,9 +4,9 @@ import {
   ProjectDetailPage,
   ProjectDetail,
 } from "@/src/app-pages/ProjectDetailPage";
-import { projectDetailsMap } from "@/src/entities/portfolio/projectData";
+import { projectDetailsMap } from "@/src/app-pages/PortfolioPage/model/projectData";
 import { useRouter, useParams } from "next/navigation";
-import { portfolioData } from "@/src/entities/portfolio/portfolioData";
+import { portfolioData } from "@/src/app-pages/PortfolioPage/model/portfolioData";
 
 export default function ProjectPage() {
   const router = useRouter();

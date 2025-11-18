@@ -10,7 +10,7 @@ import { ContactModal } from "@/src/features/contact/ContactModal";
 import { SectionDescription, SectionHeading } from "../shared/ui";
 import { getAnimationConfig } from "../shared/utils/performance";
 
-interface CTASectionProps {
+interface ICTASectionProps {
   onNavigate?: (page: string) => void;
 }
 
@@ -62,7 +62,7 @@ const Badge = styled.div`
   }
 `;
 
-export function CTASection({ onNavigate }: CTASectionProps) {
+export function CTASection({ onNavigate }: ICTASectionProps) {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const animConfig = useMemo(() => getAnimationConfig(), []);
   const [mounted, setMounted] = useState(false);
@@ -84,7 +84,7 @@ export function CTASection({ onNavigate }: CTASectionProps) {
                     scale: [1, 1.2, 1],
                     opacity: [0.3, 0.5, 0.3],
                   }
-                : false
+                : {}
             }
             transition={{
               duration: 8,
@@ -100,7 +100,7 @@ export function CTASection({ onNavigate }: CTASectionProps) {
                     scale: [1.2, 1, 1.2],
                     opacity: [0.2, 0.4, 0.2],
                   }
-                : false
+                : {}
             }
             transition={{
               duration: 10,
@@ -112,7 +112,7 @@ export function CTASection({ onNavigate }: CTASectionProps) {
 
           <div className="relative max-w-5xl mx-auto">
             <motion.div
-              initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
+              initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : {}}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: animConfig.duration }}

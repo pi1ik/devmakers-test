@@ -104,7 +104,7 @@ function ServiceCard({
   return (
     mounted && (
       <motion.div
-        initial={animConfig.shouldAnimate ? { opacity: 0, y: 30 } : false}
+        initial={animConfig.shouldAnimate ? { opacity: 0, y: 30 } : {}}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-50px" }}
         transition={{
@@ -239,11 +239,11 @@ function ServiceCard({
   );
 }
 
-interface ServicesProps {
+interface IServicesProps {
   onNavigate?: (page: string) => void;
 }
 
-export function Services({ onNavigate }: ServicesProps) {
+export function Services({ onNavigate }: IServicesProps) {
   const animConfig = useMemo(() => getAnimationConfig(), []);
   const [mounted, setMounted] = useState(false);
 
@@ -299,14 +299,14 @@ export function Services({ onNavigate }: ServicesProps) {
         <div className="relative max-w-7xl mx-auto">
           {/* Header */}
           <motion.div
-            initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
+            initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : {}}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: animConfig.duration }}
             className="text-center mb-20"
           >
             <motion.div
-              initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
+              initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : {}}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: animConfig.duration, delay: 0.1 }}

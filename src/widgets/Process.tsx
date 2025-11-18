@@ -111,7 +111,7 @@ export function Process() {
 
         <div className="max-w-4xl mx-auto">
           <motion.div
-            initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : false}
+            initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : {}}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: animConfig.duration }}
@@ -142,7 +142,7 @@ export function Process() {
                             initial={
                               animConfig.shouldAnimate
                                 ? { opacity: 0, x: -50 }
-                                : false
+                                : {}
                             }
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
@@ -199,7 +199,7 @@ export function Process() {
                             initial={
                               animConfig.shouldAnimate
                                 ? { opacity: 0, x: 50 }
-                                : false
+                                : {}
                             }
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
@@ -254,7 +254,7 @@ export function Process() {
                     {/* Mobile Layout */}
                     <motion.div
                       initial={
-                        animConfig.shouldAnimate ? { opacity: 0, y: 30 } : false
+                        animConfig.shouldAnimate ? { opacity: 0, y: 30 } : {}
                       }
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
@@ -380,7 +380,7 @@ export function Process() {
                             initial={
                               animConfig.shouldAnimate
                                 ? { pathLength: 0, opacity: 0 }
-                                : false
+                                : {}
                             }
                             whileInView={{ pathLength: 1, opacity: 1 }}
                             viewport={{ once: true }}
