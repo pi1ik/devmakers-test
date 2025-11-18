@@ -29,11 +29,6 @@ export function NotFoundPage() {
 
   const animConfig = useMemo(() => getAnimationConfig(), []);
 
-  const item = {
-    hidden: { opacity: 0, y: 20, scale: 0.9 },
-    show: { opacity: 1, y: 0, scale: 1 },
-  };
-
   return (
     <div className="min-h-screen bg-background pt-24 pb-20">
       <SEO
@@ -110,10 +105,10 @@ export function NotFoundPage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: animConfig.duration }}
-            whileHover={{ scale: 1.05, transition: { duration: 0.15 } }}
+            whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
             whileTap={{ scale: 0.95, transition: { duration: 0.15 } }}
             onClick={() => onNavigate("home")}
-            className="inline-flex items-center gap-2 px-8 py-4 bg-accent text-white rounded-xl hover:bg-accent/90 transition-colors duration-300 shadow-lg shadow-accent/20"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-accent text-white rounded-xl hover:bg-accent/90 transition-colors duration-300 shadow-lg shadow-accent/20 cursor-pointer"
           >
             <Home className="w-5 h-5" />
             <span style={{ fontSize: "1.125rem" }}>На главную</span>

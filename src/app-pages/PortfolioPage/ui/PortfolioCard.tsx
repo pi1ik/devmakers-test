@@ -48,7 +48,7 @@ export function PortfolioCard({ project, index, onClick }: IProjectCardProps) {
           <h3 style={{ fontSize: "1.5rem" }} className="text-foreground flex-1">
             {project.title}
           </h3>
-          <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300 flex-shrink-0 ml-3" />
+          <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-accent group-hover:translate-x-1 group-hover:-translate-y-1 transition-colors duration-300 flex-shrink-0 ml-3" />
         </div>
 
         <p className="text-muted-foreground mb-4">{project.description}</p>

@@ -230,7 +230,7 @@ export function Navigation() {
               target="_blank"
               rel="noopener noreferrer"
               whileHover={{ scale: 1.03, transition: { duration: 0.15 } }}
-              whileTap={{ scale: 0.98 }}
+              whileTap={{ scale: 0.98, transition: { duration: 0.15 } }}
               className="hidden sm:flex px-5 py-2 bg-accent text-accent-foreground rounded-full transition-shadow duration-300 hover:shadow-[0_0_20px_rgba(99,102,241,0.3)] items-center gap-2 cursor-pointer"
             >
               <Send className="w-4 h-4" />
@@ -239,8 +239,8 @@ export function Navigation() {
 
             <motion.a
               href={`mailto:${CONTACT_EMAIL}`}
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
+              whileHover={{ scale: 1.03, transition: { duration: 0.15 } }}
+              whileTap={{ scale: 0.98, transition: { duration: 0.15 } }}
               className="hidden sm:flex px-5 py-2 border border-border bg-background/50 backdrop-blur-sm text-foreground rounded-full transition-colors duration-300 hover:border-accent/50 items-center gap-2"
             >
               <Mail className="w-4 h-4" />
@@ -408,7 +408,7 @@ export function Navigation() {
                   href={TELEGRAM_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-accent text-accent-foreground rounded-xl transition-all duration-300"
+                  className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-accent text-accent-foreground rounded-xl duration-300"
                 >
                   <Send className="w-4 h-4" />
                   Telegram
@@ -416,7 +416,7 @@ export function Navigation() {
 
                 <a
                   href={`mailto:${CONTACT_EMAIL}`}
-                  className="flex items-center justify-center gap-2 w-full px-5 py-3 border border-border bg-background/50 backdrop-blur-sm text-foreground rounded-xl transition-all duration-300"
+                  className="flex items-center justify-center gap-2 w-full px-5 py-3 border border-border bg-background/50 backdrop-blur-sm text-foreground rounded-xl duration-300"
                 >
                   <Mail className="w-4 h-4" />
                   Email

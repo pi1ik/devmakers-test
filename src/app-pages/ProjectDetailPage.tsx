@@ -13,12 +13,7 @@ import {
 import { ImageWithFallback } from "../shared/ui/imageWithFallback";
 import { useEffect, useMemo } from "react";
 import { trackProjectView } from "../shared/utils/analytics";
-import {
-  PageDescription,
-  PageHeading,
-  SectionDescription,
-  SectionHeading,
-} from "../shared/ui";
+import { PageHeading, SectionHeading } from "../shared/ui";
 import { getAnimationConfig } from "../shared/utils/performance";
 import { mediaQueries } from "../shared/utils/breakpoints";
 
@@ -256,9 +251,7 @@ export function ProjectDetailPage({
             className="mb-16"
           >
             <SectionHeading>О проекте</SectionHeading>
-            <ProjectDetailSectionDescription
-              className="leading-relaxed"
-            >
+            <ProjectDetailSectionDescription className="leading-relaxed">
               {project.fullDescription}
             </ProjectDetailSectionDescription>
           </motion.div>

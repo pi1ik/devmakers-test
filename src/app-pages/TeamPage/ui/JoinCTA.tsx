@@ -42,7 +42,7 @@ export default function JoinCTA() {
             href={`mailto:${CONTACT_EMAIL}`}
             whileHover={animConfig.shouldAnimate ? { scale: 1.03 } : {}}
             whileTap={{ scale: 0.98 }}
-            className="px-8 py-4 border border-border bg-background/50 backdrop-blur-sm text-foreground rounded-full transition-color duration-300 hover:border-accent/50 flex items-center gap-2"
+            className="px-8 py-4 border border-border bg-background/50 backdrop-blur-sm text-foreground rounded-full transition-colors duration-300 hover:border-accent/50 flex items-center gap-2"
           >
             <Mail className="w-5 h-5" />
             Email

@@ -105,7 +105,7 @@ export function BentoGrid({ onContactClick }: IBentoGridProps) {
               whileHover={{ scale: 1.02 }}
               className={`relative group ${feature.className}`}
             >
-              <div className="relative h-full min-h-[200px] p-6 sm:p-8 rounded-2xl bg-secondary/30 border border-border backdrop-blur-sm hover:bg-secondary/50 hover:border-accent/50 transition-all duration-300 overflow-hidden">
+              <div className="relative h-full min-h-[200px] p-6 sm:p-8 rounded-2xl bg-secondary/30 border border-border backdrop-blur-sm hover:bg-secondary/50 hover:border-accent/50 transition-colors duration-300 overflow-hidden">
                 {/* Gradient background */}
                 <div
                   className={`absolute inset-0 bg-gradient-to-br ${feature.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
@@ -114,7 +114,7 @@ export function BentoGrid({ onContactClick }: IBentoGridProps) {
                 {/* Content */}
                 <div className="relative z-10 flex flex-col h-full">
                   {/* Icon */}
-                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-accent/10 flex items-center justify-center mb-4 group-hover:bg-accent/20 group-hover:scale-110 transition-all duration-300">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-accent/10 flex items-center justify-center mb-4 group-hover:bg-accent/20 group-hover:scale-110 transition-colors transition-transform duration-300">
                     <feature.icon className="w-6 h-6 sm:w-7 sm:h-7 text-accent" />
                   </div>
 

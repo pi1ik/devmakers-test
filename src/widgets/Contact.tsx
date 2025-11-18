@@ -138,7 +138,7 @@ export function Contact({ onNavigate }: IContactProps) {
               onClick={() => setIsContactModalOpen(true)}
               whileHover={animConfig.shouldAnimate ? { scale: 1.02 } : {}}
               whileTap={{ scale: 0.98 }}
-              className="w-full px-8 py-3 bg-accent text-accent-foreground rounded-xl transition-all duration-300 hover:shadow-[0_0_30px_rgba(99,102,241,0.4)]"
+              className="w-full px-8 py-3 bg-accent text-accent-foreground rounded-xl transition-shadow duration-300 hover:shadow-[0_0_30px_rgba(99,102,241,0.4)]"
             >
               Оставить заявку
             </motion.button>
@@ -165,7 +165,7 @@ export function Contact({ onNavigate }: IContactProps) {
               rel="noopener noreferrer"
               whileHover={animConfig.shouldAnimate ? { scale: 1.02 } : {}}
               whileTap={{ scale: 0.98 }}
-              className="group p-6 border border-border bg-secondary/30 rounded-xl hover:border-accent/50 transition-all duration-300 flex items-center gap-4"
+              className="group p-6 border border-border bg-secondary/30 rounded-xl hover:border-accent/50 transition-colors duration-300 flex items-center gap-4"
             >
               <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center group-hover:bg-accent/20 transition-colors">
                 <Send className="w-6 h-6 text-accent" />
@@ -182,7 +182,7 @@ export function Contact({ onNavigate }: IContactProps) {
               href={`mailto:${CONTACT_EMAIL}`}
               whileHover={animConfig.shouldAnimate ? { scale: 1.02 } : {}}
               whileTap={{ scale: 0.98 }}
-              className="group p-6 border border-border bg-secondary/30 rounded-xl hover:border-accent/50 transition-all duration-300 flex items-center gap-4"
+              className="group p-6 border border-border bg-secondary/30 rounded-xl hover:border-accent/50 transition-colors duration-300 flex items-center gap-4"
             >
               <div className="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center group-hover:bg-accent/20 transition-colors">
                 <Mail className="w-6 h-6 text-accent" />

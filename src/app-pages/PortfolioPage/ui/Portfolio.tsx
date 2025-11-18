@@ -70,10 +70,6 @@ export function Portfolio({
 
   const animConfig = useMemo(() => getAnimationConfig(), []);
 
-  if (!data) {
-    notFound();
-  }
-
   const visibleProjects = data.projects.slice(0, visibleCount);
 
   const hasMore = visibleCount < data.projects.length;
@@ -87,7 +83,7 @@ export function Portfolio({
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : {}}
           animate={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{
@@ -131,7 +127,7 @@ export function Portfolio({
         {/* Load More Button */}
         {hasMore && (
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : {}}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="flex justify-center mt-12"
@@ -140,7 +136,7 @@ export function Portfolio({
               onClick={handleLoadMore}
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.98 }}
-              className="px-8 py-4 bg-accent text-accent-foreground rounded-full transition-all duration-300 hover:shadow-[0_0_20px_rgba(99,102,241,0.3)]"
+              className="px-8 py-4 bg-accent text-accent-foreground rounded-full transition-shadow duration-300 hover:shadow-[0_0_20px_rgba(99,102,241,0.3)]"
             >
               Загрузить еще
             </motion.button>

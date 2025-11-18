@@ -150,9 +150,9 @@ export function Hero() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => trackButtonClick("Telegram", "hero")}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="group px-10 py-4 border-2 border-accent/50 bg-background/50 backdrop-blur-sm text-foreground rounded-full transition-all duration-300 hover:border-accent hover:bg-accent/10 hover:shadow-[0_0_30px_rgba(99,102,241,0.3)] flex items-center gap-3 text-lg font-semibold"
+                whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+                whileTap={{ scale: 0.95, transition: { duration: 0.15 } }}
+                className="group px-10 py-4 border-2 border-accent/50 bg-background/50 backdrop-blur-sm text-foreground rounded-full transition-colors transition-shadow duration-300 hover:border-accent hover:bg-accent/10 hover:shadow-[0_0_30px_rgba(99,102,241,0.3)] flex items-center gap-3 text-lg font-semibold"
               >
                 <MessageSquare className="w-5 h-5" />
                 Написать в Telegram
