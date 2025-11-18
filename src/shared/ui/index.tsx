@@ -46,5 +46,4 @@ export * from "./toggle-group";
 export * from "./toggle";
 export * from "./tooltip";
 export * from "./Typography";
-export * from "./use-mobile";
-export * from "./utils";
+export * from "./cn";

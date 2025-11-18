@@ -27,15 +27,19 @@ export function FloatingChatButton() {
         animate={{ scale: 1, opacity: 1 }}
         transition={{ delay: 1, duration: 0.3 }}
         className="fixed bottom-6 right-6 z-50"
-        style={{ willChange: 'transform, opacity' }}
+        style={{ willChange: "transform, opacity" }}
       >
         <motion.button
           onClick={() => setIsOpen(!isOpen)}
           whileHover={{ scale: 1.1 }}
           whileTap={{ scale: 0.9 }}
-          aria-label={isOpen ? "Закрыть меню AI-консультанта" : "Открыть меню AI-консультанта"}
+          aria-label={
+            isOpen
+              ? "Закрыть меню AI-консультанта"
+              : "Открыть меню AI-консультанта"
+          }
           className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full bg-accent shadow-lg shadow-accent/50 flex items-center justify-center group hover:shadow-xl hover:shadow-accent/70 transition-shadow"
-          style={{ willChange: 'transform' }}
+          style={{ willChange: "transform" }}
         >
           <AnimatePresence mode="wait">
             {isOpen ? (
@@ -63,7 +67,7 @@ export function FloatingChatButton() {
 
           {/* Pulse animation */}
           <span className="absolute inset-0 rounded-full bg-accent animate-ping opacity-20" />
-          
+
           {/* Notification dot */}
           {!isOpen && (
             <motion.span
@@ -113,7 +117,7 @@ export function FloatingChatButton() {
                   <motion.div
                     whileHover={{ scale: 1.02, x: 4 }}
                     whileTap={{ scale: 0.98 }}
-                    className="w-full p-4 rounded-xl bg-accent/5 hover:bg-accent/10 border border-accent/20 hover:border-accent/40 transition-all text-left group cursor-pointer"
+                    className="w-full p-4 rounded-xl bg-accent/5 hover:bg-accent/10 border border-accent/20 hover:border-accent/40 transition-colors text-left group cursor-pointer"
                   >
                     <div className="flex items-center gap-3">
                       <MessageCircle className="w-5 h-5 text-accent" />
@@ -141,10 +145,14 @@ export function FloatingChatButton() {
                       "Какие сроки проекта?",
                       "Есть ли техподдержка?",
                     ].map((question, index) => (
-                      <Link key={index} href="/ai-consultant" onClick={handleNavigateToChat}>
+                      <Link
+                        key={index}
+                        href="/ai-consultant"
+                        onClick={handleNavigateToChat}
+                      >
                         <motion.div
                           whileHover={{ x: 4 }}
-                          className="w-full p-2 rounded-lg hover:bg-secondary/50 text-xs text-left text-muted-foreground hover:text-foreground transition-all cursor-pointer"
+                          className="w-full p-2 rounded-lg hover:bg-secondary/50 text-xs text-left text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
                         >
                           {question}
                         </motion.div>

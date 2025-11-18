@@ -13,7 +13,7 @@ import {
 } from "@/src/shared/ui";
 import { getAnimationConfig } from "@/src/shared/utils/performance";
 
-interface ContactModalProps {
+interface IContactModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   title?: string;
@@ -25,7 +25,7 @@ export function ContactModal({
   onOpenChange,
   title,
   description,
-}: ContactModalProps) {
+}: IContactModalProps) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",

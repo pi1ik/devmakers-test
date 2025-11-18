@@ -2,8 +2,8 @@
  * Утилита для парсинга текста и определения ссылок
  */
 
-export interface TextPart {
-  type: 'text' | 'link';
+export interface ITextPart {
+  type: "text" | "link";
   content: string;
   url?: string;
 }
@@ -12,11 +12,11 @@ export interface TextPart {
  * Парсит текст и находит все ссылки (URL)
  * Возвращает массив частей текста с типами
  */
-export function parseTextWithLinks(text: string): TextPart[] {
+export function parseTextWithLinks(text: string): ITextPart[] {
   // Regex для определения URL
   const urlRegex = /(https?:\/\/[^\s]+)/g;
-  
-  const parts: TextPart[] = [];
+
+  const parts: ITextPart[] = [];
   let lastIndex = 0;
   let match;
 
@@ -24,14 +24,14 @@ export function parseTextWithLinks(text: string): TextPart[] {
     // Добавляем текст перед ссылкой
     if (match.index > lastIndex) {
       parts.push({
-        type: 'text',
+        type: "text",
         content: text.substring(lastIndex, match.index),
       });
     }
 
     // Добавляем ссылку
     parts.push({
-      type: 'link',
+      type: "link",
       content: match[0],
       url: match[0],
     });
@@ -42,7 +42,7 @@ export function parseTextWithLinks(text: string): TextPart[] {
   // Добавляем оставшийся текст после последней ссылки
   if (lastIndex < text.length) {
     parts.push({
-      type: 'text',
+      type: "text",
       content: text.substring(lastIndex),
     });
   }
@@ -50,7 +50,7 @@ export function parseTextWithLinks(text: string): TextPart[] {
   // Если не нашли ссылок, возвращаем весь текст как одну часть
   if (parts.length === 0) {
     parts.push({
-      type: 'text',
+      type: "text",
       content: text,
     });
   }
@@ -64,7 +64,7 @@ export function parseTextWithLinks(text: string): TextPart[] {
 export function getDomainFromUrl(url: string): string {
   try {
     const urlObj = new URL(url);
-    return urlObj.hostname.replace('www.', '');
+    return urlObj.hostname.replace("www.", "");
   } catch {
     return url;
   }

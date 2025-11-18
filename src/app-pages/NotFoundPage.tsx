@@ -4,18 +4,30 @@ import { motion } from "motion/react";
 import { Home, Search, ArrowRight, FileQuestion } from "lucide-react";
 import { SEO } from "@/src/widgets";
 import { STUDIO_NAME, SITE_ORIGIN } from "@/src/shared/utils/constants";
+import { useRouter } from "next/navigation";
+import { useMemo } from "react";
+import { getAnimationConfig } from "../shared/utils/performance";
+import { MotionSectionDescription, MotionSectionHeading } from "../shared/ui";
 
-interface NotFoundPageProps {
-  onNavigate: (page: string) => void;
-}
+// interface INotFoundPageProps {
+//   onNavigate?: (page: string) => void;
+// }
 
-export function NotFoundPage({ onNavigate }: NotFoundPageProps) {
+export function NotFoundPage() {
   const popularPages = [
-    { name: "Главная", page: "home", icon: Home },
+    { name: "Главная", page: "", icon: Home },
     { name: "Услуги", page: "services", icon: FileQuestion },
     { name: "Портфолио", page: "portfolio", icon: Search },
     { name: "AI-консультант", page: "ai-consultant", icon: ArrowRight },
   ];
+
+  const router = useRouter();
+
+  const onNavigate = (page: string) => {
+    router.push(`/${page}`);
+  };
+
+  const animConfig = useMemo(() => getAnimationConfig(), []);
 
   return (
     <div className="min-h-screen bg-background pt-24 pb-20">
@@ -29,16 +41,18 @@ export function NotFoundPage({ onNavigate }: NotFoundPageProps) {
       <div className="max-w-4xl mx-auto px-6 lg:px-8">
         {/* 404 Animation */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
+          initial={animConfig.shouldAnimate ? { opacity: 0, scale: 0.9 } : {}}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          viewport={{ once: true }}
+          transition={{ duration: animConfig.duration, ease: "easeOut" }}
           className="text-center mb-12"
         >
           {/* Large 404 */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : {}}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: animConfig.duration }}
             className="relative mb-8"
           >
             <h1
@@ -56,42 +70,45 @@ export function NotFoundPage({ onNavigate }: NotFoundPageProps) {
             </div>
           </motion.div>
 
-          {/* Title */}
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-foreground mb-4"
-            style={{
-              fontSize: "2.5rem",
-              lineHeight: "1.2",
-              letterSpacing: "-0.02em",
-            }}
+          <motion.div
+            initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : {}}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: animConfig.duration, delay: 0.15 }}
           >
-            Страница не найдена
-          </motion.h2>
-
+            {/* Title */}
+            <MotionSectionHeading
+              initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : {}}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: animConfig.duration }}
+              className="mb-4"
+            >
+              Страница не найдена
+            </MotionSectionHeading>
+          </motion.div>
           {/* Description */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-muted-foreground max-w-xl mx-auto mb-12"
-            style={{ fontSize: "1.125rem" }}
+          <MotionSectionDescription
+            initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : {}}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: animConfig.duration }}
+            className="mb-12"
           >
             Похоже, вы попали на несуществующую страницу. Возможно, она была
             перемещена или удалена. Давайте вернем вас в нужное место.
-          </motion.p>
+          </MotionSectionDescription>
 
           {/* CTA Button */}
           <motion.button
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : {}}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: animConfig.duration }}
+            whileHover={{ scale: 1.05, transition: { duration: 0.2 } }}
+            whileTap={{ scale: 0.95, transition: { duration: 0.15 } }}
             onClick={() => onNavigate("home")}
-            className="inline-flex items-center gap-2 px-8 py-4 bg-accent text-white rounded-xl hover:bg-accent/90 transition-all duration-300 shadow-lg shadow-accent/20"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-accent text-white rounded-xl hover:bg-accent/90 transition-colors duration-300 shadow-lg shadow-accent/20 cursor-pointer"
           >
             <Home className="w-5 h-5" />
             <span style={{ fontSize: "1.125rem" }}>На главную</span>
@@ -100,17 +117,19 @@ export function NotFoundPage({ onNavigate }: NotFoundPageProps) {
 
         {/* Divider */}
         <motion.div
-          initial={{ opacity: 0, scaleX: 0 }}
-          animate={{ opacity: 1, scaleX: 1 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
+          initial={animConfig.shouldAnimate ? { opacity: 0, scaleX: 0 } : {}}
+          whileInView={{ opacity: 1, scaleX: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: animConfig.duration, delay: 0.5 }}
           className="h-px bg-border mb-12"
         />
 
         {/* Popular Pages */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
+          initial={animConfig.shouldAnimate ? { opacity: 0, y: 20 } : {}}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: animConfig.duration, delay: 0.6 }}
         >
           <h3
             className="text-foreground text-center mb-8"
@@ -125,13 +144,20 @@ export function NotFoundPage({ onNavigate }: NotFoundPageProps) {
               return (
                 <motion.button
                   key={item.page}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
+                  initial={
+                    animConfig.shouldAnimate ? { opacity: 0, y: 20 } : {}
+                  }
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: 0.7 + index * 0.1 }}
-                  whileHover={{ scale: 1.05, y: -4 }}
-                  whileTap={{ scale: 0.95 }}
+                  whileHover={{
+                    scale: 1.05,
+                    y: -4,
+                    transition: { duration: 0.15 },
+                  }}
+                  whileTap={{ scale: 0.95, transition: { duration: 0.15 } }}
                   onClick={() => onNavigate(item.page)}
-                  className="group p-6 rounded-2xl border border-border bg-secondary/20 hover:border-accent/50 hover:bg-secondary/40 transition-all duration-300"
+                  className="group p-6 rounded-2xl border border-border bg-secondary/20 hover:border-accent/50 hover:bg-secondary/40 transition-colors duration-300"
                 >
                   <div className="flex flex-col items-center text-center gap-3">
                     <div className="w-12 h-12 rounded-xl bg-accent/10 flex items-center justify-center group-hover:bg-accent/20 transition-colors duration-300">
@@ -149,16 +175,17 @@ export function NotFoundPage({ onNavigate }: NotFoundPageProps) {
 
         {/* Help Text */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 1 }}
+          initial={animConfig.shouldAnimate ? { opacity: 0 } : {}}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: animConfig.duration, delay: 1 }}
           className="text-center mt-16"
         >
           <p className="text-muted-foreground">
             Нужна помощь?{" "}
             <button
               onClick={() => onNavigate("ai-consultant")}
-              className="text-accent hover:underline transition-all duration-300"
+              className="text-accent hover:underline transition-[text-decoration-line] duration-300 cursor-pointer"
             >
               Спросите AI-консультанта
             </button>
@@ -168,10 +195,14 @@ export function NotFoundPage({ onNavigate }: NotFoundPageProps) {
         {/* Animated background elements */}
         <div className="fixed inset-0 pointer-events-none overflow-hidden -z-10">
           <motion.div
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.03, 0.05, 0.03],
-            }}
+            animate={
+              animConfig.shouldAnimate
+                ? {
+                    scale: [1, 1.2, 1],
+                    opacity: [0.03, 0.05, 0.03],
+                  }
+                : {}
+            }
             transition={{
               duration: 8,
               repeat: Infinity,
@@ -180,10 +211,14 @@ export function NotFoundPage({ onNavigate }: NotFoundPageProps) {
             className="absolute top-1/4 left-1/4 w-96 h-96 bg-accent rounded-full blur-3xl"
           />
           <motion.div
-            animate={{
-              scale: [1.2, 1, 1.2],
-              opacity: [0.03, 0.05, 0.03],
-            }}
+            animate={
+              animConfig.shouldAnimate
+                ? {
+                    scale: [1.2, 1, 1.2],
+                    opacity: [0.03, 0.05, 0.03],
+                  }
+                : {}
+            }
             transition={{
               duration: 10,
               repeat: Infinity,

@@ -49,7 +49,7 @@ const Testimonials = dynamic(
 
 const AIConsultantPreview = dynamic(
   () =>
-    import("@/src/features/ai-consultant/AIConsultantPreview").then((mod) => ({
+    import("@/src/widgets/AIConsultantPreview").then((mod) => ({
       default: mod.AIConsultantPreview,
     })),
   {
@@ -75,31 +75,10 @@ export default function Home() {
     const [category, id] = projectId.split("-");
     router.push(`/portfolio/${category}/${id}`);
   };
+
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
       {/* Ambient background gradient system */}
-      <div className="fixed inset-0 -z-10 pointer-events-none">
-        {/* Base gradient - full page smooth transition */}
-        <div className="absolute inset-0 bg-gradient-to-b from-accent/5 via-transparent to-accent/5" />
-
-        {/* Top accent bloom */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[600px] bg-accent/8 rounded-full blur-[150px]" />
-
-        {/* Left side gradient flow */}
-        <div className="absolute top-1/4 -left-1/4 w-[800px] h-[800px] bg-purple-500/6 rounded-full blur-[120px]" />
-
-        {/* Right side gradient flow */}
-        <div className="absolute top-1/2 -right-1/4 w-[900px] h-[900px] bg-accent/6 rounded-full blur-[140px]" />
-
-        {/* Bottom accent bloom */}
-        <div className="absolute bottom-0 left-1/3 w-[1000px] h-[500px] bg-purple-500/7 rounded-full blur-[130px]" />
-
-        {/* Smooth vignette overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-transparent via-50% to-background/40" />
-
-        {/* Radial fade from edges */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_0%,background_100%)] opacity-60" />
-      </div>
 
       <Hero />
 

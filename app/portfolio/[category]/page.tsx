@@ -1,6 +1,6 @@
 "use client";
 
-import { Portfolio } from "@/src/widgets/Portfolio";
+import { Portfolio } from "@/src/app-pages/PortfolioPage/ui/Portfolio";
 import { useRouter, useParams } from "next/navigation";
 
 export default function CategoryPage() {

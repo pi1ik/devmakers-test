@@ -10,12 +10,12 @@ import {
 
 type Theme = "dark" | "light";
 
-interface ThemeContextType {
+interface IThemeContextType {
   theme: Theme;
   toggleTheme: () => void;
 }
 
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+const ThemeContext = createContext<IThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
   // Initialize theme with localStorage or system preference

@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, AnimatePresence } from "motion/react";
-import { useState, useEffect, useMemo, useLayoutEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { ChevronDown, Send, Mail, Menu, X, Sun, Moon } from "lucide-react";
 import { useTheme } from "../theme/ThemeProvider";
 import { throttle, getAnimationConfig } from "@/src/shared/utils/performance";
@@ -9,45 +9,7 @@ import { TELEGRAM_URL, CONTACT_EMAIL } from "@/src/shared/utils/constants";
 import { Logo } from "@/src/widgets";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
-const portfolioItems = [
-  {
-    category: "Веб разработка",
-    items: [
-      { label: "Лендинги", key: "landings" },
-      { label: "Корпоративные сайты", key: "corporate" },
-      { label: "Интернет-магазины", key: "ecommerce" },
-      { label: "Веб-приложения", key: "webapps" },
-    ],
-  },
-  {
-    category: "Дизайн",
-    items: [
-      { label: "UI/UX дизайн", key: "uiux" },
-      { label: "Логотипы", key: "logos" },
-      { label: "Брендинг", key: "branding" },
-      { label: "Дизайн-системы", key: "designsystems" },
-    ],
-  },
-  {
-    category: "AI-агенты",
-    items: [
-      { label: "Чат-боты", key: "chatbots" },
-      { label: "Telegram боты", key: "telegrambots" },
-      { label: "Голосовые ассистенты", key: "voiceassistants" },
-      { label: "Автоматизация поддержки", key: "aisupport" },
-    ],
-  },
-  {
-    category: "Автоматизация",
-    items: [
-      { label: "CRM системы", key: "crm" },
-      { label: "Email-маркетинг", key: "emailmarketing" },
-      { label: "Интеграции", key: "integrations" },
-      { label: "Аналитика", key: "analytics" },
-    ],
-  },
-];
+import { portfolioItems } from "./data/portfolioItems";
 
 export function Navigation() {
   const pathname = usePathname();
@@ -60,7 +22,7 @@ export function Navigation() {
 
   const animConfig = useMemo(() => getAnimationConfig(), []);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     Promise.resolve().then(() => setMounted(true));
   }, []);
 
@@ -80,7 +42,7 @@ export function Navigation() {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "unset";
-      setMobilePortfolioOpen(false); // Close portfolio submenu when mobile menu closes
+      Promise.resolve().then(() => setMobilePortfolioOpen(false)); // Close portfolio submenu when mobile menu closes
     }
     return () => {
       document.body.style.overflow = "unset";
@@ -252,7 +214,7 @@ export function Navigation() {
               onClick={toggleTheme}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="p-2 rounded-full border border-border bg-background/50 backdrop-blur-sm text-foreground hover:border-accent/50 transition-all duration-300"
+              className="p-2 rounded-full border border-border bg-background/50 backdrop-blur-sm text-foreground hover:border-accent/50 transition-colors duration-300 cursor-pointer"
               aria-label="Toggle theme"
             >
               {mounted &&
@@ -267,9 +229,9 @@ export function Navigation() {
               href={TELEGRAM_URL}
               target="_blank"
               rel="noopener noreferrer"
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-              className="hidden sm:flex px-5 py-2 bg-accent text-accent-foreground rounded-full transition-all duration-300 hover:shadow-[0_0_20px_rgba(99,102,241,0.3)] items-center gap-2"
+              whileHover={{ scale: 1.03, transition: { duration: 0.15 } }}
+              whileTap={{ scale: 0.98, transition: { duration: 0.15 } }}
+              className="hidden sm:flex px-5 py-2 bg-accent text-accent-foreground rounded-full transition-shadow duration-300 hover:shadow-[0_0_20px_rgba(99,102,241,0.3)] items-center gap-2 cursor-pointer"
             >
               <Send className="w-4 h-4" />
               Telegram
@@ -277,9 +239,9 @@ export function Navigation() {
 
             <motion.a
               href={`mailto:${CONTACT_EMAIL}`}
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.98 }}
-              className="hidden sm:flex px-5 py-2 border border-border bg-background/50 backdrop-blur-sm text-foreground rounded-full transition-all duration-300 hover:border-accent/50 items-center gap-2"
+              whileHover={{ scale: 1.03, transition: { duration: 0.15 } }}
+              whileTap={{ scale: 0.98, transition: { duration: 0.15 } }}
+              className="hidden sm:flex px-5 py-2 border border-border bg-background/50 backdrop-blur-sm text-foreground rounded-full transition-colors duration-300 hover:border-accent/50 items-center gap-2"
             >
               <Mail className="w-4 h-4" />
               Email
@@ -446,7 +408,7 @@ export function Navigation() {
                   href={TELEGRAM_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-accent text-accent-foreground rounded-xl transition-all duration-300"
+                  className="flex items-center justify-center gap-2 w-full px-5 py-3 bg-accent text-accent-foreground rounded-xl duration-300"
                 >
                   <Send className="w-4 h-4" />
                   Telegram
@@ -454,7 +416,7 @@ export function Navigation() {
 
                 <a
                   href={`mailto:${CONTACT_EMAIL}`}
-                  className="flex items-center justify-center gap-2 w-full px-5 py-3 border border-border bg-background/50 backdrop-blur-sm text-foreground rounded-xl transition-all duration-300"
+                  className="flex items-center justify-center gap-2 w-full px-5 py-3 border border-border bg-background/50 backdrop-blur-sm text-foreground rounded-xl duration-300"
                 >
                   <Mail className="w-4 h-4" />
                   Email

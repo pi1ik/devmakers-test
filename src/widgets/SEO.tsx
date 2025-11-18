@@ -8,7 +8,7 @@ import {
   TELEGRAM_URL,
 } from "../shared/utils/constants";
 
-interface SEOProps {
+interface ISEOProps {
   title: string;
   description: string;
   keywords?: string;
@@ -26,7 +26,7 @@ export function SEO({
   ogImage = `${SITE_ORIGIN}/og-image.jpg`,
   canonical,
   structuredData,
-}: SEOProps) {
+}: ISEOProps) {
   useEffect(() => {
     // Update title
     document.title = `${title} | ${STUDIO_NAME}`;
