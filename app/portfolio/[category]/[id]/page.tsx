@@ -1,9 +1,12 @@
 "use client";
 
-import { ProjectDetailPage, ProjectDetail } from "@/src/components/pages/ProjectDetailPage";
-import { projectDetailsMap } from "@/src/components/projectData";
+import {
+  ProjectDetailPage,
+  ProjectDetail,
+} from "@/src/app-pages/ProjectDetailPage";
+import { projectDetailsMap } from "@/src/app-pages/PortfolioPage/model/projectData";
 import { useRouter, useParams } from "next/navigation";
-import { portfolioData } from "@/src/components/Portfolio";
+import { portfolioData } from "@/src/app-pages/PortfolioPage/model/portfolioData";
 
 export default function ProjectPage() {
   const router = useRouter();
@@ -24,7 +27,7 @@ export default function ProjectPage() {
     const categoryData = portfolioData[category];
     if (categoryData && categoryData.projects[parseInt(id)]) {
       const basicProject = categoryData.projects[parseInt(id)];
-      
+
       // Generate enhanced project details
       project = {
         id: projectKey,
@@ -37,8 +40,13 @@ export default function ProjectPage() {
         client: `Клиент проекта ${basicProject.title}`,
         timeline: "4-8 недель",
         fullDescription: `${basicProject.description} Проект был реализован с применением современных технологий и лучших практик разработки. Мы уделили особое внимание производительности, безопасности и пользовательскому опыту.`,
-        challenge: "Клиент столкнулся с необходимостью создания современного и эффективного решения, которое бы отвечало требованиям бизнеса и ожиданиям пользователей. Важно было реализовать проект в сжатые сроки без потери качества.",
-        solution: `Мы разработали комплексное решение, используя ${basicProject.tags.slice(0, 2).join(' и ')}. Применили современные подходы к проектированию и разработке, что позволило создать масштабируемую и надежную систему. Особое внимание уделили оптимизации производительности и удобству использования.`,
+        challenge:
+          "Клиент столкнулся с необходимостью создания современного и эффективного решения, которое бы отвечало требованиям бизнеса и ожиданиям пользователей. Важно было реализовать проект в сжатые сроки без потери качества.",
+        solution: `Мы разработали комплексное решение, используя ${basicProject.tags
+          .slice(0, 2)
+          .join(
+            " и "
+          )}. Применили современные подходы к проектированию и разработке, что позволило создать масштабируемую и надежную систему. Особое внимание уделили оптимизации производительности и удобству использования.`,
         technologies: basicProject.tags,
         features: [
           "Современный и адаптивный дизайн",
@@ -46,13 +54,13 @@ export default function ProjectPage() {
           "Интеграция с внешними сервисами",
           "Удобная система управления контентом",
           "Аналитика и отслеживание метрик",
-          "Безопасность и защита данных"
+          "Безопасность и защита данных",
         ],
         outcomes: [
           basicProject.results || "Успешный запуск проекта",
           "Положительные отзывы пользователей",
-          "Достижение бизнес-целей клиента"
-        ]
+          "Достижение бизнес-целей клиента",
+        ],
       } as ProjectDetail;
     }
   }
@@ -68,19 +76,17 @@ export default function ProjectPage() {
             Вернуться назад
           </button>
           <div className="text-center py-20">
-            <h1 className="text-4xl font-bold text-foreground mb-4">Проект не найден</h1>
-            <p className="text-muted-foreground">Проект с ID "{id}" не существует.</p>
+            <h1 className="text-4xl font-bold text-foreground mb-4">
+              Проект не найден
+            </h1>
+            <p className="text-muted-foreground">
+              {`Проект с ID "${id}" не существует.`}
+            </p>
           </div>
         </div>
       </div>
     );
   }
 
-  return (
-    <ProjectDetailPage 
-      project={project}
-      onBack={handleBack}
-    />
-  );
+  return <ProjectDetailPage project={project} onBack={handleBack} />;
 }
-

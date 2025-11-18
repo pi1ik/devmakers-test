@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Navigation } from "@/src/components/Navigation";
-import { Footer } from "@/src/components/Footer";
-import { FloatingChatButton } from "@/src/components/FloatingChatButton";
-import { ThemeProvider } from "@/src/components/ThemeProvider";
-import { QueryProvider } from "@/src/components/QueryProvider";
+import { Navigation } from "@/src/features/navigation/Navigation";
+import { Footer } from "@/src/widgets/Footer";
+import { FloatingChatButton } from "@/src/features/navigation/FloatingChatButton";
+import { ThemeProvider } from "@/src/features/theme/ThemeProvider";
+import { QueryProvider } from "@/src/processes/QueryProvider";
+import { ThemeScript } from "@/src/features/theme/ThemeScript";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,11 +20,12 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "devmakers - Разработка сайтов, дизайн и AI для вашего бизнеса",
-  description: "Разрабатываем сайты, создаем дизайн, внедряем AI-агентов и автоматизируем бизнес-процессы. От идеи до полной реализации.",
+  description:
+    "Разрабатываем сайты, создаем дизайн, внедряем AI-агентов и автоматизируем бизнес-процессы. От идеи до полной реализации.",
   icons: {
     icon: [
       { url: "/logo-new.svg", type: "image/svg+xml" },
-      { url: "/logo-new.svg", type: "image/svg+xml", sizes: "any" }
+      { url: "/logo-new.svg", type: "image/svg+xml", sizes: "any" },
     ],
     apple: "/logo-new.svg",
   },
@@ -35,7 +37,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru">
+    <html lang="ru" suppressHydrationWarning>
+      <head>
+        <ThemeScript />
+        <link rel="preload" href="/logo-new.svg" as="image" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
