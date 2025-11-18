@@ -40,7 +40,7 @@ export function Technologies({ technologies }: ITechnologiesProps) {
             {/* Right fade gradient */}
             <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none" />
             <div className="flex overflow-hidden">
-              <div className="flex gap-4 animate-marquee">
+              <div className="flex animate-marquee">
                 {/* First set */}
                 <div className="flex gap-4 pl-2 pr-2 animate-marquee1">
                   {technologies.map((tech) => (
