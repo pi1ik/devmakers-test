@@ -7,7 +7,7 @@ import { ArrowLeft } from "lucide-react";
 import { useMemo, useState } from "react";
 import {
   portfolioData,
-  PortfolioProject,
+  IPortfolioProject,
 } from "@/src/app-pages/PortfolioPage/model/portfolioData";
 import { PortfolioCard } from "@/src/app-pages/PortfolioPage/ui/PortfolioCard";
 import { getAnimationConfig } from "@/src/shared/utils/performance";
@@ -116,7 +116,7 @@ export function Portfolio({
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {visibleProjects.map((project: PortfolioProject, index: number) => {
+          {visibleProjects.map((project: IPortfolioProject, index: number) => {
             return (
               <PortfolioCard
                 key={project.title}
